@@ -1,11 +1,13 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
+import Profile from './pages/Profile'
 
 const Routes = () => (
-  <>
-    <Route exact component={Home} />
-  </>
+  <Switch>
+    <Route exact path='/' component={Home} />
+    <Route exact path='/:username/:id' component={Profile} />
+  </Switch>
 )
 
 export default Routes

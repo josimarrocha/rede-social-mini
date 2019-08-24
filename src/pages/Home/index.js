@@ -1,15 +1,25 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { loginUser, loadingProfile } from '../../reducers/userInfo/actionsCreators'
 import { showPostsTimeline } from '../../reducers/posts/actionsCreators'
-import { loginUser } from '../../reducers/userInfo/actionsCreators'
-import { Container } from './styles'
+import { initSocket } from '../../reducers/socket-io/actionsCreators'
+import { showFriends, friendsPending } from '../../reducers/friends/actionsCreators'
 import UserInfo from '../../components/UserInfo'
 import UserPosts from '../../components/UserPosts'
+import { Container } from './styles'
 
-const Home = ({ showPostsTimeline, loginUser }) => {
+const Home = ({ showPostsTimeline, showFriends, friendsPending, loadingProfile }) => {
   useEffect(() => {
-    loginUser()
-    showPostsTimeline()
+    const loadingData = async () => {
+      const user = JSON.parse(await localStorage.getItem('@midiasocial@'))
+      if (user.token) {
+        await friendsPending()
+        await loadingProfile(user.id)
+        await showPostsTimeline()
+        await showFriends()
+      }
+    }
+    loadingData()
   }, [])
 
   return (
@@ -20,4 +30,4 @@ const Home = ({ showPostsTimeline, loginUser }) => {
   )
 }
 
-export default connect(null, { showPostsTimeline, loginUser })(Home)
+export default connect(null, { showPostsTimeline, loginUser, showFriends, friendsPending, loadingProfile, initSocket })(Home)

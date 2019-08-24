@@ -4,6 +4,8 @@ export const NewPostContainer = styled.div`
   background: ${styles.colorWhite};
   padding-bottom: 10px;
   box-shadow: 1px 1px 15px #ddd;
+  margin-bottom: 20px;
+
   .newpost-header{
     display: flex;
     height: 35px;

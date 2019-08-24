@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import Ws from '@adonisjs/websocket-client'
-import { NewPostContainer } from './styles'
+import PreviewImg from '../../PreviewImg'
 import { createNewPost } from '../../../reducers/posts/actionsCreators'
-
-const io = Ws('ws://localhost:3333')
-let post
+import { NewPostContainer } from './styles'
 
 const NewPost = ({ createNewPost }) => {
   const [legend, setLegend] = useState()
   const [image, setImage] = useState()
-  useEffect(() => {
-    // startWebSocket()
-  }, [])
+  const [isModalPreview, setIsModalPreviw] = useState(false)
 
-  const startWebSocket = () => {
-    io.connect()
-    post = io.subscribe('post')
-    post.on('ready', () => {
-    })
-    post.on('newPost', (event) => {
-      console.log(event)
-    })
-  }
+  const textarea = React.createRef()
+  useEffect(() => {
+    if (!image) {
+      setIsModalPreviw(false)
+    } else {
+      setIsModalPreviw(true)
+    }
+  }, [image])
 
   const newPost = async (e) => {
     e.preventDefault()
@@ -44,38 +38,56 @@ const NewPost = ({ createNewPost }) => {
     return image || legend ? true : false
   }
 
-  console.log(isImageOrlegendEmpty())
+  const abortImagePreview = () => {
+    setIsModalPreviw(false)
+    setImage('')
+  }
+
+  const confirmImagePreview = () => {
+    setIsModalPreviw(false)
+    textarea.current.focus()
+  }
 
   return (
-    <NewPostContainer>
-      <form action="" onSubmit={newPost}>
-        <div className="newpost-header">
-          <div className="newpost-up-img">
-            <label htmlFor="input"><i className="fas fa-camera"></i></label>
-            <input
-              type="file"
-              name="inputImage"
-              id="input"
-              style={{ display: 'none' }}
-              onChange={({ target: { files } }) => setImage(files[0])} />
+    <>
+      {isModalPreview &&
+        <PreviewImg
+          confirmImagePreview={confirmImagePreview}
+          abortImagePreview={abortImagePreview}
+          imagePreview={image}
+        />
+      }
+      <NewPostContainer>
+        <form action="" onSubmit={newPost}>
+          <div className="newpost-header">
+            <div className="newpost-up-img">
+              <label htmlFor="input"><i className="fas fa-camera"></i></label>
+              <input
+                type="file"
+                name="inputImage"
+                id="input"
+                style={{ display: 'none' }}
+                onChange={({ target: { files } }) => setImage(files[0])} />
+            </div>
+            <div className="newpost-up-post">
+              <button
+                disabled={!isImageOrlegendEmpty() ? true : false}
+                className={!isImageOrlegendEmpty() ? 'disabled' : ''}>
+                Publicar
+              </button>
+            </div>
           </div>
-          <div className="newpost-up-post">
-            <button
-              disabled={!isImageOrlegendEmpty() ? true : false}
-              className={!isImageOrlegendEmpty() ? 'disabled' : ''}>
-              Publicar
-            </button>
+          <div className="post-content">
+            <textarea
+              ref={textarea}
+              name="legend"
+              cols="30"
+              rows="10"
+              onChange={({ target: { value } }) => setLegend(value)} />
           </div>
-        </div>
-        <div className="post-content">
-          <textarea
-            name="legend"
-            cols="30"
-            rows="10"
-            onChange={({ target: { value } }) => setLegend(value)} />
-        </div>
-      </form>
-    </NewPostContainer>
+        </form>
+      </NewPostContainer>
+    </>
   )
 }
 

@@ -3,9 +3,9 @@ import styles from '../../../styles'
 
 export const ContainerPost = styled.article`
   width: 100%;
-  background: #fff;
-  margin-top:20px;
+  background: ${styles.colorWhite};
   box-shadow: 1px 1px 15px #ddd;
+  margin-bottom: 10px;
 
   .content{
     padding: 10px;

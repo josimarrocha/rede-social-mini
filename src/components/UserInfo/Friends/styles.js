@@ -6,6 +6,10 @@ export const FreindsContainer = styled.section`
   width: 100%;
   background: ${styles.colorWhite};
 
+  @media (max-width: ${styles.containerMiddle}) {
+   display: none;
+  }
+
   .friends-header{
     font-size: ${styles.fontSmall};
     font-weight: 600;
@@ -20,27 +24,40 @@ export const FreindsContainer = styled.section`
     padding: 5px;
     display: flex;
     flex-wrap: wrap;
+    
+   p{
+    width: 100%;
+    text-align: center;
+   }
+
+   a{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    box-shadow: 1px 1px 5px #aaa;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    flex: 1 1 25%;
+    height: 95px;
+
+    &:last-child{
+    flex: 0 1 31.5%;
+    }
+
+    &:first-child{
+      flex: 0 1 31.5%;
+    }
+   }
   }
 `
 
 export const Friend = styled.div`
-  padding: 5px;
   display: flex;
   flex-direction: column;
-  width: 80px;
   align-items: center;
-  box-shadow: 1px 1px 5px #aaa;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  flex: 1 1 25%;
-
-  &:last-child{
-    flex: 0 1 31.5%;
-  }
-  &:first-child{
-    flex: 0 1 31.5%;
-  }
-
+  
   .friend-img{
     width: 50px;
     img{
@@ -49,6 +66,7 @@ export const Friend = styled.div`
   }
 
   .friend-name p{
+    width: 100%;
     text-align: center;
     font-weight: 500;
     color: ${styles.colorPrimary};

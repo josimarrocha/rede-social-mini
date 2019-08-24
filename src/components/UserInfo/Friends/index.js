@@ -1,25 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { FreindsContainer, Friend } from './styles'
 
 const Friends = ({ friends }) => {
+  useEffect(() => {
+    renderFriends()
+  }, [friends])
+
+  const renderFriends = () => {
+    return (
+      friends.map(friend => (
+        <Link to={`/${friend.username}/${friend.id}`} key={`friend:${friend.id}`}>
+          <Friend>
+            <div className="friend-img">
+              {friend.image_profile_mini
+                ? <img src={`http://localhost:3333/imageProfile/${friend.image_profile_mini}`} alt="" />
+                : <img src={`http://localhost:3000/images/user@50.png`} alt="" />
+              }
+            </div>
+            <div className="friend-name">
+              <p>{friend.name}</p>
+            </div>
+          </Friend>
+        </Link>
+      ))
+    )
+  }
+
   return (
     <FreindsContainer>
       <div className="friends-header">
         <p>Amigos</p>
       </div>
-      <div className="friends-content">
+      <div className='friends-content'>
         <div>
-          {friends.map(friend => (
-            <Friend key={`friend:${friend.id}`}>
-              <div className="friend-img">
-                {friend.image_profile_mini && <img src={`http://localhost:3333/imageProfile/${friend.image_profile_mini}`} alt="" />}
-              </div>
-              <div className="friend-name">
-                {friend.friend_name && <p>{friend.username}</p>}
-              </div>
-            </Friend>
-          ))}
+          {!!friends.length
+            ? renderFriends()
+            : <p>Nenhum amigo adicionado</p>
+          }
         </div>
 
       </div>
@@ -28,7 +47,7 @@ const Friends = ({ friends }) => {
 }
 
 const mapStateToProps = state => ({
-  friends: state.initialDataProfile.friends
+  friends: state.friendsInfo.friends
 })
 
 export default connect(mapStateToProps)(Friends)

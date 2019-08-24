@@ -3,10 +3,10 @@ import NewPost from './NewPost'
 import Post from './Post'
 import { ContainerPosts } from './styles'
 
-const UserPosts = () => {
+const UserPosts = ({ visitProfile }) => {
   return (
     <ContainerPosts>
-      <NewPost />
+      {!visitProfile && <NewPost />}
       <Post />
     </ContainerPosts>
   )

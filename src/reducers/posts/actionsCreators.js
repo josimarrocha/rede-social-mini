@@ -4,17 +4,23 @@ export const SHOW_POSTS_TIMELINE = 'posts:SHOW_POSTS_TIMELINE'
 export const NEW_POST_USER = 'posts:NEW_POST_USER'
 export const ADD_LIKE_POST = 'posts:ADD_LIKE_POST'
 export const REMOVE_LIKE_POST = 'posts:REMOVE_LIKE_POST'
+export const POSTS_BY_USER = 'posts:POSTS_BY_USER'
 
 export const showPostsTimeline = () => async dispatch => {
   const { data: posts } = await api.get('post/timeline')
-  const { data: friends } = await api.get('profile/friends')
-
   dispatch({
     type: SHOW_POSTS_TIMELINE,
     payload: {
       posts: posts[0].data,
-      friends
     }
+  })
+}
+
+export const postsByUser = (id) => async dispatch => {
+  const { data: posts } = await api.get(`post/profile/${id}`)
+  dispatch({
+    type: POSTS_BY_USER,
+    payload: posts
   })
 }
 

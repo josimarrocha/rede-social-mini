@@ -1,8 +1,7 @@
-import { SHOW_POSTS_TIMELINE, NEW_POST_USER, ADD_LIKE_POST, REMOVE_LIKE_POST } from './actionsCreators'
+import { SHOW_POSTS_TIMELINE, NEW_POST_USER, ADD_LIKE_POST, REMOVE_LIKE_POST, POSTS_BY_USER } from './actionsCreators'
 
 const initialState = {
   posts: [],
-  friends: []
 }
 
 const initialDataProfile = (state = initialState, action) => {
@@ -10,13 +9,17 @@ const initialDataProfile = (state = initialState, action) => {
     case SHOW_POSTS_TIMELINE:
       return {
         ...state,
-        posts: state.posts.concat(action.payload.posts),
-        friends: state.friends.concat(action.payload.friends)
+        posts: action.payload.posts,
       }
     case NEW_POST_USER:
       return {
         ...state,
         posts: [...action.payload, ...state.posts]
+      }
+    case POSTS_BY_USER:
+      return {
+        ...state,
+        posts: [...action.payload]
       }
     case ADD_LIKE_POST:
       const { posts } = state

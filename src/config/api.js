@@ -1,15 +1,19 @@
 import axios from 'axios'
 
 const getToken = () => {
-  return localStorage.getItem('@tokenmidiasocial')
+  const token = JSON.parse(localStorage.getItem('@midiasocial@'))
+  if (token) {
+    return axios.create({
+      baseURL: 'http://localhost:3333',
+      headers: {
+        'Authorization': `${`bearer ${token.token}`}`,
+      },
+    })
+  } else {
+    return axios.create({
+      baseURL: 'http://localhost:3333'
+    })
+  }
 }
 
-const api = axios.create({
-  baseURL: 'http://localhost:3333',
-  headers: {
-    'Authorization': `${getToken() ? `bearer ${getToken()}` : ''}`,
-  },
-})
-
-
-export default api
+export default getToken()

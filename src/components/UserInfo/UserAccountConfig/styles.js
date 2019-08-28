@@ -3,9 +3,9 @@ import styles from '../../../styles'
 
 export const UserConfigAccount = styled.div`
   position: absolute;
-  background: #f8f8f8;
-  right:-65%;
   top: 200px;
+  right:-65%;
+  background: #f8f8f8;
   border-radius: 5px;
   border: 1px solid #ddd;
 

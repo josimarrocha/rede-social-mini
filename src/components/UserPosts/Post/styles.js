@@ -14,6 +14,27 @@ export const ContainerPost = styled.article`
   .header-post{
     border-bottom:1px solid ${styles.colorBorder};
     padding-bottom:5px;
+    position: relative;
+
+    .options-post{
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+    }
+    .options{
+      position: absolute;
+      font-size: ${styles.fontSmall};
+      background: #f8f8f8;
+      border-radius: 5px;
+      left: -60px;
+      border: 1px solid #ddd;
+      padding: 5px 8px;
+      cursor:pointer;
+
+      &:hover{
+        background: #f0f0f0
+      }
+    }
   }
   .post-user{
     display: flex;
@@ -21,6 +42,7 @@ export const ContainerPost = styled.article`
     img{
       max-width: 100%;
       width: 50px;
+      max-height: 60px;
     }
     .post-user-info{
       margin-top:8px;

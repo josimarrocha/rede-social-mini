@@ -15,8 +15,8 @@ const Friends = ({ friends }) => {
           <Friend>
             <div className="friend-img">
               {friend.image_profile_mini
-                ? <img src={`http://localhost:3333/imageProfile/${friend.image_profile_mini}`} alt="" />
-                : <img src={`http://localhost:3000/images/user@50.png`} alt="" />
+                ? <img src={friend.image_profile_mini} alt="" />
+                : <img src={`/images/user@50.png`} alt="" />
               }
             </div>
             <div className="friend-name">

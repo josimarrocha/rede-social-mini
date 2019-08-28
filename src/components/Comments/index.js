@@ -13,7 +13,7 @@ import {
 } from '../../reducers/comments/actionsCreators'
 import { ContainerComments } from './styles'
 
-const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo, addCommentPost, addLikeComment, removeLikeComment, viewMoreComments, showComment, emitComment }) => {
+const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo, addLikeComment, removeLikeComment, viewMoreComments, emitComment }) => {
   const textareaRef = React.createRef()
   const textareaRef2 = React.createRef()
 
@@ -31,20 +31,6 @@ const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo
         } else {
           emitComment.comment.emit('newComment', commente)
         }
-        e.target.value = e.target.value.replace(/(.|\s|\n)*/g, '')
-      }
-    }
-  }
-
-  const addComment = async (e, { isAnswer, commentId }) => {
-    if (e.charCode === 13) {
-      if (e.target.value.replace(/\s+/g, '') !== '') {
-        const comment = {
-          post_id: postId,
-          comment: e.target.value,
-          image_comment: 'imagem'
-        }
-        addCommentPost(comment, { isAnswer, commentId })
         e.target.value = e.target.value.replace(/(.|\s|\n)*/g, '')
       }
     }

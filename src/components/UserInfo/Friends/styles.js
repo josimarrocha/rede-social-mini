@@ -40,7 +40,7 @@ export const FreindsContainer = styled.section`
     margin-right: 5px;
     margin-bottom: 5px;
     flex: 1 1 25%;
-    height: 95px;
+    height: 100px;
 
     &:last-child{
     flex: 0 1 31.5%;
@@ -59,9 +59,10 @@ export const Friend = styled.div`
   align-items: center;
   
   .friend-img{
-    width: 50px;
+    /* width: 50px; */
     img{
-      max-width: 100%;
+      width: 55px;
+      height: 50px;
     }
   }
 

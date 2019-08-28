@@ -36,6 +36,8 @@ export const UserImg = styled.div`
   z-index: 1;
   img{
     max-width: 100px;
+    max-height: 100px;
+    width:100%;
     border-radius: 50%;
     margin: 50px auto 0 auto;
     display: block
@@ -48,7 +50,7 @@ export const UserImgbackground = styled.div`
   position:absolute;
   top: 0;
   left: 0;
-  background-image: url('http://localhost:3000/images/tarn-nguyen-4a52btspyY8-unsplash.jpg');
+  background-image: url('/images/tarn-nguyen-4a52btspyY8-unsplash.jpg');
   background-size:cover;
   background-position: center;
 

@@ -14,6 +14,7 @@ export const UserComment = styled.div`
     }
   }
 
+    position: relative;
   .user-profile{
     .repost-post{
       padding: 3px;
@@ -24,6 +25,28 @@ export const UserComment = styled.div`
       }
       .user-comment-post{
         padding: 5px;
+      }
+
+      .options-comment{
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        top: 15px;
+      }
+      .options{
+        position: absolute;
+        font-size: ${styles.fontSmall};
+        background: #f8f8f8;
+        border-radius: 5px;
+        top: 16px;
+        left: -55px;
+        border: 1px solid #ddd;
+        padding: 5px 8px;
+        cursor:pointer;
+
+        &:hover{
+          background: #f0f0f0
+        }
       }
     }
 

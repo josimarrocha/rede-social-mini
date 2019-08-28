@@ -28,7 +28,7 @@ const PendingFriends = ({ userInfo, setIsModalFriendsPending, friendsPending, fr
               <div className="img-friend">
                 {friendsPend.image_profile_mini
                   ? <img src={`http://localhost:3333/imageProfile/${friendsPend.image_profile_mini}`} alt="" />
-                  : <img src={`http://localhost:3000/images/user@50.png`} alt="" />
+                  : <img src={`/images/user@50.png`} alt="" />
                 }
               </div>
               <div className="pending-friend">

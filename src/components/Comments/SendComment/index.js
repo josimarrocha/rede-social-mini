@@ -6,7 +6,7 @@ const SendComment = ({ textareaRef, addComment, imageProfile, isAnswer, commentI
     <SendCommentContainer answer={isAnswer}>
       <div className="img-user-logged">
         {imageProfile
-          ? <img className='img' src={`http://localhost:3333/imageProfile/${imageProfile}`} alt="" />
+          ? <img className='img' src={imageProfile} alt="" />
           : <img src={`images/user@50.png`} alt="" />
         }
       </div>

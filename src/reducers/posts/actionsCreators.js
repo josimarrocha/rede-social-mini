@@ -5,6 +5,7 @@ export const NEW_POST_USER = 'posts:NEW_POST_USER'
 export const ADD_LIKE_POST = 'posts:ADD_LIKE_POST'
 export const REMOVE_LIKE_POST = 'posts:REMOVE_LIKE_POST'
 export const POSTS_BY_USER = 'posts:POSTS_BY_USER'
+export const DELETE_POST = 'posts:DELETE_POST'
 
 export const showPostsTimeline = () => async dispatch => {
   const { data: posts } = await api.get('post/timeline')
@@ -30,6 +31,14 @@ export const createNewPost = (post) => async dispatch => {
   dispatch({
     type: NEW_POST_USER,
     payload: newPost.data
+  })
+}
+
+export const deletePost = (post_id) => async dispatch => {
+  await api.delete(`/post/delete/${post_id}`)
+  dispatch({
+    type: DELETE_POST,
+    payload: post_id
   })
 }
 

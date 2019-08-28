@@ -1,4 +1,4 @@
-import { SHOW_POSTS_TIMELINE, NEW_POST_USER, ADD_LIKE_POST, REMOVE_LIKE_POST, POSTS_BY_USER } from './actionsCreators'
+import { SHOW_POSTS_TIMELINE, NEW_POST_USER, ADD_LIKE_POST, REMOVE_LIKE_POST, POSTS_BY_USER, DELETE_POST } from './actionsCreators'
 
 const initialState = {
   posts: [],
@@ -15,6 +15,11 @@ const initialDataProfile = (state = initialState, action) => {
       return {
         ...state,
         posts: [...action.payload, ...state.posts]
+      }
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter(post => post.id !== action.payload)
       }
     case POSTS_BY_USER:
       return {

@@ -3,7 +3,9 @@ import {
   ADD_COMMENT_POST,
   ADD_LIKE_COMMENT,
   REMOVE_LIKE_COMMENT,
-  MORE_COMMENTS
+  MORE_COMMENTS,
+  DELETE_COMMENT_POST,
+  DELETE_COMMENT_REPLY
 } from './actionsCreators'
 
 const initialState = {
@@ -37,6 +39,34 @@ const comments = (state = initialState, action) => {
         }
       }
     }
+    case DELETE_COMMENT_POST: {
+      const { id, postId } = action.payload
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [postId]: {
+            ...state.comments[postId],
+            data: state.comments[postId].data.filter(comment => comment.comment_id !== id)
+          }
+        }
+      }
+    }
+    case DELETE_COMMENT_REPLY: {
+      const { idComment, id } = action.payload
+      console.log(idComment, id)
+      return {
+        ...state,
+        commentsAnswered: {
+          ...state.commentsAnswered,
+          [idComment]: {
+            ...state.commentsAnswered[idComment],
+            data: state.commentsAnswered[idComment].data.filter(comment => comment.comment_id !== id)
+          }
+        }
+      }
+    }
+
     case MORE_COMMENTS: {
       let { id, comments: commentss, where } = action.payload
       return {

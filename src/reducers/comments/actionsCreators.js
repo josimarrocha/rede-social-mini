@@ -5,13 +5,14 @@ export const ADD_COMMENT_POST = 'comment:ADD_COMMENT_POST'
 export const ADD_LIKE_COMMENT = 'comment:ADD_LIKE_COMMENT'
 export const MORE_COMMENTS = 'comments:MORE_COMMENTS'
 export const REMOVE_LIKE_COMMENT = 'comment:REMOVE_LIKE_COMMENT'
+export const DELETE_COMMENT_POST = 'comment:DELETE_COMMENT_POST'
+export const DELETE_COMMENT_REPLY = 'comment:DELETE_COMMENT_REPLY'
 
 export const showCommentPost = (post_id, answers) => async dispatch => {
-  let comments, reply, where
+  let comments, where
   if (answers) {
     comments = await api.get(`post/comment/reply/${post_id}/1`)
     where = 'commentsAnswered'
-    reply = true
   } else {
     comments = await api.get(`post/comment/${post_id}/1`)
     where = 'comments'
@@ -46,6 +47,28 @@ export const addCommentPost = ({ post_id, comment, image_comment }, { isAnswer, 
       id,
       where,
       comment: data.data[0],
+    }
+  })
+}
+
+export const deleteComment = (postId, id) => async dispatch => {
+  await api.delete(`post/delete/comment/${id}`)
+  dispatch({
+    type: DELETE_COMMENT_POST,
+    payload: {
+      id,
+      postId
+    }
+  })
+}
+
+export const deleteReplyComment = (idComment, id) => async dispatch => {
+  await api.delete(`post/delete/comment/reply/${id}`)
+  dispatch({
+    type: DELETE_COMMENT_REPLY,
+    payload: {
+      id,
+      idComment
     }
   })
 }

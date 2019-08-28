@@ -32,13 +32,13 @@ const InputSearch = ({ search, searchProfile, mobile }) => {
       {isEmptyInput && <div className="result-list">
         <ul>
           {search.map(item => (
-            <Link to={`profile/${item.id}`} key={`profile:${item.id}`}>
+            <Link to={`${item.username}/${item.id}`} key={`profile:${item.id}`}>
               <li onClick={() => {
                 setIsEmptyInput(false)
                 setInputSearch('')
               }}>
                 <span>
-                  <img src={`http://localhost:3333/imageProfile/${item.image_profile_mini}`} alt="" />
+                  <img src={item.image_profile_mini} alt="" />
                 </span>
                 <b>{item.username}</b>
               </li>

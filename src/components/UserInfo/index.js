@@ -71,8 +71,8 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
 
         <UserImg>
           {profileInfo.image_profile
-            ? <img src={`http://localhost:3333/imageProfile/${profileInfo.image_profile}`} alt="" />
-            : <img src={`http://localhost:3000/images/user@150.png`} alt="" />
+            ? <img src={profileInfo.image_profile} alt="" />
+            : <img src={`/images/user@150.png`} alt="" />
           }
         </UserImg>
         <UserData>

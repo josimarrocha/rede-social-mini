@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import styles from '../../../styles'
 
 export const ContainerImage = styled.div`
   margin-left: 300px;
@@ -9,6 +10,9 @@ export const ContainerImage = styled.div`
     img{
       width: 100%;
       max-width: 100%;
+    }
+    @media (max-width: ${styles.containerMiddle}) {
+     display: none;
     }
   }
 `

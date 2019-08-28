@@ -15,7 +15,6 @@ const MenuMobile = () => {
             <ul className="menu-list">
               <li><InputSearch /></li>
               <li className='menu-item'>Ver amigos</li>
-              <li className='menu-item'>dsidjsixs</li>
             </ul>
           </div>}
       </div>

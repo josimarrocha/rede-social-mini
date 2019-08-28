@@ -37,7 +37,7 @@ const Header = ({ pendingFriends, userInfo, socket, friendsPendingIo }) => {
       <div className="header-content">
         <div>
           <div className="header-logo">
-            <Link to='/'><h2>Midia</h2></Link>
+            <Link to='/'><h2>REDE</h2></Link>
           </div>
           <span onClick={() => setIsModalFriendsPending(!isModalFriendsPending)}>
             {isModalFriendsPending &&

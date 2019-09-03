@@ -29,28 +29,6 @@ export const showCommentPost = (post_id, answers) => async dispatch => {
   }
 }
 
-export const addCommentPost = ({ post_id, comment, image_comment }, { isAnswer, commentId }) => async dispatch => {
-  let data, where, id
-
-  if (!isAnswer) {
-    data = await api.post('post/new/comment', { post_id, comment, image_comment })
-    where = 'comments'
-    id = post_id
-  } else {
-    data = await api.post('post/new/comment/reply', { post_id, comment, image_comment, comment_id: commentId })
-    where = 'commentsAnswered'
-    id = commentId
-  }
-  dispatch({
-    type: ADD_COMMENT_POST,
-    payload: {
-      id,
-      where,
-      comment: data.data[0],
-    }
-  })
-}
-
 export const deleteComment = (postId, id) => async dispatch => {
   await api.delete(`post/delete/comment/${id}`)
   dispatch({

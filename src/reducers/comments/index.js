@@ -54,7 +54,6 @@ const comments = (state = initialState, action) => {
     }
     case DELETE_COMMENT_REPLY: {
       const { idComment, id } = action.payload
-      console.log(idComment, id)
       return {
         ...state,
         commentsAnswered: {

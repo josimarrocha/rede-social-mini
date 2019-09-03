@@ -17,6 +17,10 @@ export const Container = styled.div`
       width:100%;
       background: ${styles.colorPrimary};
       flex: 1;
+
+      @media (max-width: ${styles.containerMiddle}) {
+        display: none;
+      }
     }
   }
 `

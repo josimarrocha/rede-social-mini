@@ -14,7 +14,7 @@ export const FormConatiner = styled.div`
 
     @media (max-width: ${styles.containerSmall + 'px'}) {
       margin-left: 0rem
-      }
+    }
     
     .form-input{
       border: none;
@@ -33,40 +33,40 @@ export const FormConatiner = styled.div`
     }
   }
 
-    .result-list{
-      background: ${styles.colorWhite};
-      right: 0;
-      top: 26px;
-      position: absolute;
-      width: 20rem;
-      box-shadow: 0px 1px 5px #666;  
-      ul{
-        width: 100%;
+  .result-list{
+    background: ${styles.colorWhite};
+    right: 0;
+    top: 26px;
+    position: absolute;
+    width: 20rem;
+    box-shadow: 0px 1px 5px #666;  
+    ul{
+      width: 100%;
+    }
+
+    li{
+      display: flex;
+      color: #333;
+      padding: 3px 5px 3px 5px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+
+      &:hover{
+        background: #ddd;
       }
 
-      li{
-        display: flex;
-        color: #333;
-        padding: 3px 5px 3px 5px;
-        border-bottom: 1px solid #ddd;
-        cursor: pointer;
-
-        &:hover{
-          background: #ddd;
+      span{
+        width: 33px;
+        margin-right: 10px;
+        img{
+          width: 35px;
+          height: 40px;
         }
+      }
 
-        span{
-          width: 33px;
-          margin-right: 10px;
-          img{
-            width: 100%;
-            max-width: 100%;
-          }
-        }
-
-        b{
-          font-size: ${styles.fontSmall}
-        }
+      b{
+        font-size: ${styles.fontSmall}
       }
     }
+  }
 `

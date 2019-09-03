@@ -7,7 +7,7 @@ export const SendCommentContainer = styled.div`
   .img-user-logged{
     flex: 1;
     margin-right:  ${props => props.answer ? '-6px' : '3px'};
-
+    margin-right: 5px;
     img{
       max-width: ${props => props.answer ? '35px' : '100%'};
       max-height: ${props => props.answer ? '35px' : '100%'}

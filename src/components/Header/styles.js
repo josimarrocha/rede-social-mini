@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   width: 100%;
   top: 0;
   box-shadow: 1px 1px 5px #999;
-  z-index:1;
+  z-index:6;
 
   .header-content{
     max-width: ${styles.container};
@@ -46,6 +46,15 @@ export const HeaderContainer = styled.header`
         height: 18px;
         font-size: 13px;
         top: -5px;
+      }
+    }
+    .logout{
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+
+      @media (max-width: ${styles.containerSmall + 'px'}) {
+        display: none;
       }
     }
   }

@@ -32,6 +32,11 @@ const Header = ({ pendingFriends, userInfo, socket, friendsPendingIo }) => {
     }
   })
 
+  const logout = () => {
+    localStorage.removeItem('@midiasocial@')
+    window.location.reload()
+  }
+
   return (
     <HeaderContainer>
       <div className="header-content">
@@ -51,6 +56,9 @@ const Header = ({ pendingFriends, userInfo, socket, friendsPendingIo }) => {
           </span>
         </div>
         {!isMenuMobile ? <InputSearch /> : <MenuMobile />}
+        <div className="logout" onClick={logout}>
+          <p>Sair</p>
+        </div>
       </div>
     </HeaderContainer>
   )

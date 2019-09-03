@@ -4,6 +4,7 @@ import styles from '../../../styles'
 export const UserComment = styled.div`
   display: flex;
   margin-bottom: 5px;
+  position: relative;
 
   .img-user{
     margin-right:  ${props => props.answer ? '10px' : '8px'};
@@ -14,7 +15,6 @@ export const UserComment = styled.div`
     }
   }
 
-    position: relative;
   .user-profile{
     .repost-post{
       padding: 3px;
@@ -35,11 +35,11 @@ export const UserComment = styled.div`
       }
       .options{
         position: absolute;
-        font-size: ${styles.fontSmall};
+        font-size: 14px;
         background: #f8f8f8;
         border-radius: 5px;
         top: 16px;
-        left: -55px;
+        left: -65px;
         border: 1px solid #ddd;
         padding: 5px 8px;
         cursor:pointer;

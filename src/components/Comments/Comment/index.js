@@ -13,9 +13,10 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
           : <img src={`images/user@50.png`} alt="" />
         }
       </div>
+      {console.log(comment)}
       <div className="user-profile">
         <div className="repost-post">
-          <div className="options-comment">
+          {comment.user_id === userId && <div className="options-comment">
             <i className="fas fa-ellipsis-v" onClick={() => setShowOptionsComment(!showOptionsComment)}></i>
             {showOptionsComment &&
               <ul className='options' onClick={() => {
@@ -29,7 +30,7 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
                 <li>Excluir</li>
               </ul>
             }
-          </div>
+          </div>}
           <b>{comment.name}</b>
           <div className="user-comment-post">
             <p>{comment.comment}</p>

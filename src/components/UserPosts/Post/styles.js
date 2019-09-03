@@ -15,7 +15,6 @@ export const ContainerPost = styled.article`
     border-bottom:1px solid ${styles.colorBorder};
     padding-bottom:5px;
     position: relative;
-
     .options-post{
       position: absolute;
       right: 10px;
@@ -39,6 +38,7 @@ export const ContainerPost = styled.article`
   .post-user{
     display: flex;
     font-size: ${styles.fontSmall};
+    
     img{
       max-width: 100%;
       width: 50px;

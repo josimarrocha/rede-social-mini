@@ -18,14 +18,14 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
       <ContainerPost>
         <div className="content">
           <div className="header-post">
-            <div className="options-post">
+            {userInfo.id === post.user_id && <div className="options-post">
               <i className="fas fa-ellipsis-v" onClick={() => setShowOptionsPost(!showOptionsPost)}></i>
               {showOptionsPost &&
                 <ul className='options' onClick={() => deletePost(post.id)}>
                   <li>Excluir</li>
                 </ul>
               }
-            </div>
+            </div>}
             <div className="post-user">
               {post.image_profile_mini
                 ? <img src={post.image_profile_mini} alt="" />

@@ -5,7 +5,7 @@ export const UserAccountContainer = styled.section`
   max-width: 280px;
   width:100%;
   position: fixed;
-  z-index: 0;
+  z-index: 5;
 
   @media (max-width: ${styles.containerMiddle}) {
     position: relative;
@@ -26,7 +26,8 @@ export const UserInfoContainer = styled.div`
     right: 0;
     top: 170px;
     cursor: pointer;
-    padding: 5px;
+    padding: 8px;
+    z-index: 2;
   }
 `
 
@@ -50,7 +51,7 @@ export const UserImgbackground = styled.div`
   position:absolute;
   top: 0;
   left: 0;
-  background-image: url('/images/tarn-nguyen-4a52btspyY8-unsplash.jpg');
+  background-image: url('/rede-social-mini/images/tarn-nguyen-4a52btspyY8-unsplash.jpg');
   background-size:cover;
   background-position: center;
 

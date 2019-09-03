@@ -72,7 +72,7 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
         <UserImg>
           {profileInfo.image_profile
             ? <img src={profileInfo.image_profile} alt="" />
-            : <img src={`/images/user@150.png`} alt="" />
+            : <img src={`/rede-social-mini/images/user@150.png`} alt="" />
           }
         </UserImg>
         <UserData>
@@ -97,14 +97,16 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
           </div>
           <div className="user-info-describe">
             <p>
-              {userInfo.description
-                ? userInfo.description
-                : !isUpdateDescription && <>
+              {!visitProfile ? profileInfo.description
+                ? profileInfo.description
+                : !isUpdateDescription &&
+                <>
                   Nenhuma descrição
                     <span onClick={() => setIsUpdateDescription(true)}>
                     <i className="far fa-edit"></i>Adicionar
                     </span>
                 </>
+                : 'Nenhuma descrição'
               }
             </p>
             {isUpdateDescription &&

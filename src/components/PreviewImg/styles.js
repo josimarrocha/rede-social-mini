@@ -8,8 +8,8 @@ export const PreviewContainer = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 5;
-  overflow: hidden;
+  z-index: 4;
+  overflow-x: hidden;
 
   .preview-close{
     position: relative;

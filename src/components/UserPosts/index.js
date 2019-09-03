@@ -21,8 +21,8 @@ const UserPosts = ({ visitProfile, socket, addNewComment, posts }) => {
       await addNewComment(post_id, m[0])
     })
     answersComment && answersComment.on('newAnswersComment', async (m) => {
-      const { comment_id } = m[0]
-      await addNewComment(comment_id, m[0], true)
+      const { id } = m[0]
+      await addNewComment(id, m[0], true)
 
     })
   }, [])

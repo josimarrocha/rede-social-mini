@@ -4,7 +4,6 @@ import Comment from './Comment'
 import SendComment from './SendComment'
 
 import {
-  addCommentPost,
   showCommentPost,
   addLikeComment,
   removeLikeComment,
@@ -167,4 +166,4 @@ const mapStateToProps = state => ({
   userInfo: state.userInfo
 })
 
-export default connect(mapStateToProps, { addCommentPost, addNewComment, showCommentPost, addLikeComment, removeLikeComment, viewMoreComments })(Comments)
+export default connect(mapStateToProps, { addNewComment, showCommentPost, addLikeComment, removeLikeComment, viewMoreComments })(Comments)

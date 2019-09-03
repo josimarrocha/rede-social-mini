@@ -3,6 +3,8 @@ import styles from '../../styles'
 
 export const MenuMobileContainer = styled.div`
   flex: 2;
+  position: relative;
+  
   .menu-content{
     display: none !important;
     position: relative;
@@ -11,12 +13,13 @@ export const MenuMobileContainer = styled.div`
       padding: 8px;
     }
 
-    @media (max-width: ${styles.containerSmall + 'px'}) {
+    @media (max-width: ${styles.containerMiddle}) {
       display: block !important;
       position: absolute;
-      right: 15px;
+      right: 10px;
       font-size: 20px;
-      }
+    }
+    
     .menu-list{
       display: flex;
       flex-direction: column;
@@ -26,6 +29,7 @@ export const MenuMobileContainer = styled.div`
       background: #fff;
       box-shadow: 0 2px 5px #666;
       position: absolute;
+      z-index: 20;
       top: 33px;
       right: -15px;
     }  

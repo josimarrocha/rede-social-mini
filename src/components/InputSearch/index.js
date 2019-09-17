@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import pathImageDefault from '../../config/util'
 import { searchProfile } from '../../reducers/search/actionsCreators'
 import { FormConatiner } from './styles'
 
@@ -38,7 +39,9 @@ const InputSearch = ({ search, searchProfile, mobile }) => {
                 setInputSearch('')
               }}>
                 <span>
-                  <img src={item.image_profile_mini} alt="" />
+                  {item.image_profile_mini
+                    ? <img src={item.image_profile_mini} alt="" />
+                    : <img src={`${pathImageDefault.pathImageDev}/user@50.png`} alt='' />}
                 </span>
                 <b>{item.username}</b>
               </li>

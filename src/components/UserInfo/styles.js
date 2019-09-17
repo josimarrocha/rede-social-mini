@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import styles from '../../styles'
+import path from '../../config/util'
 
 export const UserAccountContainer = styled.section`
   max-width: 280px;
@@ -51,9 +52,11 @@ export const UserImgbackground = styled.div`
   position:absolute;
   top: 0;
   left: 0;
-  background-image: url('/rede-social-mini/images/tarn-nguyen-4a52btspyY8-unsplash.jpg');
   background-size:cover;
   background-position: center;
+  ${() => `
+    background-image: url('${path.pathImageDev}/tarn-nguyen-4a52btspyY8-unsplash.jpg');
+  `}
 
   @media (max-width: ${styles.containerMiddle}) {
       background-position-y: -60px;

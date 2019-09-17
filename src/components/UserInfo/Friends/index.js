@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import pathImageDefault from '../../../config/util'
 import { connect } from 'react-redux'
 import { FreindsContainer, Friend } from './styles'
 
@@ -16,7 +17,7 @@ const Friends = ({ friends, userInfo }) => {
             <div className="friend-img">
               {friend.image_profile_mini
                 ? <img src={friend.image_profile_mini} alt="" />
-                : <img src={`/rede-social-mini/images/user@50.png`} alt="" />
+                : <img src={`${pathImageDefault.pathImageDev}/user@50.png`} alt="" />
               }
             </div>
             <div className="friend-name">

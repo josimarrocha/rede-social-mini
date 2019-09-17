@@ -56,11 +56,10 @@ export const FormConatiner = styled.div`
       }
 
       span{
-        width: 33px;
+        width: 35px;
         margin-right: 10px;
         img{
-          width: 35px;
-          height: 40px;
+          max-width: 100%;
         }
       }
 

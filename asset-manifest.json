@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/rede-social-mini/static/css/main.4affd967.chunk.css",
-    "main.js": "/rede-social-mini/static/js/main.84b65d13.chunk.js",
-    "main.js.map": "/rede-social-mini/static/js/main.84b65d13.chunk.js.map",
+    "main.js": "/rede-social-mini/static/js/main.763ae1ea.chunk.js",
+    "main.js.map": "/rede-social-mini/static/js/main.763ae1ea.chunk.js.map",
     "runtime~main.js": "/rede-social-mini/static/js/runtime~main.409cf430.js",
     "runtime~main.js.map": "/rede-social-mini/static/js/runtime~main.409cf430.js.map",
     "static/css/2.764ccc25.chunk.css": "/rede-social-mini/static/css/2.764ccc25.chunk.css",
-    "static/js/2.881f82e0.chunk.js": "/rede-social-mini/static/js/2.881f82e0.chunk.js",
-    "static/js/2.881f82e0.chunk.js.map": "/rede-social-mini/static/js/2.881f82e0.chunk.js.map",
+    "static/js/2.ebd09ba7.chunk.js": "/rede-social-mini/static/js/2.ebd09ba7.chunk.js",
+    "static/js/2.ebd09ba7.chunk.js.map": "/rede-social-mini/static/js/2.ebd09ba7.chunk.js.map",
     "index.html": "/rede-social-mini/index.html",
-    "precache-manifest.7de77404508852cce5ddd5d8500adf42.js": "/rede-social-mini/precache-manifest.7de77404508852cce5ddd5d8500adf42.js",
+    "precache-manifest.3fd45f4935fe344616bded4394e16d70.js": "/rede-social-mini/precache-manifest.3fd45f4935fe344616bded4394e16d70.js",
     "service-worker.js": "/rede-social-mini/service-worker.js",
     "static/css/2.764ccc25.chunk.css.map": "/rede-social-mini/static/css/2.764ccc25.chunk.css.map",
     "static/css/main.4affd967.chunk.css.map": "/rede-social-mini/static/css/main.4affd967.chunk.css.map"

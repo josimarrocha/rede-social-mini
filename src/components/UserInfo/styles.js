@@ -5,7 +5,7 @@ export const UserAccountContainer = styled.section`
   max-width: 280px;
   width:100%;
   position: fixed;
-  z-index: 5;
+  z-index: 4;
 
   @media (max-width: ${styles.containerMiddle}) {
     position: relative;

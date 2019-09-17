@@ -8,7 +8,7 @@ export const PreviewContainer = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 4;
+  z-index: 12;
   overflow-x: hidden;
 
   .preview-close{

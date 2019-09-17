@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7b9a875786a9ce6159236944db9944ba",
+    "revision": "31af57ff49f5bf691d00ce35437f605c",
     "url": "/rede-social-mini/index.html"
   },
   {
-    "revision": "556cc7f6aa4bf5ad93db",
+    "revision": "14c038cb7f3a8e434c8a",
     "url": "/rede-social-mini/static/css/2.764ccc25.chunk.css"
   },
   {
-    "revision": "b49b097bb3963ab809b3",
+    "revision": "a646e0c2941a1291d139",
     "url": "/rede-social-mini/static/css/main.4affd967.chunk.css"
   },
   {
-    "revision": "556cc7f6aa4bf5ad93db",
-    "url": "/rede-social-mini/static/js/2.c032e632.chunk.js"
+    "revision": "14c038cb7f3a8e434c8a",
+    "url": "/rede-social-mini/static/js/2.99e67165.chunk.js"
   },
   {
-    "revision": "b49b097bb3963ab809b3",
-    "url": "/rede-social-mini/static/js/main.53912b65.chunk.js"
+    "revision": "a646e0c2941a1291d139",
+    "url": "/rede-social-mini/static/js/main.c812dc43.chunk.js"
   },
   {
     "revision": "a083ab8411362b8482dc",

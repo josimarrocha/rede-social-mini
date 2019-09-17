@@ -25,7 +25,7 @@ const NewPost = ({ createNewPost }) => {
       return false
     }
     const data = new FormData()
-    data.append('legend', legend)
+    data.append('legend', legend ? legend : '')
     data.append('image', image)
 
     createNewPost(data)

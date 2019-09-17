@@ -39,7 +39,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
             </div>
           </div>
           <div className="post-user-content">
-            <p className='post-user-legend'>{post.legend}</p>
+            <p className='post-user-legend'>{post.legend ? post.legend : ''}</p>
             <div className="post-user-image">
               <img src={post.pathImage} alt="" />
             </div>

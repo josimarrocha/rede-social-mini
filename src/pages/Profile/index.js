@@ -19,7 +19,9 @@ const Profile = ({ loadingProfile, match: { params }, postsByUser }) => {
   return (
     <Container>
       <UserInfo visitProfile={true} />
-      <ImageBgProfile />
+      <ImageBgProfile
+        visitProfile={true}
+      />
       <UserPosts visitProfile={true} />
     </Container>
   )

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import api from '../../config/api'
-import { updateNameUser, updateDescription } from '../../reducers/userInfo/actionsCreators'
-import { loadingProfile, friendsPendingIo } from '../../reducers/friends/actionsCreators'
 import Friends from './Friends'
 import UserAccountConfig from './UserAccountConfig'
+import ImageBgProfile from '../UserInfo/ImageBgProfile'
+import { updateNameUser, updateDescription } from '../../reducers/userInfo/actionsCreators'
+import { loadingProfile, friendsPendingIo } from '../../reducers/friends/actionsCreators'
+import pathImageDefault from '../../config/util'
+import api from '../../config/api'
 import { UserAccountContainer, UserInfoContainer, UserImg, UserData, UserImgbackground } from './styles'
 
-const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProfile, updateDescription, socket, friendsPendingIo }) => {
+const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProfile, updateDescription, socket }) => {
   const [isMenuConfigUser, setIsMenuConfigUser] = useState(false)
   const [isUpdateNameUser, setIsUpdateNameUser] = useState(false)
   const [isUpdateDescription, setIsUpdateDescription] = useState(false)
@@ -53,14 +55,17 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
   return (
     <UserAccountContainer>
       <UserInfoContainer>
-        {!visitProfile &&
+        {userInfo.id === profileInfo.id &&
           <div className="menu-user-config"
             onClick={() => setIsMenuConfigUser(!isMenuConfigUser)}>
             <i className="fas fa-ellipsis-v"></i>
           </div>
         }
-        <UserImgbackground>
-        </UserImgbackground>
+        <ImageBgProfile
+          imageBackground={'https://josimarrocha.github.io/rede-social-mini/images/tarn-nguyen-4a52btspyY8-unsplash.jpg'}
+          idUserLogged={userInfo.id}
+          idUser={profileInfo.id} />
+
         {isMenuConfigUser &&
           <UserAccountConfig
             setIsMenuConfigUser={setIsMenuConfigUser}
@@ -72,7 +77,7 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
         <UserImg>
           {profileInfo.image_profile
             ? <img src={profileInfo.image_profile} alt="" />
-            : <img src={`/rede-social-mini/images/user@150.png`} alt="" />
+            : <img src={`${pathImageDefault.pathImageDev}/user@150.png`} alt="" />
           }
         </UserImg>
         <UserData>
@@ -97,16 +102,16 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
           </div>
           <div className="user-info-describe">
             <p>
-              {!visitProfile ? profileInfo.description
+              {profileInfo.description
                 ? profileInfo.description
                 : !isUpdateDescription &&
                 <>
                   Nenhuma descrição
-                    <span onClick={() => setIsUpdateDescription(true)}>
+                   {!visitProfile && <span onClick={() => setIsUpdateDescription(true)}>
                     <i className="far fa-edit"></i>Adicionar
-                    </span>
+                    </span>}
                 </>
-                : 'Nenhuma descrição'
+
               }
             </p>
             {isUpdateDescription &&

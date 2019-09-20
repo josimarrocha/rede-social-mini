@@ -32,7 +32,7 @@ const Friends = ({ friends, userInfo }) => {
   return (
     <FreindsContainer>
       <div className="friends-header">
-        <p>Amigos</p>
+        <p>Amigos ({friends.length})</p>
       </div>
       <div className='friends-content'>
         <div>

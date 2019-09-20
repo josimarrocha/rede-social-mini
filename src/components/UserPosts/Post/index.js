@@ -48,6 +48,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
             <i className="fas fa-thumbs-up"> {post.likes}</i>
           </span>
         </div>
+        {console.log('teste')}
         <div className="btn-actions">
           <a href='/'
             className={`btn ${post

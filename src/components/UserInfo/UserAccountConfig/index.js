@@ -38,7 +38,7 @@ const UserAccountConfig = ({ updateImageUser, setIsMenuConfigUser, setIsUpdateNa
   }
 
   return (
-    <UserConfigAccount>
+    <UserConfigAccount onMouseLeave={() => setIsMenuConfigUser(false)}>
       {isModalPreview && <PreviewImg
         confirmImagePreview={confirmImagePreview}
         abortImagePreview={abortImagePreview}

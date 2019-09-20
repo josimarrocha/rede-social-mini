@@ -5,14 +5,16 @@ import Routes from './routes'
 import Header from './components/Header'
 import Auth from './pages/Auth'
 import { initSocket } from './reducers/socket-io/actionsCreators'
+import { loadingProfile } from './reducers/userInfo/actionsCreators'
 
-function App({ initSocket }) {
+function App({ initSocket, loadingProfile }) {
   const [isAuth, setIsAuth] = useState(null)
 
   useEffect(() => {
     const isToken = JSON.parse(localStorage.getItem('@midiasocial@'))
     if (isToken) {
       initSocket()
+      loadingProfile(isToken.id)
       setIsAuth(false)
     } else {
       setIsAuth(true)
@@ -32,4 +34,4 @@ function App({ initSocket }) {
   );
 }
 
-export default connect(null, { initSocket })(App);
+export default connect(null, { initSocket, loadingProfile })(App);

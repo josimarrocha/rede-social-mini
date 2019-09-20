@@ -14,7 +14,7 @@ const Home = ({ showPostsTimeline, showFriends, friendsPending, loadingProfile }
       const user = JSON.parse(await localStorage.getItem('@midiasocial@'))
       if (user.token) {
         await friendsPending()
-        await loadingProfile(user.id)
+        // await loadingProfile(user.id)
         await showPostsTimeline()
         await showFriends()
       }

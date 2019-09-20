@@ -18,6 +18,7 @@ const SendComment = ({ textareaRef, addComment, imageProfile, isAnswer, commentI
           onInput={(e) => {
             if (textareaRef.current.scrollHeight > textareaRef.current.offsetHeight) textareaRef.current.rows += 1
           }} />
+        <span><button type='button' onClick={(e) => addComment(e, { isAnswer, commentId })}>Enviar</button></span>
       </form>
     </SendCommentContainer>
   )

@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import styles from '../../styles'
-import path from '../../config/util'
 
 export const UserAccountContainer = styled.section`
   max-width: 280px;
@@ -46,30 +45,16 @@ export const UserImg = styled.div`
   }
 `
 
-export const UserImgbackground = styled.div`
-  width:100%;
-  height: 170px;
-  position:absolute;
-  top: 0;
-  left: 0;
-  background-size:cover;
-  background-position: center;
-  ${() => `
-    background-image: url('${path.pathImageDev}/tarn-nguyen-4a52btspyY8-unsplash.jpg');
-  `}
-
-  @media (max-width: ${styles.containerMiddle}) {
-      background-position-y: -60px;
-  }
-
-`
-
 export const UserData = styled.div`
   text-align:center;
   position: relative;
   z-index: 1;
   margin-top:20px;
   font-size:${styles.fontSmall};
+
+  @media (max-width: ${styles.containerMiddle}) {
+    margin-top:70px;
+    }
 
   .user-info-username{
     margin-bottom: 20px;

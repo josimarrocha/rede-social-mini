@@ -15,6 +15,10 @@ export const Container = styled.div`
   flex-direction: column;
   background-color: #ffffee;
 
+  @media (max-width: ${styles.containerMiddle}) {
+    left:0;
+  }
+
   &:before{
     content: '';
     position: absolute;

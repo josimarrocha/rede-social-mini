@@ -8,7 +8,7 @@ export const PreviewContainer = styled.div`
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 12;
+  z-index: 10;
   overflow-x: hidden;
 
   .preview-close{
@@ -25,14 +25,15 @@ export const PreviewContainer = styled.div`
   .preview-content{
     position: relative;
     width: 100%;
-    margin: 100px auto;
+    height: 100vh;
+    margin: 20px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     img{
       margin: 0 auto;
       max-width: 100%;
-      max-height: 600px;
+      max-height: 500px;
     }
   }
 

@@ -1,28 +1,65 @@
 import api from '../../config/api'
+import { SHOW_COMMENT_POST } from '../comments/actionsCreators'
 
 export const SHOW_POSTS_TIMELINE = 'posts:SHOW_POSTS_TIMELINE'
+export const MORE_POSTS = 'posts:MORE_POSTS'
 export const NEW_POST_USER = 'posts:NEW_POST_USER'
 export const ADD_LIKE_POST = 'posts:ADD_LIKE_POST'
 export const REMOVE_LIKE_POST = 'posts:REMOVE_LIKE_POST'
 export const POSTS_BY_USER = 'posts:POSTS_BY_USER'
 export const DELETE_POST = 'posts:DELETE_POST'
+export const SINGLE_POST_BY_USER = 'posts:SINGLE_POST_BY_USER'
 
-export const showPostsTimeline = () => async dispatch => {
-  const { data: posts } = await api.get('post/timeline')
+export const showPostsTimeline = (page) => async dispatch => {
+  const { data: posts } = await api.get(`post/timeline/${page}`)
   dispatch({
     type: SHOW_POSTS_TIMELINE,
     payload: {
-      posts: posts[0].data,
+      total: posts.total,
+      perPage: posts.perPage,
+      page: posts.page,
+      lastPage: posts.lastPage,
+      posts: posts.data,
     }
   })
 }
 
-export const postsByUser = (id) => async dispatch => {
-  const { data: posts } = await api.get(`post/profile/${id}`)
-  dispatch({
-    type: POSTS_BY_USER,
-    payload: posts
+export const singlePostByUser = (url) => async dispatch => {
+  const { data } = await api.get(url)
+
+  await dispatch({
+    type: SINGLE_POST_BY_USER,
+    payload: data.data
   })
+  if (data.hasOwnProperty('comments')) {
+    await dispatch({
+      type: SHOW_COMMENT_POST,
+      payload: {
+        post_id: data.data[0].id,
+        comments: data.comments,
+        where: 'comments'
+      }
+    })
+  }
+}
+
+export const postsByUser = (id, page) => async dispatch => {
+  try {
+    const { data: posts } = await api.get(`post/profile/${id}/${page}`)
+    dispatch({
+      type: POSTS_BY_USER,
+      payload: {
+        total: posts.total,
+        perPage: posts.perPage,
+        page: posts.page,
+        lastPage: posts.lastPage,
+        posts: posts.data
+      }
+    })
+
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export const createNewPost = (post) => async dispatch => {

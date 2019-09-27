@@ -37,7 +37,7 @@ export const FormConatiner = styled.div`
     background: ${styles.colorWhite};
     right: 0;
     top: 26px;
-    position: absolute;
+    position: ${props => props.inHeader ? 'absolute' : 'static'};
     width: 20rem;
     box-shadow: 0px 1px 5px #666;  
     ul{

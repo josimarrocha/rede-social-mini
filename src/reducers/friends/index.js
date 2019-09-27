@@ -3,7 +3,7 @@ import { SHOW_FRIENDS, FRIENDS_PENDING, FRIENDS_PENDING_IO, CONFIRM_FRIEND, LOAD
 const initialState = {
   friends: [],
   friendsPending: [],
-  friendProfile: {}
+  profile: {}
 }
 
 const friends = (state = initialState, action) => {
@@ -32,8 +32,7 @@ const friends = (state = initialState, action) => {
     case LOADING_PROFILE_FRIEND:
       return {
         ...state,
-        friendProfile: { ...action.payload[0] },
-        friends: action.payload[0].friends
+        profile: { ...action.payload[0] },
       }
     default:
       return state

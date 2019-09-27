@@ -1,4 +1,4 @@
-import { LOGIN_USER, UPDATE_IMAGE_USER, UPDATE_NAME_USER, LOADING_PROFILE, UPDATE_DESCRIPTION_USER } from './actionsCreators'
+import { LOGIN_USER, UPDATE_IMAGE_USER, UPDATE_NAME_USER, LOADING_PROFILE, UPDATE_DESCRIPTION_USER, UPDATE_BACKGROUND_IMAGE_USER } from './actionsCreators'
 
 const userInfo = (state = {}, action) => {
   switch (action.type) {
@@ -16,6 +16,11 @@ const userInfo = (state = {}, action) => {
       return {
         ...state,
         image_profile: action.payload
+      }
+    case UPDATE_BACKGROUND_IMAGE_USER:
+      return {
+        ...state,
+        image_background: action.payload
       }
     case UPDATE_NAME_USER:
       return {

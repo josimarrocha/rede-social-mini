@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   width: 100%;
   top: 0;
   box-shadow: 1px 1px 5px #999;
-  z-index:6;
+  z-index:10;
 
   .header-content{
     max-width: ${styles.container};
@@ -36,7 +36,7 @@ export const HeaderContainer = styled.header`
         text-align:center;
         cursor: pointer;
       }
-      span b{
+      span .fas b{
         padding-top: 2px;
         position: absolute;
         background: #333;
@@ -46,6 +46,10 @@ export const HeaderContainer = styled.header`
         height: 18px;
         font-size: 13px;
         top: -5px;
+        left:10px;
+      }
+      .notifications{
+        margin-left:15px;        
       }
     }
     .logout{

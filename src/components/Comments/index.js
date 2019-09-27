@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable array-callback-return */
+import React from 'react'
 import { connect } from 'react-redux'
 import Comment from './Comment'
 import SendComment from './SendComment'
-
 import {
   showCommentPost,
   addLikeComment,
@@ -12,28 +12,7 @@ import {
 } from '../../reducers/comments/actionsCreators'
 import { ContainerComments } from './styles'
 
-const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo, addLikeComment, removeLikeComment, viewMoreComments, emitComment }) => {
-  const textareaRef = React.createRef()
-  const textareaRef2 = React.createRef()
-
-  const adicionaComment = async (e, { isAnswer, commentId }) => {
-    if (e.charCode === 13) {
-      if (e.target.value.replace(/\s+/g, '') !== '') {
-        const commente = {
-          post_id: postId,
-          comment_id: commentId,
-          comment: e.target.value,
-          image_comment: 'imagem'
-        }
-        if (isAnswer) {
-          emitComment.answersComment.emit('newAnswersComment', commente)
-        } else {
-          emitComment.comment.emit('newComment', commente)
-        }
-        e.target.value = e.target.value.replace(/(.|\s|\n)*/g, '')
-      }
-    }
-  }
+const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo, addLikeComment, removeLikeComment, viewMoreComments, postByUserId }) => {
 
   const addLike = (post_id, comment_id, answer, idCommentPrincipal) => {
     const comment = { post_id, comment_id }
@@ -49,56 +28,46 @@ const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo
     removeLikeComment(comment, answer, idCommentPrincipal)
   }
 
-  const plusComments = (page, lastPage, postId) => {
+  const plusComments = async (page, lastPage, id, type) => {
     if (page < lastPage) {
       page++
-      viewMoreComments(page, postId)
+      type === 'replies'
+        ? await viewMoreComments(page, id, true)
+        : await viewMoreComments(page, id, false)
     }
   }
 
-  const plusAnswersComment = async (page, lastPage, comment_id) => {
-    if (page < lastPage) {
-      page++
-      await viewMoreComments(page, comment_id, true)
-    }
-  }
-
-  const renderCommentsReply = (comment_id, numberReplys) => {
+  const renderCommentsReplies = (comment_id) => {
     return Object.keys(answersComments).map((key, i) => {
       const { page, lastPage, data } = answersComments[key]
       return <div key={`answerComment:${i}`}>
         {+key === comment_id && page !== lastPage &&
-          renderButtonMoreComments(page, lastPage, comment_id, plusAnswersComment)
+          renderButtonMoreComments(page, lastPage, comment_id, plusComments, 'replies', 'Ver comentarios anteriores')
         }
         {data.map((replys, i) => {
           if (replys.id === comment_id) {
-            return (
-              <Comment
-                key={`replys:${i}`}
-                addLike={addLike}
-                removeLike={removeLike}
-                userId={userInfo.id}
-                postId={postId}
-                idCommentPrincipal={comment_id}
-                comment={replys}
-                answer={true}
-              />
-            )
+            return <Comment
+              key={`replys:${i}`}
+              addLike={addLike}
+              removeLike={removeLike}
+              userId={userInfo.id}
+              postId={postId}
+              idCommentPrincipal={comment_id}
+              comment={replys}
+              answer={true}
+            />
           }
         })}
       </div>
     })
   }
 
-  const renderButtonMoreComments = (page, lastPage, postId, func) => {
-    return <a href='/'
-      onClick={(e) => {
-        e.preventDefault()
-        func(page, lastPage, postId)
-      }}
+  const renderButtonMoreComments = (page, lastPage, id, func, type, text) => {
+    return <span
+      onClick={() => func(page, lastPage, id, type)}
       className='more-comments'>
-      <b>Ver comentarios anteriores</b>
-    </a>
+      <b>{text}</b>
+    </span>
   }
 
   const renderComments = () => {
@@ -106,7 +75,7 @@ const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo
       const { page, lastPage, data } = comments[key]
       return <div key={`postId:${i}`}>
         {+key === postId && page !== lastPage &&
-          renderButtonMoreComments(page, lastPage, postId, plusComments)
+          renderButtonMoreComments(page, lastPage, postId, plusComments, null, 'Ver comentarios anteriores')
         }
         {data.map((comment, index) => {
           if (comment.post_id === postId) {
@@ -119,29 +88,32 @@ const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo
                 comment={comment}
               >
                 {+comment.replys > 0 &&
-                  <a href='/'
-                    id={`answers:${comment.comment_id}`}
-                    onClick={(e) => {
-                      e.preventDefault()
+                  <span id={`answers:${comment.comment_id}`}
+                    onClick={() => {
                       showCommentPost(comment.comment_id, true)
-                      document.getElementById(`answers:${comment.comment_id}`).remove()
+                      document.getElementById(`answers:${comment.comment_id}`).textContent = ''
                     }}
                     className='more-comments'>
                     <b>Ver respostas</b>
-                  </a>
+                  </span>
                 }
-                {renderCommentsReply(comment.comment_id, comment.replys)}
+                {renderCommentsReplies(comment.comment_id, comment.replys)}
                 <SendComment
-                  addComment={adicionaComment}
                   imageProfile={userInfo.image_profile_mini}
-                  textareaRef={textareaRef2}
                   isAnswer={true}
                   commentId={comment.comment_id}
+                  postId={postId}
+                  userInfo={userInfo}
+                  postByUserId={postByUserId}
+                  commentByUserId={comment.user_id}
                 />
               </Comment>
             )
           }
         })}
+        {/* {+key === postId && page !== lastPage &&
+          renderButtonMoreComments(page, lastPage, postId, plusComments, null, 'Ver próximos comentários')
+        } */}
       </div>
     })
   }
@@ -150,11 +122,7 @@ const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo
     <ContainerComments>
       <div className="comment-content">
         {Object.keys(comments).length > 0 && renderComments()}
-        <SendComment
-          addComment={adicionaComment}
-          imageProfile={userInfo.image_profile_mini}
-          textareaRef={textareaRef}
-        />
+
       </div>
     </ContainerComments>
   )

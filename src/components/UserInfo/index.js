@@ -4,13 +4,13 @@ import Friends from './Friends'
 import UserAccountConfig from './UserAccountConfig'
 import ImageBgProfile from '../UserInfo/ImageBgProfile'
 import { updateNameUser, updateDescription } from '../../reducers/userInfo/actionsCreators'
-import { loadingProfile, friendsPendingIo } from '../../reducers/friends/actionsCreators'
+import { loadingProfile, friendsPendingIo, showFriends } from '../../reducers/friends/actionsCreators'
+import { showUserConfig } from '../../reducers/ui/'
 import pathImageDefault from '../../config/util'
 import api from '../../config/api'
-import { UserAccountContainer, UserInfoContainer, UserImg, UserData, UserImgbackground } from './styles'
+import { UserAccountContainer, UserInfoContainer, UserImg, UserData } from './styles'
 
-const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProfile, updateDescription, socket }) => {
-  const [isMenuConfigUser, setIsMenuConfigUser] = useState(false)
+const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProfile, updateDescription, socket, showFriends, ui, showUserConfig }) => {
   const [isUpdateNameUser, setIsUpdateNameUser] = useState(false)
   const [isUpdateDescription, setIsUpdateDescription] = useState(false)
   const [nameInput, setNameInput] = useState('')
@@ -18,11 +18,7 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
   const [profileInfo, setProfileInfo] = useState({})
 
   useEffect(() => {
-    if (visitProfile) {
-      setProfileInfo(profile)
-    } else {
-      setProfileInfo(userInfo)
-    }
+    setProfileInfo(profile)
     setNameInput(userInfo.username)
   }, [userInfo, profile])
 
@@ -36,6 +32,7 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
   const removeProfile = async id => {
     await api.delete(`/profile/friend/delete/${id}`)
     await loadingProfile(id)
+    showFriends(id)
   }
 
   const descriptionUpdate = () => {
@@ -45,7 +42,6 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
     }
     setIsUpdateDescription(false)
   }
-
   const addProfile = async (id) => {
     await api.get(`/profile/friend/newFriend/${id}`)
     await loadingProfile(id)
@@ -53,36 +49,37 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
   }
 
   return (
-    <UserAccountContainer>
-      <UserInfoContainer>
-        {userInfo.id === profileInfo.id &&
+    <UserAccountContainer >
+      {profileInfo.hasOwnProperty('id') && <UserInfoContainer>
+        {userInfo.id === profile.id &&
           <div className="menu-user-config"
-            onClick={() => setIsMenuConfigUser(!isMenuConfigUser)}>
+            onClick={() => showUserConfig()}>
             <i className="fas fa-ellipsis-v"></i>
           </div>
         }
         <ImageBgProfile
-          imageBackground={'https://josimarrocha.github.io/rede-social-mini/images/tarn-nguyen-4a52btspyY8-unsplash.jpg'}
+          imageBackground={!visitProfile ? userInfo.image_background : profileInfo.image_background}
           idUserLogged={userInfo.id}
-          idUser={profileInfo.id} />
+          idUser={profileInfo.id}
+          visitProfile={false} />
 
-        {isMenuConfigUser &&
+        {ui.showUserConfig &&
           <UserAccountConfig
-            setIsMenuConfigUser={setIsMenuConfigUser}
+            setIsMenuConfigUser={showUserConfig}
             setIsUpdateNameUser={setIsUpdateNameUser}
             setIsUpdateDescription={setIsUpdateDescription}
           />
         }
 
         <UserImg>
-          {profileInfo.image_profile
-            ? <img src={profileInfo.image_profile} alt="" />
-            : <img src={`${pathImageDefault.pathImageDev}/user@150.png`} alt="" />
-          }
+          <img src={profileInfo.image_profile
+            ? !visitProfile ? userInfo.image_profile : profileInfo.image_profile
+            : `${pathImageDefault.pathImageDev}/user@150.png`} alt=""
+          />
         </UserImg>
         <UserData>
           <div className="user-info-username">
-            {!isUpdateNameUser ? <h3>{profileInfo.name}</h3>
+            {!isUpdateNameUser ? <h3>{userInfo.id === profile.id ? userInfo.name : profileInfo.name}</h3>
               : <div>
                 <input
                   type="text"
@@ -107,7 +104,7 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
                 : !isUpdateDescription &&
                 <>
                   Nenhuma descrição
-                   {!visitProfile && <span onClick={() => setIsUpdateDescription(true)}>
+                   {userInfo.id === profile.id && <span onClick={() => setIsUpdateDescription(true)}>
                     <i className="far fa-edit"></i>Adicionar
                     </span>}
                 </>
@@ -135,15 +132,15 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
               </>
             }
           </div>
-          {!visitProfile && <div className="user-info-email">
-            <p>{userInfo.email}</p>
-          </div>}
+          <div className="user-info-email">
+            {userInfo.id === profile.id && <p>{userInfo.email}</p>}
+          </div>
           <div className="user-info-local">
             <p>Brasil, São Paulo, SP</p>
           </div>
 
           <div className='profile-status'>
-            {profileInfo.isFriend === true &&
+            {profileInfo.isFriend === true && userInfo.id !== profile.id &&
               <>
                 <span className='profile-status-friend'>
                   <i className="fas fa-check-circle" /> Amigos
@@ -155,7 +152,7 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
               </>
             }
 
-            {profileInfo.isFriend === null &&
+            {profileInfo.isFriend === null && userInfo.id !== profile.id &&
               <div className='profile-add'>
                 <a href="/" onClick={(e) => {
                   e.preventDefault()
@@ -178,16 +175,17 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
             }
           </div>
         </UserData>
-      </UserInfoContainer>
-      <Friends visitProfile={visitProfile} />
+      </UserInfoContainer>}
+      <Friends />
     </UserAccountContainer>
   )
 }
 
 const mapStateToProps = state => ({
   userInfo: state.userInfo,
-  profile: state.friendsInfo.friendProfile,
-  socket: state.socket
+  profile: state.friendsInfo.profile,
+  socket: state.socket,
+  ui: state.ui
 })
 
-export default connect(mapStateToProps, { updateNameUser, loadingProfile, updateDescription, friendsPendingIo })(UserInfo)
+export default connect(mapStateToProps, { updateNameUser, loadingProfile, updateDescription, friendsPendingIo, showFriends, showUserConfig })(UserInfo)

@@ -7,6 +7,9 @@ export const ContainerPost = styled.article`
   box-shadow: 1px 1px 15px #ddd;
   margin-bottom: 10px;
 
+  div.send{
+    padding: 0 8px 5px 8px;
+  }
   .content{
     padding: 10px;
   }
@@ -47,7 +50,14 @@ export const ContainerPost = styled.article`
     .post-user-info{
       margin-top:8px;
       margin-left: 10px;
+      a{
+        color: #444;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
       label{
+        cursor: pointer;
         display: block;
         font-weight: 550;
       }

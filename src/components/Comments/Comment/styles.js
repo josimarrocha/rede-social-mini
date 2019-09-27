@@ -7,19 +7,27 @@ export const UserComment = styled.div`
   position: relative;
 
   .img-user{
-    margin-right:  ${props => props.answer ? '10px' : '8px'};
+    flex: 1;
 
     img{
+      width: 40px;
       max-width: ${props => props.answer ? '35px' : '100%'};
       max-height: ${props => props.answer ? '35px' : '100%'}
     }
   }
 
   .user-profile{
+    flex: 9;
     .repost-post{
       padding: 3px;
       background: #e4e5ee;
       border-radius: 6px;
+
+      &.comment-active{
+        animation: commentMarkup 3s linear 0.5s ;
+        transition: animation 200ms;
+      }
+      
       b{
         padding-left:5px;
       }
@@ -53,6 +61,7 @@ export const UserComment = styled.div`
     .comments-actions{
       margin-bottom: 8px;
       margin-top: 3px;
+      color: #666;
 
       span{
         margin-left: 5px;
@@ -68,6 +77,13 @@ export const UserComment = styled.div`
 
         &.activeLike{
           color: ${styles.colorPrimary};
+        }
+      }
+      .reply{
+        font-weight: 600;
+        cursor: pointer;
+        &:hover{
+          text-decoration: underline;
         }
       }
     }

@@ -7,6 +7,9 @@ body {
   background: rgba(102, 102, 102, 0.1);
   position: relative;
 }
+html, body{
+  height: 100%;
+}
 *{
   box-sizing: border-box;
 }
@@ -19,4 +22,29 @@ ul{
 }
 a{
   text-decoration: none;
+
+}
+
+@keyframes commentMarkup{
+  0%{
+    background: #e4e5ee;
+  }
+  15%{
+    background: #e6e08ea6;
+  }
+  25%{
+    background: #e4e5ee;
+  }
+  40%{
+    background: #e6e08ea6;
+  }
+  50%{
+    background: #e4e5ee;
+  }
+  75%{
+    background: #e6e08ea6;
+  }
+  100%{
+    background: #e4e5ee;
+  }
 }

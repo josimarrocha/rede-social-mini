@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import pathImageDefault from '../../config/util'
 import { searchProfile } from '../../reducers/search/actionsCreators'
 import { FormConatiner } from './styles'
 
-const InputSearch = ({ search, searchProfile, mobile }) => {
+const InputSearch = ({ search, searchProfile, inHeader, userMarkup, setUserMakup }) => {
   const [isEmptyInput, setIsEmptyInput] = useState(false)
   const [inputSearch, setInputSearch] = useState('')
 
+  // useEffect(() => {
+  //   renderListUsers()
+  // }, [userMarkup, search])
   const searchUser = (e) => {
     setInputSearch(e.target.value)
     if (e.target.value) {
@@ -20,35 +23,41 @@ const InputSearch = ({ search, searchProfile, mobile }) => {
     setIsEmptyInput(false)
   }
 
+  const renderListUsers = () => {
+    return search.map(item => (
+      <Action to={`/${item.username}/${item.id}`} key={`profile:${item.id}`}>
+        <li onClick={() => {
+          setIsEmptyInput(false)
+          setInputSearch('')
+        }}>
+          <span>
+            <img src={item.image_profile_mini
+              ? item.image_profile_mini :
+              `${pathImageDefault.pathImageDev}/user@50.png`} alt="" />
+          </span>
+          <b>{item.username}</b>
+        </li>
+      </Action>
+    ))
+  }
+
+  const Action = inHeader ? Link : 'span'
+
   return (
-    <FormConatiner mobile={mobile}>
-      <form onSubmit={(e) => e.preventDefault()}>
+    <FormConatiner inHeader={inHeader}>
+      {inHeader && <form onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
           autoComplete="off"
           onChange={searchUser}
           value={inputSearch}
           className='form-input' name="search" placeholder='Pesquisar usuário' />
-      </form>
-      {isEmptyInput && <div className="result-list">
+      </form>}
+      <div className="result-list">
         <ul>
-          {search.map(item => (
-            <Link to={`${item.username}/${item.id}`} key={`profile:${item.id}`}>
-              <li onClick={() => {
-                setIsEmptyInput(false)
-                setInputSearch('')
-              }}>
-                <span>
-                  {item.image_profile_mini
-                    ? <img src={item.image_profile_mini} alt="" />
-                    : <img src={`${pathImageDefault.pathImageDev}/user@50.png`} alt='' />}
-                </span>
-                <b>{item.username}</b>
-              </li>
-            </Link>
-          ))}
+          {inHeader && isEmptyInput ? renderListUsers() : !inHeader && userMarkup ? renderListUsers() : ''}
         </ul>
-      </div>}
+      </div>
     </FormConatiner>
   )
 }

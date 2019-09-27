@@ -1,51 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import NewPost from './NewPost'
 import Post from './Post'
-import { addNewComment } from '../../reducers/comments/actionsCreators'
+
 import { ContainerPosts } from './styles'
 
-const UserPosts = ({ visitProfile, socket, addNewComment, posts }) => {
-  const [emitComment, setEmitComment] = useState()
-
+const UserPosts = ({ posts, userInfo, profile }) => {
   useEffect(() => {
-    let comment = socket.comment
-    let answersComment = socket.answersComment
-    setEmitComment({
-      comment,
-      answersComment
-    })
 
-    comment && comment.on('newComment', async (m) => {
-      const { post_id } = m[0]
-      await addNewComment(post_id, m[0])
-    })
-    answersComment && answersComment.on('newAnswersComment', async (m) => {
-      const { id } = m[0]
-      await addNewComment(id, m[0], true)
-
-    })
   }, [])
   return (
-    <ContainerPosts>
-      {!visitProfile && <NewPost />}
+    <>
+      {userInfo.hasOwnProperty('id') &&
+        <ContainerPosts onScroll={() => console.log('posts')}>
+          {userInfo.id === profile.id && <NewPost />}
 
-      {posts.map((post, i) => (
-        <Post key={`post:${post.pathImage}${i}`}
-          emitComment={emitComment}
-          post={post}
-        />
-      ))
-      }
-    </ContainerPosts>
+          {Object.keys(posts).map((key, i) => (
+            <Post key={`post:${key}${i}`}
+              post={posts[key]}
+            />
+          ))
+          }
+        </ContainerPosts>}
+    </>
   )
 }
 
 
 const mapStateToProps = state => ({
   posts: state.initialDataProfile.posts,
-  socket: state.socket
+  socket: state.socket,
+  userInfo: state.userInfo,
+  profile: state.friendsInfo.profile
 })
 
 
-export default connect(mapStateToProps, { addNewComment })(UserPosts)
+export default connect(mapStateToProps)(UserPosts)

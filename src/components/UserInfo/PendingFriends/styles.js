@@ -2,40 +2,44 @@ import styled from 'styled-components'
 import styles from '../../../styles'
 
 export const PendingFriendsConatiner = styled.div`
-  box-shadow: 1px 1px 15px #ddd;
-  width: 100%;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
   background: ${styles.colorWhite};
-  max-width: 280px;
+  max-width: 300px;
+  width: 100%;
   position: absolute;
-  top: 40px;
+  top: 45px;
   left:15px;
   color: #333;
   display: flex;
   flex-direction: column;
   z-index: 5;
 
-  &::before{
+  &:before{
     content: '';
     position: absolute;
-    width: 15px;
-    height: 15px;
-    background: ${styles.colorWhite};
-    left: 105px;
-    top: -5px;
-    transform: rotate(45deg)
+    border-width: 10px;
+    border-color: transparent transparent ${styles.colorWhite} transparent;
+    border-style: solid;
+    left: 100px;
+    top: -20px;
   }
-
   .pending-friends-header{
-    font-size: ${styles.fontSmall};
+    width: 100%;
     font-weight: 600;
-    text-align: center;
-    padding: 10px 0;
+    border-bottom: 1px solid #bbb;
+    background-color: #eee;
+    height: 25px;
+    p{
+      text-align: center;
+      width: 100%;
+      font-size: ${styles.fontSmallSmall};
+    }
   }
 `
 
 export const PendingFriendsContent = styled.div`
     overflow-y: auto;
-    max-height: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
 
@@ -46,11 +50,14 @@ export const PendingFriendsContent = styled.div`
 
   .pending-friends{
     display: flex;
-    padding:5px 5px 10px 5px;
+    padding:5px 5px 5px 5px;
     justify-content:space-between;
-    margin-bottom: 5px;
     border-top:1px solid ${styles.colorBorder};
     width: 100%;
+    background-color: #ddd;
+    &:hover{
+      background-color: #ccc;
+    }
   }
 
   .img-friend{
@@ -60,19 +67,21 @@ export const PendingFriendsContent = styled.div`
   .pending-friend{
     margin-left: 10px;
     display: flex;
-    flex:3;
+    flex:4;
+    align-items: flex-start;
     flex-direction: column;
+    color: #555;
 
     p.friend-name{
       text-align: left;
-      font-size: ${styles.fontSmall};
+      font-size: 13px;
       font-weight: 600;
       align-self: flex-start;
-      /* word-break:break-all; */
     }
 
     .actions{
-      margin-top: 15px;
+      margin-top: 7px;
+      align-self: flex-start;
 
       button{
         margin-right: 5px;

@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { friendsPending, confirmFriend, showFriends } from '../../../reducers/friends/actionsCreators'
+import { friendsPending, confirmFriend, showFriends, loadingProfile } from '../../../reducers/friends/actionsCreators'
 import { PendingFriendsConatiner, PendingFriendsContent } from './styles'
 
-const PendingFriends = ({ userInfo, setIsModalFriendsPending, friendsPending, friendsInfo, confirmFriend, showFriends }) => {
+const PendingFriends = ({ loadingProfile, profile, friendsPending, friendsInfo, confirmFriend, showFriends }) => {
   useEffect(() => {
     friendsPending()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const confirmFriendship = async (id) => {
     await confirmFriend(id)
     await friendsPending()
-    await showFriends()
-    // setIsModalFriendsPending(false)
+    await showFriends(profile.id)
+    loadingProfile(profile.id)
   }
 
   return (
@@ -28,7 +29,7 @@ const PendingFriends = ({ userInfo, setIsModalFriendsPending, friendsPending, fr
               <div className="img-friend">
                 {friendsPend.image_profile_mini
                   ? <img src={`http://localhost:3333/imageProfile/${friendsPend.image_profile_mini}`} alt="" />
-                  : <img src={`/images/user@50.png`} alt="" />
+                  : <img src={`images/user@50.png`} alt="" />
                 }
               </div>
               <div className="pending-friend">
@@ -47,7 +48,8 @@ const PendingFriends = ({ userInfo, setIsModalFriendsPending, friendsPending, fr
 
 const mapStateToProps = state => ({
   userInfo: state.userInfo,
-  friendsInfo: state.friendsInfo.friendsPending
+  friendsInfo: state.friendsInfo.friendsPending,
+  profile: state.friendsInfo.profile
 })
 
-export default connect(mapStateToProps, { friendsPending, confirmFriend, showFriends })(PendingFriends)
+export default connect(mapStateToProps, { friendsPending, confirmFriend, showFriends, loadingProfile })(PendingFriends)

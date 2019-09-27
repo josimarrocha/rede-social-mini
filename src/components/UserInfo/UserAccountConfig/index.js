@@ -21,24 +21,24 @@ const UserAccountConfig = ({ updateImageUser, setIsMenuConfigUser, setIsUpdateNa
       const data = new FormData()
       data.append('imageProfile', imageProfile)
       updateImageUser(data)
-      setIsMenuConfigUser(false)
+      setIsMenuConfigUser()
     }
   }
 
   const abortImagePreview = () => {
     setIsModalPreviw(false)
-    setIsMenuConfigUser(false)
+    setIsMenuConfigUser()
     setImageProfile('')
   }
 
   const confirmImagePreview = () => {
     updateImageProfile()
     setIsModalPreviw(false)
-    setIsMenuConfigUser(false)
+    setIsMenuConfigUser()
   }
 
   return (
-    <UserConfigAccount onMouseLeave={() => setIsMenuConfigUser(false)}>
+    <UserConfigAccount >
       {isModalPreview && <PreviewImg
         confirmImagePreview={confirmImagePreview}
         abortImagePreview={abortImagePreview}
@@ -49,7 +49,7 @@ const UserAccountConfig = ({ updateImageUser, setIsMenuConfigUser, setIsUpdateNa
         type="file"
         id="updateImageUser"
         onChange={({ target: { files } }) => setImageProfile(files[0])}
-        style={{ display: 'none' }} />
+        hidden />
       <ul>
         <label htmlFor="updateImageUser">
           <li>Trocar foto de perfil</li>

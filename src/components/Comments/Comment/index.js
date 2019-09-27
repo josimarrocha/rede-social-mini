@@ -1,10 +1,32 @@
 import React, { useState } from 'react'
+import api from '../../../config/api'
 import { connect } from 'react-redux'
 import { deleteComment, deleteReplyComment } from '../../../reducers/comments/actionsCreators'
 import { UserComment } from './styles'
 
-const Comment = ({ comment, userId, postId, removeLike, addLike, children, answer, idCommentPrincipal, deleteComment, deleteReplyComment }) => {
+const Comment = ({ comment, userId, postId, removeLike, addLike, children, answer, idCommentPrincipal, deleteComment, deleteReplyComment, socket }) => {
   const [showOptionsComment, setShowOptionsComment] = useState(false)
+  const [isComponentSend, setIsComponentSend] = useState(false)
+
+  const createNotificationLike = async () => {
+
+    try {
+      userId !== comment.user_id && await api.post('/notification', {
+        user_id: comment.user_id,
+        action_id: 1,
+        post_id: postId,
+        comment_id: comment.comment_id
+      })
+      socket.friends.emit('pendingFriends', 'notifications')
+    } catch (error) {
+
+    }
+  }
+  const createLikeComment = () => {
+    addLike(postId, comment.comment_id, answer, idCommentPrincipal)
+    createNotificationLike()
+  }
+
   return (
     <UserComment answer={answer}>
       <div className="img-user">
@@ -13,9 +35,8 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
           : <img src={`images/user@50.png`} alt="" />
         }
       </div>
-      {console.log(comment)}
       <div className="user-profile">
-        <div className="repost-post">
+        <div id={`comment${comment.comment_id && comment.comment_id}`} className="repost-post">
           {comment.user_id === userId && <div className="options-comment">
             <i className="fas fa-ellipsis-v" onClick={() => setShowOptionsComment(!showOptionsComment)}></i>
             {showOptionsComment &&
@@ -46,14 +67,23 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
                 .numberLikes
                 .some(userLike => userLike.user_id === userId)
                 ? removeLike(postId, comment.comment_id, userId, answer, idCommentPrincipal)
-                : addLike(postId, comment.comment_id, answer, idCommentPrincipal)
+                : createLikeComment()
             }}>
             Gostei</b>
+          {!answer &&
+            <span
+              className='reply'
+              onClick={() => setIsComponentSend(!isComponentSend)}>Responder
+            </span>
+          }
         </div>
-        {children}
+        {isComponentSend && children}
       </div>
     </UserComment>
   )
 }
 
-export default connect(null, { deleteComment, deleteReplyComment })(Comment)
+const mapStateToProps = state => ({
+  socket: state.socket
+})
+export default connect(mapStateToProps, { deleteComment, deleteReplyComment })(Comment)

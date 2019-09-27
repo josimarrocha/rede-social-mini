@@ -5,6 +5,8 @@ import friendsInfo from './friends'
 import search from './search'
 import comments from './comments'
 import socket from './socket-io'
+import notifications from './notifications'
+import ui from './ui'
 
 export default combineReducers({
   initialDataProfile,
@@ -12,5 +14,7 @@ export default combineReducers({
   friendsInfo,
   search,
   comments,
-  socket
+  socket,
+  notifications,
+  ui
 })

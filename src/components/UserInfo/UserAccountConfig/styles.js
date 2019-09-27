@@ -8,7 +8,7 @@ export const UserConfigAccount = styled.div`
   background: #f8f8f8;
   border-radius: 5px;
   border: 1px solid #ddd;
-  z-index: 10 !important;
+  /* z-index: 10 !important; */
 
   @media (max-width: ${styles.containerSmall + 'px'}) {
     right: 10px;

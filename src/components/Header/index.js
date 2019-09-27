@@ -3,24 +3,31 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PendingFriends from '../UserInfo/PendingFriends'
 import MenuMobile from '../MenuMobile'
+import Notification from '../Notification'
 import InputSearch from '../InputSearch'
-import { friendsPendingIo } from '../../reducers/friends/actionsCreators'
+import { friendsPendingIo, friendsPending } from '../../reducers/friends/actionsCreators'
+import { loadingNotifications } from '../../reducers/notifications/actionsCreators'
+import { showFriendsPending, showNotifications } from '../../reducers/ui'
 import { HeaderContainer } from './styles'
 import styles from '../../styles'
 
-const Header = ({ pendingFriends, userInfo, socket, friendsPendingIo }) => {
-  const [isModalFriendsPending, setIsModalFriendsPending] = useState(false)
+const Header = ({ pendingFriends, socket, notifications, friendsPending, loadingNotifications, ui, showNotifications, showFriendsPending }) => {
   const [isMenuMobile, setIsMMenuMobile] = useState(true)
 
   useEffect(() => {
-    socket.friends && socket.friends.on('pendingFriends', (data) => {
-      friendsPendingIo(data)
+    socket.friends && socket.friends.on('friendsPending', (type) => {
+      if (type === 'notifications') {
+        loadingNotifications()
+        return
+      }
+      friendsPending()
     })
     if (window.innerWidth <= styles.containerSmall) {
       setIsMMenuMobile(true)
     } else {
       setIsMMenuMobile(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   window.addEventListener('resize', function (e) {
@@ -37,6 +44,15 @@ const Header = ({ pendingFriends, userInfo, socket, friendsPendingIo }) => {
     window.location.reload()
   }
 
+  const numberNotification = () => {
+    const number = notifications.filter(noti => !noti.viewed).length
+    if (number > 0) {
+      return (
+        <b>{number}</b>
+      )
+    }
+  }
+
   return (
     <HeaderContainer>
       <div className="header-content">
@@ -44,18 +60,29 @@ const Header = ({ pendingFriends, userInfo, socket, friendsPendingIo }) => {
           <div className="header-logo">
             <Link to='/'><h2>REDE</h2></Link>
           </div>
-          <span onClick={() => setIsModalFriendsPending(!isModalFriendsPending)}>
-            {isModalFriendsPending &&
-              <PendingFriends
-                setIsModalFriendsPending={setIsModalFriendsPending}
-              />
+          <span
+            className='friends-pending'
+            onClick={() => showFriendsPending()}>
+            {ui.showFriendsPending &&
+              <PendingFriends />
             }
             <i className="fas fa-user-friends">
-              {!!pendingFriends.length && <b>{pendingFriends.filter(item => item.friend_id !== userInfo.id).length}</b>}
+              {!!pendingFriends.length && <b>{pendingFriends.length}</b>
+              }
+            </i>
+          </span>
+          <span
+            className='notifications'
+            onClick={() => showNotifications()}>
+            {ui.showNotifications &&
+              <Notification />
+            }
+            <i className="fas fa-bell">
+              {!!notifications.length && numberNotification()}
             </i>
           </span>
         </div>
-        {!isMenuMobile ? <InputSearch /> : <MenuMobile />}
+        {!isMenuMobile ? <InputSearch inHeader={true} /> : <MenuMobile />}
         <div className="logout" onClick={logout}>
           <p>Sair</p>
         </div>
@@ -67,7 +94,9 @@ const Header = ({ pendingFriends, userInfo, socket, friendsPendingIo }) => {
 const mapStateToProps = state => ({
   pendingFriends: state.friendsInfo.friendsPending,
   userInfo: state.userInfo,
-  socket: state.socket
+  socket: state.socket,
+  notifications: state.notifications,
+  ui: state.ui
 })
 
-export default connect(mapStateToProps, { friendsPendingIo })(Header)
+export default connect(mapStateToProps, { friendsPendingIo, friendsPending, loadingNotifications, showFriendsPending, showNotifications })(Header)

@@ -1,6 +1,10 @@
-import { SHOW_POSTS_TIMELINE, NEW_POST_USER, ADD_LIKE_POST, REMOVE_LIKE_POST, POSTS_BY_USER, DELETE_POST } from './actionsCreators'
+import { SHOW_POSTS_TIMELINE, MORE_POSTS, NEW_POST_USER, ADD_LIKE_POST, REMOVE_LIKE_POST, POSTS_BY_USER, DELETE_POST, SINGLE_POST_BY_USER } from './actionsCreators'
 
 const initialState = {
+  total: '',
+  perPage: '',
+  page: '',
+  lastPage: '',
   posts: [],
 }
 
@@ -9,8 +13,15 @@ const initialDataProfile = (state = initialState, action) => {
     case SHOW_POSTS_TIMELINE:
       return {
         ...state,
-        posts: action.payload.posts,
+        ...action.payload,
+        posts: action.payload.clean ? [] : state.posts.concat(action.payload.posts)
       }
+    case MORE_POSTS: {
+      return {
+        ...state,
+        posts: state.posts.concat(action.payload.posts)
+      }
+    }
     case NEW_POST_USER:
       return {
         ...state,
@@ -24,7 +35,13 @@ const initialDataProfile = (state = initialState, action) => {
     case POSTS_BY_USER:
       return {
         ...state,
-        posts: [...action.payload]
+        ...action.payload,
+        posts: state.posts.concat(action.payload.posts)
+      }
+    case SINGLE_POST_BY_USER:
+      return {
+        ...state,
+        posts: action.payload
       }
     case ADD_LIKE_POST:
       const { posts } = state

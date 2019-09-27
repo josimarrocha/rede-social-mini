@@ -25,6 +25,7 @@ export const ContainerComments = styled.div`
       width: 100%;
       margin-bottom: 5px;
       text-align: center;
+      cursor: pointer;
     }
   }
 `

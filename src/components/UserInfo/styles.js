@@ -5,7 +5,7 @@ export const UserAccountContainer = styled.section`
   max-width: 280px;
   width:100%;
   position: fixed;
-  z-index: 4;
+  z-index: 2;
 
   @media (max-width: ${styles.containerMiddle}) {
     position: relative;
@@ -28,6 +28,10 @@ export const UserInfoContainer = styled.div`
     cursor: pointer;
     padding: 8px;
     z-index: 2;
+
+    @media (max-width: ${styles.containerMiddle}) {
+      top: 220px
+    }
   }
 `
 
@@ -36,6 +40,7 @@ export const UserImg = styled.div`
   position: relative;
   z-index: 1;
   img{
+    box-shadow: 1px 1px 15px #000;
     max-width: 100px;
     max-height: 100px;
     width:100%;

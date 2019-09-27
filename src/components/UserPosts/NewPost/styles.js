@@ -33,6 +33,7 @@ export const NewPostContainer = styled.div`
   }
 
   .post-content{
+    position: relative;
     textarea{
       width: 100%;
       height: 100px;

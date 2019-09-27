@@ -51,7 +51,7 @@ export const deleteReplyComment = (idComment, id) => async dispatch => {
   })
 }
 
-export const addNewComment = (id, comment, answer) => dispatch => {
+export const addNewComment = (id, comment, answer) => async dispatch => {
   let where
   if (answer) {
     where = 'commentsAnswered'

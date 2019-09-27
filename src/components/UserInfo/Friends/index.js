@@ -4,21 +4,22 @@ import pathImageDefault from '../../../config/util'
 import { connect } from 'react-redux'
 import { FreindsContainer, Friend } from './styles'
 
-const Friends = ({ friends, userInfo }) => {
+const Friends = ({ friends, friendsPending }) => {
   useEffect(() => {
     renderFriends()
-  }, [friends])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [friends, friendsPending])
 
   const renderFriends = () => {
     return (
       friends.map(friend => (
-        userInfo.id !== friend.id && <Link to={`/${friend.username}/${friend.id}`} key={`friend:${friend.id}`}>
+        <Link to={`/${friend.username}/${friend.id}`} key={`friend:${friend.id}`}>
           <Friend>
             <div className="friend-img">
-              {friend.image_profile_mini
-                ? <img src={friend.image_profile_mini} alt="" />
-                : <img src={`${pathImageDefault.pathImageDev}/user@50.png`} alt="" />
-              }
+              <img src={friend.image_profile_mini
+                ? friend.image_profile_mini
+                : `${pathImageDefault.pathImageDev}/user@50.png`} alt=""
+              />
             </div>
             <div className="friend-name">
               <p>{friend.name}</p>
@@ -49,6 +50,7 @@ const Friends = ({ friends, userInfo }) => {
 
 const mapStateToProps = state => ({
   friends: state.friendsInfo.friends,
+  friendsPending: state.friendsInfo.friendsPending,
   userInfo: state.userInfo
 })
 

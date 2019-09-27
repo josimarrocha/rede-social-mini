@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import styles from '../../../styles'
+import path from '../../../config/util'
 
 export const ContainerImage = styled.div`
   margin-left: 300px;
@@ -18,18 +19,27 @@ export const ContainerImage = styled.div`
 `
 
 export const UserImgbackground = styled.div`
-  width:100%;
-  height:170px;
-  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain, cover;
+  /* background-position: center; */
+  height:${props => props.visitProfile ? '480px' : '170px'};
+  position:${props => props.visitProfile ? 'static' : 'absolute'};
   top: 0;
   left: 0;
-  background-size:cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  ${props => props.imageBackground
-    && `background-image: url(${props.imageBackground});`
+  width:100%;
 
+  ${props => props.imageBackground
+    ? `background-image: url(${props.imageBackground});`
+    : `background-color: rgba(0, 0, 0, 0.3);
+      background-image: url('${path.pathImageDev}/default-background.svg');`
   }
+  ${props => props.visitProfile && !props.imageBackground &&
+    `background: url('${path.pathImageDev}/default-background.svg');
+     background-color: rgba(0, 0, 0, 0.3);
+      @media (max-width: ${styles.containerMiddle}) {
+        display: none;
+      }
+  `}
 
   .edit-image{
     color: #f8f8f8;

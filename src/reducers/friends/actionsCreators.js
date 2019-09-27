@@ -1,4 +1,5 @@
 import api from '../../config/api'
+import { SHOW_POSTS_TIMELINE } from '../posts/actionsCreators'
 
 export const FRIENDS_PENDING = 'friends:FRIENDS_PENDING'
 export const FRIENDS_PENDING_IO = 'friends:FRIENDS_PENDING_IO'
@@ -24,8 +25,8 @@ export const friendsPendingIo = (data, id) => async dispatch => {
   })
 }
 
-export const showFriends = () => async dispatch => {
-  const { data: friends } = await api.get('profile/friends')
+export const showFriends = (id) => async dispatch => {
+  const { data: friends } = await api.get(`profile/friends/${id}`)
   dispatch({
     type: SHOW_FRIENDS,
     payload: friends
@@ -41,6 +42,13 @@ export const confirmFriend = (friend_id) => async dispatch => {
 }
 
 export const loadingProfile = (id) => async dispatch => {
+  dispatch({
+    type: SHOW_POSTS_TIMELINE,
+    payload: {
+      posts: [],
+      clean: true
+    }
+  })
   const { data: profileFriend } = await api.get(`profile/friend/${id}`)
   dispatch({
     type: LOADING_PROFILE_FRIEND,

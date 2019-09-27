@@ -1,6 +1,7 @@
 import api from '../../config/api'
 export const LOGIN_USER = 'user:LOGIN_USER'
 export const UPDATE_IMAGE_USER = 'user:UPDATE_IMAGE_USER'
+export const UPDATE_BACKGROUND_IMAGE_USER = 'user:UPDATE_BACKGROUND_IMAGE_USER'
 export const UPDATE_NAME_USER = 'user:UPDATE_NAME_USER'
 export const LOADING_PROFILE = 'user:LOADING_PROFILE'
 export const UPDATE_DESCRIPTION_USER = 'user:UPDATE_DESCRIPTION_USER'
@@ -31,6 +32,14 @@ export const updateImageUser = (image) => async dispatch => {
   dispatch({
     type: UPDATE_IMAGE_USER,
     payload: newImage
+  })
+}
+
+export const updateImageBackground = (image) => async dispatch => {
+  const { data: { newImageBackground } } = await api.put(`profile/updateImageBackground`, image)
+  dispatch({
+    type: UPDATE_BACKGROUND_IMAGE_USER,
+    payload: newImageBackground
   })
 }
 

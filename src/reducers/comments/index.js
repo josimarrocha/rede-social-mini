@@ -19,7 +19,7 @@ const comments = (state = initialState, action) => {
       return {
         ...state,
         [action.payload.where]: {
-          // state[action.payload.where],
+          ...state[action.payload.where],
           [action.payload.post_id]: {
             ...action.payload.comments
           }

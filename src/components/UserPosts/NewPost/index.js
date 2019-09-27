@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import PreviewImg from '../../PreviewImg'
+import InputSearch from '../../InputSearch'
 import { createNewPost } from '../../../reducers/posts/actionsCreators'
+import { searchProfile } from '../../../reducers/search/actionsCreators'
 import { NewPostContainer } from './styles'
 
-const NewPost = ({ createNewPost }) => {
+const NewPost = ({ createNewPost, searchProfile }) => {
   const [legend, setLegend] = useState()
   const [image, setImage] = useState()
   const [isModalPreview, setIsModalPreviw] = useState(false)
+  const [userMarkup, setUserMakup] = useState('')
 
   const textarea = React.createRef()
   useEffect(() => {
@@ -48,6 +51,19 @@ const NewPost = ({ createNewPost }) => {
     textarea.current.focus()
   }
 
+  const markupUser = (e) => {
+    setUserMakup(userMarkup + e.key)
+
+    if (e.charCode === 32 || e.charCode === 13 || textarea.current.value === '') {
+      setUserMakup('')
+      return false
+    }
+    if (userMarkup !== '') {
+      searchProfile(userMarkup)
+      return
+    }
+  }
+
   return (
     <>
       {isModalPreview &&
@@ -83,12 +99,20 @@ const NewPost = ({ createNewPost }) => {
               name="legend"
               cols="30"
               rows="10"
-              onChange={({ target: { value } }) => setLegend(value)} />
+              onKeyPress={markupUser}
+              onChange={({ target: { value } }) => {
+                setLegend(value)
+              }} />
           </div>
+          <InputSearch userMarkup={userMarkup} setUserMakup={setUserMakup} />
         </form>
       </NewPostContainer>
     </>
   )
 }
 
-export default connect(null, { createNewPost })(NewPost)
+const mapStateToProps = state => ({
+  search: state.search
+})
+
+export default connect(mapStateToProps, { createNewPost, searchProfile })(NewPost)

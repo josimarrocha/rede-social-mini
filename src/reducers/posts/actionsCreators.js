@@ -26,7 +26,6 @@ export const showPostsTimeline = (page) => async dispatch => {
 
 export const singlePostByUser = (url) => async dispatch => {
   const { data } = await api.get(url)
-
   await dispatch({
     type: SINGLE_POST_BY_USER,
     payload: data.data
@@ -43,7 +42,7 @@ export const singlePostByUser = (url) => async dispatch => {
   }
 }
 
-export const postsByUser = (id, page) => async dispatch => {
+export const postsByUser = (page, id) => async dispatch => {
   try {
     const { data: posts } = await api.get(`post/profile/${id}/${page}`)
     dispatch({

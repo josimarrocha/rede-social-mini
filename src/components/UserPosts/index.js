@@ -1,38 +1,45 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import NewPost from './NewPost'
 import Post from './Post'
-
 import { ContainerPosts } from './styles'
 
-const UserPosts = ({ posts, userInfo, profile }) => {
+const UserPosts = ({ posts, userInfo, profile, postsTimeline, isScroll, profileId, url }) => {
+  const [isInitScrollEvent, setIsInitScrollEvent] = useState(true)
+  let scrollY = 0
   useEffect(() => {
-
+    isScroll ? postsTimeline(1, profileId) : postsTimeline(url)
+    return () => window.onscroll = null
   }, [])
-  return (
-    <>
-      {userInfo.hasOwnProperty('id') &&
-        <ContainerPosts onScroll={() => console.log('posts')}>
-          {userInfo.id === profile.id && <NewPost />}
 
-          {Object.keys(posts).map((key, i) => (
-            <Post key={`post:${key}${i}`}
-              post={posts[key]}
-            />
-          ))
-          }
-        </ContainerPosts>}
-    </>
+  const scroll = (e) => {
+    setIsInitScrollEvent(true)
+    let pagey = posts.page + 1
+    scrollY = e.currentTarget.scrollY + e.currentTarget.innerHeight
+    if (document.body.scrollHeight - scrollY < 600) {
+      isScroll && isInitScrollEvent && postsTimeline(pagey, profile.id)
+      setIsInitScrollEvent(false)
+    }
+  }
+
+  window.onscroll = scroll
+
+  return (
+    <ContainerPosts>
+      {userInfo.id === profile.id && <NewPost />}
+      {posts.posts.map((post, i) => (
+        <Post key={`post:${post.id}${i}`}
+          post={post}
+        />
+      ))}
+    </ContainerPosts>
   )
 }
 
-
 const mapStateToProps = state => ({
-  posts: state.initialDataProfile.posts,
-  socket: state.socket,
+  posts: state.posts,
   userInfo: state.userInfo,
   profile: state.friendsInfo.profile
 })
-
 
 export default connect(mapStateToProps)(UserPosts)

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import initialDataProfile from './posts'
+import posts from './posts'
 import userInfo from './userInfo'
 import friendsInfo from './friends'
 import search from './search'
@@ -9,7 +9,7 @@ import notifications from './notifications'
 import ui from './ui'
 
 export default combineReducers({
-  initialDataProfile,
+  posts,
   userInfo,
   friendsInfo,
   search,

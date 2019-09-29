@@ -1,20 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Login from '../../components/SignIn'
 import SignUp from '../../components/SignUp'
 import { Container } from './styles'
 
-const Auth = ({ setIsAuth }) => {
+const token = JSON.parse(localStorage.getItem('@midiasocial@'))
+const Auth = ({ history }) => {
   const [isLogin, setIsLogin] = useState(true)
+
+  useEffect(() => {
+    if (token) {
+      history.push('/')
+    }
+  }, [])
+
   return (
-    <Container>
-      <div className="login-content">
-        <div className="brand"></div>
-        {isLogin
-          ? <Login setIsAuth={setIsAuth} setIsLogin={setIsLogin} isLogin={isLogin} />
-          : <SignUp setIsLogin={setIsLogin} isLogin={isLogin} />
-        }
-      </div>
-    </Container>
+    <>
+      {!token && <Container>
+        <div className="login-content">
+          <div className="brand"></div>
+          {isLogin
+            ? <Login history={history} setIsLogin={setIsLogin} isLogin={isLogin} />
+            : <SignUp setIsLogin={setIsLogin} isLogin={isLogin} />
+          }
+        </div>
+      </Container>
+      }
+    </>
   )
 }
 

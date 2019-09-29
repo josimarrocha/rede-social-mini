@@ -2,9 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import api from '../../../config/api'
 import { addNewComment } from '../../../reducers/comments/actionsCreators'
+import { commentIO, friendsIO } from '../../../config/util'
 import { SendCommentContainer } from './styles'
 
-const SendComment = ({ imageProfile, socket, isAnswer, commentId, postId, userInfo, postByUserId, commentByUserId, addNewComment }) => {
+const SendComment = ({ imageProfile, isAnswer, commentId, postId, userInfo, postByUserId, commentByUserId, addNewComment }) => {
   const textareaRef = React.createRef()
 
   const createNotificationComment = async (userId, comment_id) => {
@@ -39,8 +40,8 @@ const SendComment = ({ imageProfile, socket, isAnswer, commentId, postId, userIn
             ? createNotificationComment(commentByUserId, commentId)
             : createNotificationComment(postByUserId, data.comment_id)
 
-          socket.comment.emit(isAnswer ? 'newAnswersComment' : 'newComment', data)
-          socket.friends.emit('pendingFriends', 'notifications')
+          commentIO.emit(isAnswer ? 'newAnswersComment' : 'newComment', data)
+          friendsIO.emit('pendingFriends', 'notifications')
         } catch (error) {
 
         }
@@ -75,8 +76,4 @@ const SendComment = ({ imageProfile, socket, isAnswer, commentId, postId, userIn
   )
 }
 
-const mapStateToProps = state => ({
-  socket: state.socket,
-})
-
-export default connect(mapStateToProps, { addNewComment })(SendComment)
+export default connect(null, { addNewComment })(SendComment)

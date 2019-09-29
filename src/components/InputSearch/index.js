@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import pathImageDefault from '../../config/util'
 import { searchProfile } from '../../reducers/search/actionsCreators'
 import { FormConatiner } from './styles'
 
-const InputSearch = ({ search, searchProfile, inHeader, userMarkup, setUserMakup }) => {
+const InputSearch = ({ search, searchProfile, inHeader, userMarkup }) => {
   const [isEmptyInput, setIsEmptyInput] = useState(false)
   const [inputSearch, setInputSearch] = useState('')
 
-  // useEffect(() => {
-  //   renderListUsers()
-  // }, [userMarkup, search])
   const searchUser = (e) => {
     setInputSearch(e.target.value)
     if (e.target.value) {

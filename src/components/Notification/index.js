@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import api from '../../config/api'
 import { loadingNotifications } from '../../reducers/notifications/actionsCreators'
+import { showLoader } from '../../reducers/ui'
 import { Container, NotificationList } from './styles'
 
-const Notification = ({ notifications, loadingNotifications }) => {
+const Notification = ({ notifications, loadingNotifications, showLoader }) => {
   useEffect(() => {
     const updateNotifications = async () => {
       await api.put('/notification')
@@ -29,7 +30,9 @@ const Notification = ({ notifications, loadingNotifications }) => {
 
       <NotificationList>
         {notifications.map(notification => (
-          <Link to={notification.href} key={`notifications:${notification.id_notification}`}>
+          <Link to={notification.href}
+            key={`notifications:${notification.id_notification}`}
+            onClick={() => showLoader(true)}>
             <li className='notification-item'>
               <div className="img-profile">
                 <img src={notification.image_user_action ? notification.image_user_action : "images/user@50.png"} alt="" />
@@ -58,4 +61,4 @@ const mapStateToProps = state => ({
   notifications: state.notifications,
 })
 
-export default connect(mapStateToProps, { loadingNotifications })(Notification)
+export default connect(mapStateToProps, { loadingNotifications, showLoader })(Notification)

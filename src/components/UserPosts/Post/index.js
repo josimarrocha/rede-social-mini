@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Comments from '../../Comments'
 import SendComment from '../../Comments/SendComment'
-import { addLikePost, removeLikePost, deletePost } from '../../../reducers/posts/actionsCreators'
+import { addLikePost, removeLikePost, deletePost, postsByUser } from '../../../reducers/posts/actionsCreators'
 import { hide } from '../../../reducers/ui'
 import { showCommentPost } from '../../../reducers/comments/actionsCreators'
 import { ContainerPost } from './styles'
+import { friendsIO } from '../../../config/util'
 import api from '../../../config/api'
 
-const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, deletePost, socket, hide }) => {
+const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, deletePost, hide }) => {
   const [showComment, setShowComment] = useState(false)
   const [showOptionsPost, setShowOptionsPost] = useState(false)
 
@@ -24,7 +25,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
         action_id: post.legend ? 2 : 5,
         post_id: post.id
       })
-      socket.friends.emit('pendingFriends', 'notifications')
+      friendsIO.emit('pendingFriends', 'notifications')
     } catch (error) { }
   }
 
@@ -110,8 +111,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
 
 const mapStateToProps = state => ({
   userInfo: state.userInfo,
-  comments: state.comments.comments,
-  socket: state.socket
+  profile: state.friendsInfo.profile
 })
 
-export default connect(mapStateToProps, { addLikePost, removeLikePost, showCommentPost, deletePost, hide })(Post)
+export default connect(mapStateToProps, { postsByUser, addLikePost, removeLikePost, showCommentPost, deletePost, hide })(Post)

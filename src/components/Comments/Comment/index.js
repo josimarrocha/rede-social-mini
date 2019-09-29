@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import api from '../../../config/api'
 import { connect } from 'react-redux'
 import { deleteComment, deleteReplyComment } from '../../../reducers/comments/actionsCreators'
+import { friendsIO } from '../../../config/util'
 import { UserComment } from './styles'
 
-const Comment = ({ comment, userId, postId, removeLike, addLike, children, answer, idCommentPrincipal, deleteComment, deleteReplyComment, socket }) => {
+const Comment = ({ comment, userId, postId, removeLike, addLike, children, answer, idCommentPrincipal, deleteComment, deleteReplyComment }) => {
   const [showOptionsComment, setShowOptionsComment] = useState(false)
   const [isComponentSend, setIsComponentSend] = useState(false)
 
@@ -17,7 +18,7 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
         post_id: postId,
         comment_id: comment.comment_id
       })
-      socket.friends.emit('pendingFriends', 'notifications')
+      friendsIO.emit('pendingFriends', 'notifications')
     } catch (error) {
 
     }
@@ -83,7 +84,4 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
   )
 }
 
-const mapStateToProps = state => ({
-  socket: state.socket
-})
-export default connect(mapStateToProps, { deleteComment, deleteReplyComment })(Comment)
+export default connect(null, { deleteComment, deleteReplyComment })(Comment)

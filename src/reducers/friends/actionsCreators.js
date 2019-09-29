@@ -15,16 +15,6 @@ export const friendsPending = (id) => async dispatch => {
   })
 }
 
-export const friendsPendingIo = (data, id) => async dispatch => {
-  dispatch({
-    type: FRIENDS_PENDING_IO,
-    payload: {
-      data,
-      id
-    }
-  })
-}
-
 export const showFriends = (id) => async dispatch => {
   const { data: friends } = await api.get(`profile/friends/${id}`)
   dispatch({
@@ -49,6 +39,7 @@ export const loadingProfile = (id) => async dispatch => {
       clean: true
     }
   })
+
   const { data: profileFriend } = await api.get(`profile/friend/${id}`)
   dispatch({
     type: LOADING_PROFILE_FRIEND,

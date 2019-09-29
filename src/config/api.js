@@ -1,7 +1,7 @@
 import axios from 'axios'
 
+const token = JSON.parse(localStorage.getItem('@midiasocial@'))
 const getToken = () => {
-  const token = JSON.parse(localStorage.getItem('@midiasocial@'))
   if (token) {
     return axios.create({
       baseURL: 'http://localhost:3333',

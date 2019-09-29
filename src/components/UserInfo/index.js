@@ -4,7 +4,7 @@ import Friends from './Friends'
 import UserAccountConfig from './UserAccountConfig'
 import ImageBgProfile from '../UserInfo/ImageBgProfile'
 import { updateNameUser, updateDescription } from '../../reducers/userInfo/actionsCreators'
-import { loadingProfile, friendsPendingIo, showFriends } from '../../reducers/friends/actionsCreators'
+import { loadingProfile, showFriends } from '../../reducers/friends/actionsCreators'
 import { showUserConfig } from '../../reducers/ui/'
 import pathImageDefault from '../../config/util'
 import api from '../../config/api'
@@ -29,6 +29,7 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
     }
     setIsUpdateNameUser(false)
   }
+
   const removeProfile = async id => {
     await api.delete(`/profile/friend/delete/${id}`)
     await loadingProfile(id)
@@ -188,4 +189,4 @@ const mapStateToProps = state => ({
   ui: state.ui
 })
 
-export default connect(mapStateToProps, { updateNameUser, loadingProfile, updateDescription, friendsPendingIo, showFriends, showUserConfig })(UserInfo)
+export default connect(mapStateToProps, { updateNameUser, loadingProfile, updateDescription, showFriends, showUserConfig })(UserInfo)

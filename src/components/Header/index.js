@@ -5,23 +5,19 @@ import PendingFriends from '../UserInfo/PendingFriends'
 import MenuMobile from '../MenuMobile'
 import Notification from '../Notification'
 import InputSearch from '../InputSearch'
-import { friendsPendingIo, friendsPending } from '../../reducers/friends/actionsCreators'
-import { loadingNotifications } from '../../reducers/notifications/actionsCreators'
 import { showFriendsPending, showNotifications } from '../../reducers/ui'
+import { loadingNotifications } from '../../reducers/notifications/actionsCreators'
+import { friendsPending } from '../../reducers/friends/actionsCreators'
+
 import { HeaderContainer } from './styles'
 import styles from '../../styles'
 
-const Header = ({ pendingFriends, socket, notifications, friendsPending, loadingNotifications, ui, showNotifications, showFriendsPending }) => {
+const Header = ({ pendingFriends, notifications, ui, showNotifications, showFriendsPending, loadingNotifications, friendsPending }) => {
   const [isMenuMobile, setIsMMenuMobile] = useState(true)
 
   useEffect(() => {
-    socket.friends && socket.friends.on('friendsPending', (type) => {
-      if (type === 'notifications') {
-        loadingNotifications()
-        return
-      }
-      friendsPending()
-    })
+    friendsPending()
+    loadingNotifications()
     if (window.innerWidth <= styles.containerSmall) {
       setIsMMenuMobile(true)
     } else {
@@ -94,9 +90,8 @@ const Header = ({ pendingFriends, socket, notifications, friendsPending, loading
 const mapStateToProps = state => ({
   pendingFriends: state.friendsInfo.friendsPending,
   userInfo: state.userInfo,
-  socket: state.socket,
   notifications: state.notifications,
   ui: state.ui
 })
 
-export default connect(mapStateToProps, { friendsPendingIo, friendsPending, loadingNotifications, showFriendsPending, showNotifications })(Header)
+export default connect(mapStateToProps, { showFriendsPending, showNotifications, loadingNotifications, friendsPending })(Header)

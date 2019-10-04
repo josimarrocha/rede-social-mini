@@ -22,6 +22,9 @@ const Notification = ({ notifications, loadingNotifications, showLoader }) => {
       </>
     )
   }
+  const formatPostLegend = (legend) => {
+    return legend !== '' ? `"${legend.substring(0, 30).replace(/(@\w+\d+)\$/g, '$1')}"` : ''
+  }
   return (
     <Container>
       <div className="notification-header">
@@ -40,9 +43,10 @@ const Notification = ({ notifications, loadingNotifications, showLoader }) => {
               <div className="notification-info">
                 <p>
                   <b>{notification.name_user_action}</b> {notification.action}:
-                {notification.action_id === 1 && `"${notification.comment || notification.reply}"`}
-                  {notification.action_id === 2 && `"${notification.legend_post}"`}
-                  {notification.action_id === 3 && `"${notification.legend_post}"`}
+                  {notification.action_id === 1 && `"${notification.comment || notification.reply}"`}
+                  {notification.action_id === 2 && formatPostLegend(notification.legend_post)}
+                  {notification.action_id === 3 && formatPostLegend(notification.legend_post)}
+                  {notification.action_id === 6 && formatPostLegend(notification.legend_post)}
                   {notification.action_id === 4 && `"${notification.comment}"`}
                   {notification.action_id === 5 && renderImageNotification(notification.image_post)}
                 </p>

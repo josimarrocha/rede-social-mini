@@ -4,6 +4,7 @@ import styles from '../../styles'
 export const Container = styled.div`
   max-width: 400px;
   width: 100%;
+  /* height: 100%; */
   position: absolute;
   box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
   background: ${styles.colorWhite};
@@ -47,6 +48,9 @@ export const Container = styled.div`
 export const NotificationList = styled.ul`
   width: 100%;
   text-align: left;
+  height: 100%;
+  max-height: 500px;
+  overflow-y: scroll;
   a{
     color: inherit;
   }

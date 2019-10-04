@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import InputSearch from '../InputSearch'
 import { MenuMobileContainer } from './styles'
 
 const MenuMobile = () => {
@@ -17,11 +16,11 @@ const MenuMobile = () => {
         {isListMenu &&
           <div className="">
             <ul className="menu-list">
-              <li><InputSearch /></li>
               <li className='menu-item'>Ver amigos</li>
               <li className='menu-item' onClick={logout}>Sair</li>
             </ul>
-          </div>}
+          </div>
+        }
       </div>
     </MenuMobileContainer>
   )

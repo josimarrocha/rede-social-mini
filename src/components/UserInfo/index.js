@@ -6,7 +6,7 @@ import ImageBgProfile from '../UserInfo/ImageBgProfile'
 import { updateNameUser, updateDescription } from '../../reducers/userInfo/actionsCreators'
 import { loadingProfile, showFriends } from '../../reducers/friends/actionsCreators'
 import { showUserConfig } from '../../reducers/ui/'
-import pathImageDefault from '../../config/util'
+import pathImageDefault, { friendsIO } from '../../config/util'
 import api from '../../config/api'
 import { UserAccountContainer, UserInfoContainer, UserImg, UserData } from './styles'
 
@@ -46,7 +46,7 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
   const addProfile = async (id) => {
     await api.get(`/profile/friend/newFriend/${id}`)
     await loadingProfile(id)
-    socket.friends.emit('pendingFriends', id)
+    friendsIO.emit('pendingFriends', id)
   }
 
   return (

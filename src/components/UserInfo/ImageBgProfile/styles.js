@@ -31,7 +31,10 @@ export const UserImgbackground = styled.div`
   ${props => props.imageBackground
     ? `background-image: url(${props.imageBackground});`
     : `background-color: rgba(0, 0, 0, 0.3);
-      background-image: url('${path.pathImageDev}/default-background.svg');`
+      background-image: url('${path.pathImageDev}/default-background.svg');
+      @media (max-width: ${styles.containerMiddle}) {
+        background-image:none;
+      }`
   }
   ${props => props.visitProfile && !props.imageBackground &&
     `background: url('${path.pathImageDev}/default-background.svg');

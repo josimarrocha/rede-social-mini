@@ -26,15 +26,6 @@ const Header = ({ pendingFriends, notifications, ui, showNotifications, showFrie
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  window.addEventListener('resize', function (e) {
-    if (e.path[0].innerWidth <= styles.containerSmall) {
-      setIsMMenuMobile(true)
-    }
-    else {
-      setIsMMenuMobile(false)
-    }
-  })
-
   const logout = () => {
     localStorage.removeItem('@midiasocial@')
     window.location.reload()
@@ -48,7 +39,6 @@ const Header = ({ pendingFriends, notifications, ui, showNotifications, showFrie
       )
     }
   }
-
   return (
     <HeaderContainer>
       <div className="header-content">
@@ -78,7 +68,8 @@ const Header = ({ pendingFriends, notifications, ui, showNotifications, showFrie
             </i>
           </span>
         </div>
-        {!isMenuMobile ? <InputSearch inHeader={true} /> : <MenuMobile />}
+        <InputSearch inHeader={true} />
+        <MenuMobile />
         <div className="logout" onClick={logout}>
           <p>Sair</p>
         </div>

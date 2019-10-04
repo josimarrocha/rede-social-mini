@@ -14,8 +14,8 @@ import { ContainerComments } from './styles'
 
 const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo, addLikeComment, removeLikeComment, viewMoreComments, postByUserId }) => {
 
-  const addLike = (post_id, comment_id, answer, idCommentPrincipal) => {
-    const comment = { post_id, comment_id }
+  const addLike = (comment_id, answer, idCommentPrincipal) => {
+    const comment = { post_id: postId, comment_id }
     addLikeComment(comment, answer, idCommentPrincipal)
   }
 
@@ -37,31 +37,6 @@ const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo
     }
   }
 
-  const renderCommentsReplies = (comment_id) => {
-    return Object.keys(answersComments).map((key, i) => {
-      const { page, lastPage, data } = answersComments[key]
-      return <div key={`answerComment:${i}`}>
-        {+key === comment_id && page !== lastPage &&
-          renderButtonMoreComments(page, lastPage, comment_id, plusComments, 'replies', 'Ver comentarios anteriores')
-        }
-        {data.map((replys, i) => {
-          if (replys.id === comment_id) {
-            return <Comment
-              key={`replys:${i}`}
-              addLike={addLike}
-              removeLike={removeLike}
-              userId={userInfo.id}
-              postId={postId}
-              idCommentPrincipal={comment_id}
-              comment={replys}
-              answer={true}
-            />
-          }
-        })}
-      </div>
-    })
-  }
-
   const renderButtonMoreComments = (page, lastPage, id, func, type, text) => {
     return <span
       onClick={() => func(page, lastPage, id, type)}
@@ -70,59 +45,77 @@ const Comments = ({ showCommentPost, comments, answersComments, postId, userInfo
     </span>
   }
 
+  const renderCommentsReplies = (commentId) => {
+    if (answersComments.hasOwnProperty(commentId)) {
+      const { page, lastPage, data } = answersComments[commentId]
+      return <div>
+        {page !== lastPage &&
+          renderButtonMoreComments(page, lastPage, commentId, plusComments, 'replies', 'Ver comentarios anteriores')
+        }
+        {data.map((replys, i) =>
+          <Comment
+            key={`replys:${i}`}
+            addLike={addLike}
+            removeLike={removeLike}
+            userId={userInfo.id}
+            postId={postId}
+            idCommentPrincipal={commentId}
+            comment={replys}
+            answer={true}
+          />
+        )}
+      </div>
+    }
+  }
+
   const renderComments = () => {
-    return Object.keys(comments).map((key, i) => {
-      const { page, lastPage, data } = comments[key]
-      return <div key={`postId:${i}`}>
-        {+key === postId && page !== lastPage &&
+    if (comments.hasOwnProperty(postId)) {
+      const { page, lastPage, data } = comments[postId]
+      return <div>
+        {page !== lastPage &&
           renderButtonMoreComments(page, lastPage, postId, plusComments, null, 'Ver comentarios anteriores')
         }
-        {data.map((comment, index) => {
-          if (comment.post_id === postId) {
-            return (
-              <Comment key={`comment:${index}`}
-                addLike={addLike}
-                removeLike={removeLike}
-                userId={userInfo.id}
-                postId={postId}
-                comment={comment}
-              >
-                {+comment.replys > 0 &&
-                  <span id={`answers:${comment.comment_id}`}
-                    onClick={() => {
-                      showCommentPost(comment.comment_id, true)
-                      document.getElementById(`answers:${comment.comment_id}`).textContent = ''
-                    }}
-                    className='more-comments'>
-                    <b>Ver respostas</b>
-                  </span>
-                }
-                {renderCommentsReplies(comment.comment_id, comment.replys)}
-                <SendComment
-                  imageProfile={userInfo.image_profile_mini}
-                  isAnswer={true}
-                  commentId={comment.comment_id}
-                  postId={postId}
-                  userInfo={userInfo}
-                  postByUserId={postByUserId}
-                  commentByUserId={comment.user_id}
-                />
-              </Comment>
-            )
-          }
-        })}
+        {data.map((comment, index) =>
+          <Comment key={`comment:${index}`}
+            addLike={addLike}
+            removeLike={removeLike}
+            userId={userInfo.id}
+            postId={postId}
+            comment={comment}
+          >
+            {+comment.replys > 0 &&
+              <span id={`answers:${comment.comment_id}`}
+                onClick={() => {
+                  showCommentPost(comment.comment_id, true)
+                  document.getElementById(`answers:${comment.comment_id}`).textContent = ''
+                }}
+                className='more-comments'>
+                <b>Ver respostas</b>
+              </span>
+            }
+            {renderCommentsReplies(comment.comment_id, comment.replys)}
+            <SendComment
+              imageProfile={userInfo.image_profile_mini}
+              isAnswer={true}
+              commentId={comment.comment_id}
+              postId={postId}
+              userInfo={userInfo}
+              postByUserId={postByUserId}
+              commentByUserId={comment.user_id}
+            />
+          </Comment>
+        )}
         {/* {+key === postId && page !== lastPage &&
           renderButtonMoreComments(page, lastPage, postId, plusComments, null, 'Ver próximos comentários')
         } */}
       </div>
-    })
+    }
   }
 
   return (
     <ContainerComments>
       <div className="comment-content">
         {Object.keys(comments).length > 0 && renderComments()}
-
       </div>
     </ContainerComments>
   )

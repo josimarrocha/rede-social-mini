@@ -8,7 +8,6 @@ export const ContainerPosts = styled.section`
   margin-right: 10px;
   padding-bottom: 10px;
   border-radius: 4px;
-  position: relative;
   height: 100%;
 
   @media (max-width: ${styles.containerMiddle}) {

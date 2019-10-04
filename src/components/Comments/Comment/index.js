@@ -10,7 +10,6 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
   const [isComponentSend, setIsComponentSend] = useState(false)
 
   const createNotificationLike = async () => {
-
     try {
       userId !== comment.user_id && await api.post('/notification', {
         user_id: comment.user_id,
@@ -24,7 +23,7 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
     }
   }
   const createLikeComment = () => {
-    addLike(postId, comment.comment_id, answer, idCommentPrincipal)
+    addLike(comment.comment_id, answer, idCommentPrincipal)
     createNotificationLike()
   }
 

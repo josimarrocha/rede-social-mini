@@ -23,16 +23,15 @@ function App({ addNewComment, loadingProfile, loadingNotifications, friendsPendi
         const { id: comment_id } = comment
         await addNewComment(comment_id, comment, true)
       })
-      friendsIO.on('friendsPending', (type) => {
+      friendsIO.on('friendsPending', async (type) => {
         if (type === 'notifications') {
           loadingNotifications()
           return
         }
-        friendsPending()
+        await friendsPending()
       })
     }
   }, [])
-
 
   return (
     <Router>

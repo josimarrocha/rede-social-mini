@@ -46,7 +46,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
   }
 
   const userMarkup = (legend) => {
-    let updateLegend = legend.replace(/(@\w+\d+\${\d+})/gi, function (str, math) {
+    let updateLegend = !legend ? '' : legend.replace(/(@\w+\d+\${\d+})/gi, function (str, math) {
       let [username, id] = math.split('$')
       id = id.substring(1, id.length - 1)
       usersMarkup.push(username)
@@ -107,7 +107,6 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
                 tagLink.onmouseover = function () {
                   if (tagLink.textContent.trim() === usersMarkup[i]) {
                     renderUserMarkup(tagLink.textContent.replace(/\W+/g, ''))
-                    // console.log(username)
                   }
                 }
               })

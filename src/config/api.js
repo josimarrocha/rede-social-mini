@@ -4,8 +4,8 @@ const token = JSON.parse(localStorage.getItem('@midiasocial@'))
 const getToken = () => {
   if (token) {
     return axios.create({
-      baseURL: 'http://localhost:3333',
-      // baseURL: 'https://midia-social.herokuapp.com',
+      // baseURL: 'http://localhost:3333',
+      baseURL: 'https://midia-social.herokuapp.com',
       headers: {
         'Authorization': `${`bearer ${token.token}`}`,
       },
@@ -13,8 +13,8 @@ const getToken = () => {
     //https://midia-social.herokuapp.com
   } else {
     return axios.create({
-      baseURL: 'http://localhost:3333'
-      // baseURL: 'https://midia-social.herokuapp.com'
+      // baseURL: 'http://localhost:3333'
+      baseURL: 'https://midia-social.herokuapp.com'
     })
   }
 }

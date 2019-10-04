@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import api from '../../../config/api'
 import { connect } from 'react-redux'
 import { friendsPending, confirmFriend, showFriends, loadingProfile } from '../../../reducers/friends/actionsCreators'
+import pathImageDefault from '../../../config/util'
 import { PendingFriendsConatiner, PendingFriendsContent } from './styles'
 
 const PendingFriends = ({ profile, friendsPending, friendsInfo, confirmFriend, showFriends }) => {
@@ -32,7 +33,7 @@ const PendingFriends = ({ profile, friendsPending, friendsInfo, confirmFriend, s
           : friendsInfo.map(friendsPend => (
             <div className="pending-friends" key={`friendPending:${friendsPend.friend_id}`}>
               <div className="img-friend">
-                <img src={friendsPend.image_profile_mini ? friendsPend.image_profile_mini : 'images/user@50.png'} alt="" />
+                <img src={friendsPend.image_profile_mini ? friendsPend.image_profile_mini : `${pathImageDefault.pathImageDev}/user@50.png`} alt="" />
               </div>
               <div className="pending-friend">
                 <p className="friend-name">{friendsPend.name}</p>

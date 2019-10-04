@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import api from '../../../config/api'
 import { addNewComment } from '../../../reducers/comments/actionsCreators'
-import { commentIO, friendsIO } from '../../../config/util'
+import pathImageDefault, { commentIO, friendsIO } from '../../../config/util'
 import { SendCommentContainer } from './styles'
 
 const SendComment = ({ imageProfile, isAnswer, commentId, postId, userInfo, postByUserId, commentByUserId, addNewComment }) => {
@@ -54,10 +54,9 @@ const SendComment = ({ imageProfile, isAnswer, commentId, postId, userInfo, post
   return (
     <SendCommentContainer answer={isAnswer}>
       <div className="img-user-logged">
-        {imageProfile
-          ? <img className='img' src={imageProfile} alt="" />
-          : <img src={`images/user@50.png`} alt="" />
-        }
+        <img className='img'
+          src={imageProfile ? imageProfile : `${pathImageDefault.pathImageDev}/user@50.png`}
+          alt="" />
       </div>
       <form action="">
         <textarea

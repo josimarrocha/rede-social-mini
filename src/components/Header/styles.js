@@ -57,7 +57,7 @@ export const HeaderContainer = styled.header`
       right: 10px;
       cursor: pointer;
 
-      @media (max-width: ${styles.containerSmall + 'px'}) {
+      @media (max-width: ${styles.containerMiddle}) {
         display: none;
       }
     }

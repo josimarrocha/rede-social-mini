@@ -21,7 +21,36 @@ export const ContainerPost = styled.article`
     .options-post{
       position: absolute;
       right: 10px;
-      cursor: pointer;
+      & > i{
+        cursor: pointer;
+      }
+    }
+    .viewed{
+      position: absolute;
+      right: 40px;
+      vertical-align: middle;
+      font-size: ${styles.fontSmall};
+      span{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin-right: 5px;
+      }
+      &:after{
+        content: 'Visualizações';
+        opacity: 0;
+        position: absolute;
+        margin-right: 5px;
+        font-size: 13px;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 3px 4px;
+        transition: opacity 400ms linear;
+        color: #f8f8f8;
+        border-radius: 4px;
+        top:16px;
+        left: -35px;
+      }
+      &:hover:after{
+        opacity: 1;
+      }
     }
     .options{
       position: absolute;
@@ -29,8 +58,10 @@ export const ContainerPost = styled.article`
       background: #f8f8f8;
       border-radius: 5px;
       left: -60px;
+      top: 25px;
       border: 1px solid #ddd;
       padding: 5px 8px;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
       cursor:pointer;
 
       &:hover{
@@ -73,10 +104,25 @@ export const ContainerPost = styled.article`
   .post-user-content{
     margin-top:10px;
     font-size: ${styles.fontSmall};
-    
+    position: relative;
+
+    .result-list{
+      position: absolute;
+      left:30px;
+      width: 70%;
+    }
     .post-user-legend{
       letter-spacing: 0.5px;
       margin-bottom: 10px;
+      word-wrap: break-word;
+      .user-markup{
+        font-weight: bold;
+        cursor: pointer;
+        color: inherit;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
     }
     .post-user-image{
       width: 100%;

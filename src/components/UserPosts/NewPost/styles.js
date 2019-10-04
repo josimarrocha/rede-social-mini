@@ -1,10 +1,13 @@
 import styled from 'styled-components'
+import { FormConatiner } from '../../InputSearch/styles'
 import styles from '../../../styles'
+
 export const NewPostContainer = styled.div`
   background: ${styles.colorWhite};
   padding-bottom: 10px;
   box-shadow: 1px 1px 15px #ddd;
   margin-bottom: 20px;
+  position: relative;
 
   .newpost-header{
     display: flex;
@@ -32,17 +35,33 @@ export const NewPostContainer = styled.div`
     }
   }
 
+  .result-list{
+    left:0;
+    top:0;
+    position: relative;
+  }
+  .user-markup{
+      font-weight: bold;
+      text-decoration: underline;
+    }
   .post-content{
     position: relative;
+    height: 100px;
+    overflow-x: inherit;
+    max-height:100px;
+    overflow-y: scroll;
+    padding: 8px;
+    font-size: ${styles.fontSmall};
+    outline:0;
+    font-weight: normal;
+
     textarea{
       width: 100%;
-      height: 100px;
       border: none;
       border-bottom: 1px solid ${styles.colorBorder};
       outline: none;
       padding: 10px;
       resize: none;
-      font-size: ${styles.fontSmall}
     }
   }
 `

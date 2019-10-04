@@ -1,4 +1,5 @@
 import api from '../../config/api'
+import { friendsIO } from '../../config/util'
 import { SHOW_COMMENT_POST } from '../comments/actionsCreators'
 
 export const SHOW_POSTS_TIMELINE = 'posts:SHOW_POSTS_TIMELINE'
@@ -61,13 +62,26 @@ export const postsByUser = (page, id) => async dispatch => {
   }
 }
 
-export const createNewPost = (post) => async dispatch => {
+let timer
+export const createNewPost = (post, usersNotification) => async dispatch => {
+  clearTimeout(timer)
   const newPost = await api.post('post/newpost', post)
-
   dispatch({
     type: NEW_POST_USER,
     payload: newPost.data
   })
+  usersNotification.forEach(async user => {
+    await api.post('/notification', {
+      user_id: user.id,
+      action_id: 6,
+      post_id: newPost.data[0].id,
+      comment_id: ''
+    })
+  })
+
+  timer = setTimeout(() => {
+    friendsIO.emit('pendingFriends', 'notifications')
+  }, 1000)
 }
 
 export const deletePost = (post_id) => async dispatch => {

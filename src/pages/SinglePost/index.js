@@ -16,7 +16,7 @@ const SinglePost = ({ match: { params, url }, singlePostByUser, showCommentPost,
     if (!params.commentId) {
       showCommentPost(params.postId)
     }
-  }, [params.postId, params.commentId])
+  }, [loader])
 
   const renderPosts = () => {
     return (

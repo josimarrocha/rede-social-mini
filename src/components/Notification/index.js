@@ -23,7 +23,7 @@ const Notification = ({ notifications, loadingNotifications, showLoader }) => {
     )
   }
   const formatPostLegend = (legend) => {
-    return legend !== '' ? `"${legend.substring(0, 30).replace(/(@\w+\d+)\$/g, '$1')}"` : ''
+    return legend !== '' ? `"${legend.substring(0, 30).replace(/(@\w+\d+)\${\d+}/g, '$1')}"` : ''
   }
   return (
     <Container>

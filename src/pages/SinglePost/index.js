@@ -11,7 +11,9 @@ const SinglePost = ({ match: { params, url }, singlePostByUser, showCommentPost,
   const [onLoad, setOnLoad] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => showLoader(false), 700)
+    setTimeout(() => {
+      showLoader(false)
+    }, 800)
     setOnLoad(true)
     if (!params.commentId) {
       showCommentPost(params.postId)
@@ -45,7 +47,7 @@ const SinglePost = ({ match: { params, url }, singlePostByUser, showCommentPost,
 }
 
 const mapStateToProps = state => ({
-  loader: state.ui.showLoader
+  loader: state.ui.showLoader,
 })
 
 export default connect(mapStateToProps, { singlePostByUser, showCommentPost, showLoader })(SinglePost)

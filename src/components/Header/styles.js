@@ -24,7 +24,7 @@ export const HeaderContainer = styled.header`
       align-items: center;
 
       .header-logo{
-        margin-right: 30px;
+        margin-right: 20px;
 
         a{
           color: ${styles.colorWhite};
@@ -49,7 +49,16 @@ export const HeaderContainer = styled.header`
         left:10px;
       }
       .notifications{
-        margin-left:15px;        
+        margin-left:15px;     
+        /* position: relative;    */
+      }
+    }
+    .icon-search{
+        display: none;
+        position: absolute;
+        right: 60px;
+      @media (max-width: ${styles.containerSmallSmall + 'px'}) {
+        display: block;
       }
     }
     .logout{

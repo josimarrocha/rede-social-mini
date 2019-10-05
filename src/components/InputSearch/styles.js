@@ -5,6 +5,12 @@ export const FormConatiner = styled.div`
   position: relative;
   width: 100%;
   max-width: 50%;
+  display: block;
+
+  @media (max-width: ${styles.containerSmallSmall + 'px'}) {
+      display: ${props => props.hideIcons ? 'block' : 'none'} !important;
+    }
+
   form {
     margin-left: 15rem;
     position: relative;
@@ -16,6 +22,9 @@ export const FormConatiner = styled.div`
 
     @media (max-width: ${styles.containerSmall + 'px'}) {
       margin-left:2rem
+    }
+    @media (max-width: ${styles.containerSmallSmall + 'px'}) {
+      margin-left:0rem
     }
     
     .form-input{
@@ -30,8 +39,8 @@ export const FormConatiner = styled.div`
     }
   }
 
-   .result-list{
-      position: absolute;
-      right:  0;
-    }
+  .result-list{
+    position: absolute;
+    right:  0;
+  }
 `

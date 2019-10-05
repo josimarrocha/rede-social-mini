@@ -4,7 +4,6 @@ import styles from '../../styles'
 export const Container = styled.div`
   max-width: 400px;
   width: 100%;
-  /* height: 100%; */
   position: absolute;
   box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
   background: ${styles.colorWhite};
@@ -27,7 +26,10 @@ export const Container = styled.div`
     border-color: transparent transparent ${styles.colorWhite} transparent;
     border-style: solid;
     top: -20px;
-    left: 100px;
+    left: 90px;
+    @media (max-width: ${styles.containerMiddle}) {
+      left:140px;
+    }
   }
 
   .notification-header{

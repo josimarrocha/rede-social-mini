@@ -31,6 +31,7 @@ function App({ addNewComment, loadingProfile, loadingNotifications, friendsPendi
         await friendsPending()
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

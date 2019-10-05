@@ -29,7 +29,7 @@ const ListUser = ({ search, link, cleanInput, userSearch, searchProfile, markupU
                   ? item.image_profile_mini :
                   `${pathImageDefault.pathImageDev}/user@50.png`} alt="" />
               </span>
-              <b>{item.username}</b>
+              <b>{item.name}</b>
             </li>
           </Action>
         ))}

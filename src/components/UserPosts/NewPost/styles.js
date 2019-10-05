@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { FormConatiner } from '../../InputSearch/styles'
 import styles from '../../../styles'
 
 export const NewPostContainer = styled.div`

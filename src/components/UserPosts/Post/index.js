@@ -75,7 +75,11 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
                   <i className="far fa-eye" style={{ display: 'inline' }}>
                   </i>
                 </div>
-                <i className="fas fa-ellipsis-v" onClick={() => setShowOptionsPost(!showOptionsPost)}></i>
+                <i className="fas fa-ellipsis-v"
+                  onClick={() => setShowOptionsPost(!showOptionsPost)}
+                  tabIndex={0} onBlur={() => {
+                    setShowOptionsPost(false)
+                  }} />
                 {showOptionsPost &&
                   <ul className='options' onClick={() => deletePost(post.id)}>
                     <li>Excluir</li>

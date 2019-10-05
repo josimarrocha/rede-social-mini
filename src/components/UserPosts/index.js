@@ -16,6 +16,7 @@ const UserPosts = ({ posts, userInfo, profile, postsTimeline, isScroll, profileI
     setLinePositionInScreen(document.querySelector('.area').getBoundingClientRect().top)
     isScroll ? postsTimeline(1, profileId) : postsTimeline(url)
     return () => window.onscroll = null
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const registerPostViews = async () => {

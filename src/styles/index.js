@@ -2,6 +2,7 @@ export default {
   container: '1240px',
   containerMiddle: '990px',
   containerSmall: 740,
+  containerSmallSmall: 560,
   colorPrimary: '#E38073',
   colorPrimaryDisabled: '#E38073',
   colorWhite: '#f8f8f8',

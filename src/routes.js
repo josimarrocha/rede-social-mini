@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import { HomeContainer, ProfileContainer } from './container/Container.home'
 import SinglePost from './pages/SinglePost'
 import Auth from './pages/Auth'
-import Profile from './pages/Profile'
 
 const Routes = () => (
   <Switch>

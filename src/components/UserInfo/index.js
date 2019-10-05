@@ -53,8 +53,9 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
     <UserAccountContainer >
       {profileInfo.hasOwnProperty('id') && <UserInfoContainer>
         {userInfo.id === profile.id &&
-          <div className="menu-user-config"
-            onClick={() => showUserConfig()}>
+          <div className="menu-user-config" tabIndex={0}
+            onClick={() => showUserConfig()}
+            onBlur={() => showUserConfig()}>
             <i className="fas fa-ellipsis-v"></i>
           </div>
         }

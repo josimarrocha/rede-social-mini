@@ -8,10 +8,16 @@ export const UserConfigAccount = styled.div`
   background: #f8f8f8;
   border-radius: 5px;
   border: 1px solid #ddd;
-  /* z-index: 10 !important; */
+  z-index: 10 !important;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
 
   @media (max-width: ${styles.containerSmall + 'px'}) {
-    right: 10px;
+    right: 15px;
+    top:250px;
+  }
+  @media (max-width: ${styles.containerMiddle}) {
+    right: 15px;
+    top:250px;
   }
 
   li{

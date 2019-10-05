@@ -20,7 +20,7 @@ export const PendingFriendsConatiner = styled.div`
     border-width: 10px;
     border-color: transparent transparent ${styles.colorWhite} transparent;
     border-style: solid;
-    left: 100px;
+    left: 90px;
     top: -20px;
   }
   .pending-friends-header{

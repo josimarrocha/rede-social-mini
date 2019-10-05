@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PendingFriends from '../UserInfo/PendingFriends'
@@ -10,19 +10,12 @@ import { loadingNotifications } from '../../reducers/notifications/actionsCreato
 import { friendsPending } from '../../reducers/friends/actionsCreators'
 
 import { HeaderContainer } from './styles'
-import styles from '../../styles'
 
 const Header = ({ pendingFriends, notifications, ui, showNotifications, showFriendsPending, loadingNotifications, friendsPending }) => {
-  const [isMenuMobile, setIsMMenuMobile] = useState(true)
-
+  const [hideIcons, setHideIcons] = useState(false)
   useEffect(() => {
     friendsPending()
     loadingNotifications()
-    if (window.innerWidth <= styles.containerSmall) {
-      setIsMMenuMobile(true)
-    } else {
-      setIsMMenuMobile(false)
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -46,29 +39,40 @@ const Header = ({ pendingFriends, notifications, ui, showNotifications, showFrie
           <div className="header-logo">
             <Link to='/'><h2>REDE</h2></Link>
           </div>
-          <span
-            className='friends-pending'
-            onClick={() => showFriendsPending()}>
-            {ui.showFriendsPending &&
-              <PendingFriends />
-            }
-            <i className="fas fa-user-friends">
-              {!!pendingFriends.length && <b>{pendingFriends.length}</b>
-              }
-            </i>
-          </span>
-          <span
-            className='notifications'
-            onClick={() => showNotifications()}>
-            {ui.showNotifications &&
-              <Notification />
-            }
-            <i className="fas fa-bell">
-              {!!notifications.length && numberNotification()}
-            </i>
-          </span>
+          {!hideIcons &&
+            <>
+              <span
+                className='friends-pending'
+                onClick={() => showFriendsPending()}>
+                {ui.showFriendsPending &&
+                  <PendingFriends />
+                }
+                <i className="fas fa-user-friends">
+                  {!!pendingFriends.length && <b>{pendingFriends.length}</b>}
+                </i>
+              </span>
+              <span
+                className='notifications'
+                onClick={() => showNotifications()}>
+                {ui.showNotifications &&
+                  <Notification />
+                }
+                <i className="fas fa-bell">
+                  {!!notifications.length && numberNotification()}
+                </i>
+              </span>
+            </>
+          }
         </div>
-        <InputSearch inHeader={true} />
+        <InputSearch
+          inHeader={true}
+          hideIcons={hideIcons}
+          setHideIcons={setHideIcons} />
+        <div className="icon-search" onClick={() => {
+          setHideIcons(!hideIcons)
+        }}>
+          <i className="fas fa-search"></i>
+        </div>
         <MenuMobile />
         <div className="logout" onClick={logout}>
           <p>Sair</p>

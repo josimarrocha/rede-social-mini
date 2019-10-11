@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import api from '../../../config/api'
 import { connect } from 'react-redux'
 import { deleteComment, deleteReplyComment } from '../../../reducers/comments/actionsCreators'
-import { friendsIO } from '../../../config/util'
+import pathImageDefault, { friendsIO } from '../../../config/util'
+
 import { UserComment } from './styles'
 
 const Comment = ({ comment, userId, postId, removeLike, addLike, children, answer, idCommentPrincipal, deleteComment, deleteReplyComment }) => {
@@ -30,10 +31,11 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
   return (
     <UserComment answer={answer}>
       <div className="img-user">
-        {comment.image_profile_mini
-          ? <img className='img' src={comment.image_profile_mini} alt="" />
-          : <img src={`images/user@50.png`} alt="" />
-        }
+        <img className='img' src={comment.image_profile_mini
+          ? comment.image_profile_mini
+          : `${pathImageDefault.pathImageDev}/user@50.png`} alt=""
+        />
+
       </div>
       <div className="user-profile">
         <div id={`comment${comment.comment_id && comment.comment_id}`} className="repost-post">

@@ -13,6 +13,7 @@ const Home = ({ showPostsTimeline, showFriends, loadingProfile, history }) => {
     setIsLoader(true)
     const loadingData = async () => {
       if (userToken.token) {
+        showPostsTimeline(false, 'clean')
         await loadingProfile(userToken.id)
         await showFriends(userToken.id)
         setIsLoader(false)

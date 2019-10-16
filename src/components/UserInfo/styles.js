@@ -17,7 +17,7 @@ export const UserInfoContainer = styled.div`
   background: ${styles.colorWhite};
   padding: 10px;
   border-radius: 4px;
-  box-shadow: 1px 1px 15px #ddd;
+  box-shadow: 1px 1px 15px #ccc;
   margin-bottom: 20px;
   position: relative;
 
@@ -28,6 +28,9 @@ export const UserInfoContainer = styled.div`
     cursor: pointer;
     padding: 8px;
     z-index: 2;
+    @media (max-height:700px) {
+      top: 135px;
+    }
 
     @media (max-width: ${styles.containerMiddle}) {
       top: 220px
@@ -46,7 +49,13 @@ export const UserImg = styled.div`
     width:100%;
     border-radius: 50%;
     margin: 50px auto 0 auto;
-    display: block
+    display: block;
+    @media (max-height:700px) {
+      margin-top:10px
+    }
+    @media (max-width:${styles.containerSmall + 'px'}) {
+      margin-top:10px
+    }
   }
 `
 
@@ -58,12 +67,25 @@ export const UserData = styled.div`
   font-size:${styles.fontSmall};
 
   @media (max-width: ${styles.containerMiddle}) {
-    margin-top:70px;
-    }
+    margin-top:30px;
+  }
 
   .user-info-username{
     margin-bottom: 20px;
     vertical-align: middle;
+    @media (max-height:700px) {
+      margin-bottom: 10px;
+    }
+    &:before{
+      content: '';
+      border-width: 1px;
+      width: 100%;
+      border-color: #ddd;
+      border-style: solid;
+      position: absolute;
+      left: 0;
+      top:-10px;
+    }
 
     div{
       display: flex;
@@ -75,27 +97,41 @@ export const UserData = styled.div`
       }
     }
   }
-  .user-info-describe p{
-    letter-spacing: 0.5px; 
-    font-style: italic;
-    @media (max-width: ${styles.containerMiddle}) {
-      max-width: 350px;
-      margin: 0 auto;
+  .user-info-describe{
+    textarea{
+      width: 100%;
+      @media (max-width: ${styles.containerMiddle}) {
+        width: 80%;
+      }
+      @media (max-width: ${styles.containerSmallSmall + 'px'}) {
+        width: 100%;
+      }
     }
-    span{
-      margin-left: 8px;
-      cursor: pointer;
+    p{
+      letter-spacing: 0.5px; 
+      font-style: italic;
+        @media (max-width: ${styles.containerMiddle}) {
+          max-width: 350px;
+          margin: 0 auto;
+        }
+        span{
+          margin-left: 8px;
+          cursor: pointer;
+        }
     }
   }
 
   .user-info-username .actions, .user-info-describe .actions{
     display: flex;
     flex: 1 1 100%;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin-top: 10px;
     button{
       padding: 4px 5px;
+    }
+    button:nth-child(1){
+      margin-right: 10px;
     }
     i{
       color: ${styles.colorPrimary};
@@ -110,6 +146,9 @@ export const UserData = styled.div`
   }
   .user-info-local{
     margin-top: 20px;
+    @media (max-height:700px) {
+      margin-top: 10px;
+    }
   }
 
 
@@ -161,13 +200,14 @@ export const UserData = styled.div`
       padding: 7px 0;
       background: ${styles.colorPrimary};
     }
-    a{
+    span.cancel{
       margin-top: 5px;
       display: block;
       color: ${styles.colorWhite};
       border: 1px solid #ccc;
       padding: 7px 0;
       background: ${styles.colorPrimary};
+      cursor: pointer;
     }
     i{
       margin-right: 8px;

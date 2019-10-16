@@ -4,7 +4,7 @@ import styles from '../../../styles'
 export const NewPostContainer = styled.div`
   background: ${styles.colorWhite};
   padding-bottom: 10px;
-  box-shadow: 1px 1px 15px #ddd;
+  box-shadow: 1px 1px 15px #ccc;
   margin-bottom: 20px;
   position: relative;
 

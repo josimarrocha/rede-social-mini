@@ -36,6 +36,7 @@ const NewPost = ({ createNewPost, searchProfile }) => {
 
     createNewPost(data, users)
     setImage('')
+    setLegend('')
     textarea.current.textContent = ''
     event.reset()
   }
@@ -91,7 +92,6 @@ const NewPost = ({ createNewPost, searchProfile }) => {
   }
 
   const markupUser = (user) => {
-    // let pattern = `(${searchUser})?(@\\w+\\d+)`
     let pattern = `\\s?(${searchUser}\\b)\\s?`
     const regex = new RegExp(pattern, 'i')
     usersMarkup = {

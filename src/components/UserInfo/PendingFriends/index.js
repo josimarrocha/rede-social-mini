@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import api from '../../../config/api'
 import { connect } from 'react-redux'
 import { friendsPending, confirmFriend, showFriends, loadingProfile } from '../../../reducers/friends/actionsCreators'
 import pathImageDefault from '../../../config/util'
 import { PendingFriendsConatiner, PendingFriendsContent } from './styles'
 
-const PendingFriends = ({ profile, friendsPending, friendsInfo, confirmFriend, showFriends }) => {
+const PendingFriends = ({ profile, friendsPending, friendsInfo, confirmFriend, showFriends, showFriendsPending }) => {
+  const containerRef = useRef()
   useEffect(() => {
     friendsPending()
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    containerRef.current.focus()
   }, [])
 
   const confirmFriendship = async (id) => {
@@ -23,7 +25,7 @@ const PendingFriends = ({ profile, friendsPending, friendsInfo, confirmFriend, s
   }
 
   return (
-    <PendingFriendsConatiner>
+    <PendingFriendsConatiner ref={containerRef} tabIndex={0} onBlur={() => setTimeout(() => showFriendsPending(false), 200)}>
       <div className="pending-friends-header">
         <p>Amigos pendentes</p>
       </div>

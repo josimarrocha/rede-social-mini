@@ -13,6 +13,7 @@ export const PendingFriendsConatiner = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 5;
+  outline: none;
 
   &:before{
     content: '';
@@ -62,6 +63,10 @@ export const PendingFriendsContent = styled.div`
 
   .img-friend{
     flex: 1;
+    img{
+      width: 50px;
+      max-width: 100%;
+    }
   }
   
   .pending-friend{

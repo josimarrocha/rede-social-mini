@@ -16,10 +16,21 @@ export const Container = styled.div`
     .brand{
       width:100%;
       background: ${styles.colorPrimary};
-      flex: 1;
+      flex: 1 1 30%;
 
       @media (max-width: ${styles.containerMiddle}) {
         display: none;
+      }
+      img{
+        display: block;
+        max-width: 80%;
+        margin: auto;
+        transform: translateY(15%);
+
+        @media (max-height: 700px) {
+          max-width: 60%;
+          transform: translateY(10%);
+        }
       }
     }
   }

@@ -17,7 +17,11 @@ const Auth = ({ history }) => {
     <>
       {!token && <Container>
         <div className="login-content">
-          <div className="brand"></div>
+          <div className="brand">
+            <div className="preview">
+              <img src="images/capa-inicio.jpg" alt="" />
+            </div>
+          </div>
           {isLogin
             ? <Login history={history} setIsLogin={setIsLogin} isLogin={isLogin} />
             : <SignUp setIsLogin={setIsLogin} isLogin={isLogin} />

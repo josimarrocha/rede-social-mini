@@ -11,7 +11,17 @@ export const POSTS_BY_USER = 'posts:POSTS_BY_USER'
 export const DELETE_POST = 'posts:DELETE_POST'
 export const SINGLE_POST_BY_USER = 'posts:SINGLE_POST_BY_USER'
 
-export const showPostsTimeline = (page) => async dispatch => {
+export const showPostsTimeline = (page, clean) => async dispatch => {
+  if (clean === 'clean') {
+    dispatch({
+      type: SHOW_POSTS_TIMELINE,
+      payload: {
+        posts: [],
+        clean: true
+      }
+    })
+    return
+  }
   const { data: posts } = await api.get(`post/timeline/${page}`)
   dispatch({
     type: SHOW_POSTS_TIMELINE,

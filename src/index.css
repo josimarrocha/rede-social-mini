@@ -22,7 +22,21 @@ ul{
 }
 a{
   text-decoration: none;
+}
 
+.preview-enter {
+  opacity: 0;
+}
+.preview-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+.preview-exit {
+  opacity: 1;
+}
+.preview-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
 }
 
 @keyframes commentMarkup{

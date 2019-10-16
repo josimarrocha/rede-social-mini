@@ -25,17 +25,18 @@ export const HeaderContainer = styled.header`
 
       .header-logo{
         margin-right: 20px;
-
         a{
           color: ${styles.colorWhite};
         }
       }
+
       span i{
         font-size:20px;
         position: relative;
         text-align:center;
         cursor: pointer;
       }
+
       span .fas b{
         padding-top: 2px;
         position: absolute;
@@ -48,11 +49,20 @@ export const HeaderContainer = styled.header`
         top: -5px;
         left:10px;
       }
+
       .notifications{
         margin-left:15px;     
-        /* position: relative;    */
+      }
+
+      .my-perfil{
+        display: block;
+        font-size: ${styles.fontSmall};
+        font-weight: bold;
+        margin-left: 15px;
+        color: ${styles.colorWhite};
       }
     }
+
     .icon-search{
         display: none;
         position: absolute;

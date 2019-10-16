@@ -11,7 +11,7 @@ import { friendsPending } from '../../reducers/friends/actionsCreators'
 
 import { HeaderContainer } from './styles'
 
-const Header = ({ pendingFriends, notifications, ui, showNotifications, showFriendsPending, loadingNotifications, friendsPending }) => {
+const Header = ({ pendingFriends, notifications, isNotification, isFriendsPending, showNotifications, showFriendsPending, loadingNotifications, friendsPending, userInfo }) => {
   const [hideIcons, setHideIcons] = useState(false)
   useEffect(() => {
     friendsPending()
@@ -21,7 +21,7 @@ const Header = ({ pendingFriends, notifications, ui, showNotifications, showFrie
 
   const logout = () => {
     localStorage.removeItem('@midiasocial@')
-    window.location.reload()
+    window.location.href = window.location.origin + '/rede-social-mini'
   }
 
   const numberNotification = () => {
@@ -32,20 +32,21 @@ const Header = ({ pendingFriends, notifications, ui, showNotifications, showFrie
       )
     }
   }
+
   return (
     <HeaderContainer>
       <div className="header-content">
         <div>
           <div className="header-logo">
-            <Link to='/'><h2>REDE</h2></Link>
+            <Link to='/'><h2>Rede</h2></Link>
           </div>
           {!hideIcons &&
             <>
               <span
                 className='friends-pending'
-                onClick={() => showFriendsPending()}>
-                {ui.showFriendsPending &&
-                  <PendingFriends />
+                onClick={() => showFriendsPending(!isFriendsPending)}>
+                {isFriendsPending &&
+                  <PendingFriends showFriendsPending={showFriendsPending} />
                 }
                 <i className="fas fa-user-friends">
                   {!!pendingFriends.length && <b>{pendingFriends.length}</b>}
@@ -53,14 +54,17 @@ const Header = ({ pendingFriends, notifications, ui, showNotifications, showFrie
               </span>
               <span
                 className='notifications'
-                onClick={() => showNotifications()}>
-                {ui.showNotifications &&
-                  <Notification />
+                onClick={() => showNotifications(!isNotification)}>
+                {isNotification &&
+                  <Notification showNotifications={showNotifications} />
                 }
                 <i className="fas fa-bell">
                   {!!notifications.length && numberNotification()}
                 </i>
               </span>
+              <Link to={`/${userInfo.username}/${userInfo.id}`}>
+                <span className='my-perfil'>Meu perfil</span>
+              </Link>
             </>
           }
         </div>
@@ -86,7 +90,8 @@ const mapStateToProps = state => ({
   pendingFriends: state.friendsInfo.friendsPending,
   userInfo: state.userInfo,
   notifications: state.notifications,
-  ui: state.ui
+  isNotification: state.ui.showNotifications,
+  isFriendsPending: state.ui.showFriendsPending,
 })
 
 export default connect(mapStateToProps, { showFriendsPending, showNotifications, loadingNotifications, friendsPending })(Header)

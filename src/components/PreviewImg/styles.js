@@ -10,13 +10,14 @@ export const PreviewContainer = styled.div`
   left: 0;
   z-index: 10;
   overflow-x: hidden;
-
+  padding: 0px 30px;
   .preview-close{
-    position: relative;
-    right: 220px;
-    top: 50px;
+    position: absolute;
+    right: 45px;
+    top: 20px;
     color: white;
     cursor: pointer;
+    z-index: 15;
     i{
       font-size: 28px;
     }
@@ -26,14 +27,20 @@ export const PreviewContainer = styled.div`
     position: relative;
     width: 100%;
     height: 100vh;
-    margin: 20px auto;
+    margin: 0px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+
     img{
-      margin: 0 auto;
+      margin: 0px auto;
       max-width: 100%;
-      max-height: 500px;
+  ${props => !props.inPosts
+    ? `max-height: 600px;`
+    : 'max-height: 94vh;'
+  }
     }
   }
 
@@ -55,6 +62,5 @@ export const PreviewContainer = styled.div`
         margin-right: 12px;
       }
     }
-    
   }
 `

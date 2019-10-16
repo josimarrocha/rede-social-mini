@@ -50,7 +50,7 @@ const UserPosts = ({ posts, userInfo, profile, postsTimeline, isScroll, profileI
   return (
     <ContainerPosts >
       <MessagesViewed />
-      {userInfo.id === profile.id && <NewPost />}
+      {userInfo.id === profile.id && !url && <NewPost />}
       {posts.posts.map((post, i) => (
         <Post
           key={`post:${post.id}${i}`}

@@ -5,12 +5,13 @@ import Loader from '../../components/Loader'
 import ImageBgProfile from '../../components/UserInfo/ImageBgProfile'
 import { Container } from '../Home/styles'
 
-const Profile = ({ loadingProfile, match: { params }, postsByUser, showFriends, profile }) => {
+const Profile = ({ loadingProfile, match: { params }, postsByUser, showFriends, profile, userInfo, showPostsTimeline }) => {
   const [isLoader, setIsLoader] = useState(true)
 
   useEffect(() => {
     setIsLoader(true)
     const loading = async () => {
+      showPostsTimeline(false, 'clean')
       await loadingProfile(params.profileId)
       await showFriends(params.profileId)
       setIsLoader(false)
@@ -18,14 +19,26 @@ const Profile = ({ loadingProfile, match: { params }, postsByUser, showFriends, 
     loading()
   }, [params.profileId])
 
+  useEffect(() => {
+    loadingProfile(params.profileId)
+  }, [userInfo.image_background])
+
+  const renderImageBackground = () => {
+    return (
+      <ImageBgProfile
+        imageBackground={profile.image_background}
+        visitProfile={true}
+        idUserLogged={userInfo.id}
+        idUser={profile.id}
+      />
+    )
+  }
+
   return <>{isLoader
     ? <Loader isLoading={isLoader} />
     : <Container>
       <UserInfo visitProfile={true} />
-      <ImageBgProfile
-        imageBackground={profile.image_background}
-        visitProfile={true}
-      />
+      {renderImageBackground()}
       <UserPosts
         isScroll={true}
         postsTimeline={postsByUser}

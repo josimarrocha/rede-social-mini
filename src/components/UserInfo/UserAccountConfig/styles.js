@@ -10,6 +10,7 @@ export const UserConfigAccount = styled.div`
   border: 1px solid #ddd;
   z-index: 10 !important;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
+  outline: none;
 
   @media (max-width: ${styles.containerSmall + 'px'}) {
     right: 15px;
@@ -19,7 +20,12 @@ export const UserConfigAccount = styled.div`
     right: 15px;
     top:250px;
   }
-
+  @media (max-height:700px) {
+      top: 165px;
+    }
+  ul{
+    outline: none;
+  }
   li{
     font-size: ${styles.fontSmall};
     cursor: pointer;

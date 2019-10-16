@@ -4,6 +4,7 @@ import PreviewImage from '../../PreviewImg'
 import { updateImageBackground } from '../../../reducers/userInfo/actionsCreators'
 import { ContainerImage, UserImgbackground } from './styles'
 
+let teste = false
 const ImageBgProfile = ({ visitProfile, imageBackground, idUserLogged, idUser, updateImageBackground }) => {
   const [imgBackground, setImageBackground] = useState()
   const [isModalPreviw, setIsModalPreviw] = useState(false)
@@ -28,31 +29,40 @@ const ImageBgProfile = ({ visitProfile, imageBackground, idUserLogged, idUser, u
   }
 
   const abortImagePreview = () => {
-    setIsModalPreviw(false)
-
+    setImageBackground(false)
   }
 
   return (
     <ContainerImage>
-      {isModalPreviw && <PreviewImage
+      <PreviewImage
         imagePreview={imgBackground}
         confirmImagePreview={updateBackground}
         abortImagePreview={abortImagePreview}
+        inPosts={teste}
       />
-      }
       <input
         type="file"
         id="updateImageBackgroundUser"
-        onChange={({ target: { files } }) => setImageBackground(files[0])}
+        onChange={({ target: { files } }) => {
+          setImageBackground(files[0])
+          teste = false
+        }}
         hidden />
-      <UserImgbackground imageBackground={imageBackground} visitProfile={visitProfile}>
-        {!visitProfile && idUserLogged === idUser &&
-          <label htmlFor="updateImageBackgroundUser">
-            <div className="edit-image">
-              <i className="far fa-edit"></i>
-            </div>
-          </label>
-        }
+      {visitProfile && idUserLogged === idUser &&
+        <label htmlFor="updateImageBackgroundUser">
+          <div className="edit-image">
+            <i className="far fa-edit"></i>
+          </div>
+        </label>
+      }
+      <UserImgbackground
+        imageBackground={imageBackground}
+        visitProfile={visitProfile}
+        onClick={() => {
+          setImageBackground(imageBackground)
+          teste = true
+        }}
+      >
       </UserImgbackground>
     </ContainerImage>
   )

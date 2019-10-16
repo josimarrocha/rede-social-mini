@@ -16,6 +16,27 @@ export const ContainerImage = styled.div`
      display: none;
     }
   }
+  .edit-image{
+    color: #f8f8f8;
+    float: right;
+    margin: 10px 10px 0 0;
+    font-size: 20px;
+    cursor: pointer;
+
+    &:before{
+      content: 'Trocar imagem de fundo';
+      opacity: 1;
+      margin-right: 5px;
+      font-size: 13px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 3px 4px;
+      transition: opacity 400ms linear;
+    }
+
+    &:hover:before{
+      opacity: 1;
+    }
+  }
 `
 
 export const UserImgbackground = styled.div`
@@ -27,6 +48,8 @@ export const UserImgbackground = styled.div`
   top: 0;
   left: 0;
   width:100%;
+  box-shadow: 1px 1px 15px #ccc;
+  cursor: pointer;
 
   ${props => props.imageBackground
     ? `background-image: url(${props.imageBackground});`
@@ -44,27 +67,6 @@ export const UserImgbackground = styled.div`
       }
   `}
 
-  .edit-image{
-    color: #f8f8f8;
-    float: right;
-    margin: 10px 10px 0 0;
-    font-size: 20px;
-    cursor: pointer;
-
-    &:before{
-      content: 'Trocar imagem de fundo';
-      opacity: 0;
-      margin-right: 5px;
-      font-size: 13px;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 3px 4px;
-      transition: opacity 400ms linear;
-    }
-
-    &:hover:before{
-      opacity: 1;
-    }
-  }
   @media (max-width: ${styles.containerMiddle}) {
       background-position-y: -60px;
       height:220px;

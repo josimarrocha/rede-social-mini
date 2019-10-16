@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { showPostsTimeline, addLikePost, removeLikePost, deletePost } from '../reducers/posts/actionsCreators'
 import { showFriends, loadingProfile } from '../reducers/friends/actionsCreators'
-// import { loadingProfile as infoUserLogged } from '../reducers/userInfo/actionsCreators'
 import { showCommentPost } from '../reducers/comments/actionsCreators'
 import { postsByUser } from '../reducers/posts/actionsCreators'
 import { hide } from '../reducers/ui'
@@ -26,12 +25,14 @@ export const HomeContainer = connect(mapStateToPropsHome, mapDispatchToPropsHome
 // PROFILE
 const mapStateToPropsProfile = state => ({
   profile: state.friendsInfo.profile,
+  userInfo: state.userInfo,
 })
 
 const mapDispatchToPropsProfile = {
   loadingProfile,
   postsByUser,
-  showFriends
+  showFriends,
+  showPostsTimeline
 }
 
 export const ProfileContainer = connect(mapStateToPropsProfile, mapDispatchToPropsProfile)(Profile)

@@ -10,7 +10,6 @@ const getToken = () => {
         'Authorization': `${`bearer ${token.token}`}`,
       },
     })
-    //https://midia-social.herokuapp.com
   } else {
     return axios.create({
       // baseURL: 'http://localhost:3333'

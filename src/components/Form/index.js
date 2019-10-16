@@ -12,16 +12,16 @@ const Form = ({ submit, error, signUp, setIsLogin, isLogin, success }) => {
           <p className='message-error'>{error}</p>
           <p className='message-success'>{success}</p>
           {signUp && <div className="input-group">
-            <input type="text" name="name" id="" placeholder='Digite seu nome' />
+            <input type="text" name="name" placeholder='Digite seu nome' />
           </div>}
           <div className="input-group">
-            <input type="email" name="email" id="" placeholder='Digite seu e-mail' />
+            <input type="email" name="email" placeholder='Digite seu e-mail' />
           </div>
           <div className="input-group">
-            <input type="password" name="password" id="" placeholder='Digite sua senha' />
+            <input type="password" name="password" placeholder='Digite sua senha' />
           </div>
           {signUp && <div className="input-group">
-            <input type="password" name="confirmpassword" id="" placeholder='Confirme sua senha' />
+            <input type="password" name="confirmpassword" placeholder='Confirme sua senha' />
           </div>}
           <div className='btn-action'>
             <button className='btn-auth'>{signUp ? 'Cadastrar' : 'Entrar'}</button>

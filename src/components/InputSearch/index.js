@@ -21,7 +21,7 @@ const InputSearch = ({ inHeader, hideIcons, setHideIcons }) => {
             value={inputSearch}
             className='form-input' name="search" placeholder='Pesquisar usuário'
             onBlur={() => {
-              setHideIcons(false)
+              setTimeout(() => setHideIcons(false), 100)
             }}
           />
           {inputSearch &&

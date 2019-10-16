@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import UserPosts from '../../components/UserPosts'
 import Loader from '../../components/Loader'
-import { singlePostByUser } from '../../reducers/posts/actionsCreators'
+import { singlePostByUser, showPostsTimeline } from '../../reducers/posts/actionsCreators'
 import { showCommentPost } from '../../reducers/comments/actionsCreators'
 import { showLoader } from '../../reducers/ui'
 import { Container } from '../Home/styles'
 
-const SinglePost = ({ match: { params, url }, singlePostByUser, showCommentPost, showLoader, loader }) => {
+const SinglePost = ({ match: { params, url }, singlePostByUser, showCommentPost, showLoader, loader, showPostsTimeline }) => {
   const [onLoad, setOnLoad] = useState(true)
 
   useEffect(() => {
@@ -18,6 +18,7 @@ const SinglePost = ({ match: { params, url }, singlePostByUser, showCommentPost,
     if (!params.commentId) {
       showCommentPost(params.postId)
     }
+    showPostsTimeline(false, 'clean')
   }, [loader])
 
   const renderPosts = () => {
@@ -50,4 +51,4 @@ const mapStateToProps = state => ({
   loader: state.ui.showLoader,
 })
 
-export default connect(mapStateToProps, { singlePostByUser, showCommentPost, showLoader })(SinglePost)
+export default connect(mapStateToProps, { singlePostByUser, showPostsTimeline, showCommentPost, showLoader })(SinglePost)

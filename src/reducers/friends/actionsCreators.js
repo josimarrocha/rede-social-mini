@@ -32,14 +32,6 @@ export const confirmFriend = (friend_id) => async dispatch => {
 }
 
 export const loadingProfile = (id) => async dispatch => {
-  dispatch({
-    type: SHOW_POSTS_TIMELINE,
-    payload: {
-      posts: [],
-      clean: true
-    }
-  })
-
   const { data: profileFriend } = await api.get(`profile/friend/${id}`)
   dispatch({
     type: LOADING_PROFILE_FRIEND,

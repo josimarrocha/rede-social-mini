@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import api from '../../config/api'
@@ -6,13 +6,15 @@ import { loadingNotifications } from '../../reducers/notifications/actionsCreato
 import { showLoader } from '../../reducers/ui'
 import { Container, NotificationList } from './styles'
 
-const Notification = ({ notifications, loadingNotifications, showLoader }) => {
+const Notification = ({ notifications, loadingNotifications, showLoader, showNotifications }) => {
+  const containerRef = useRef()
   useEffect(() => {
     const updateNotifications = async () => {
       await api.put('/notification')
       loadingNotifications()
     }
     updateNotifications()
+    containerRef.current.focus()
   }, [loadingNotifications])
 
   const renderImageNotification = (image_post) => {
@@ -26,11 +28,10 @@ const Notification = ({ notifications, loadingNotifications, showLoader }) => {
     return legend !== '' ? `"${legend.substring(0, 30).replace(/(@\w+\d+)\${\d+}/g, '$1')}"` : ''
   }
   return (
-    <Container>
+    <Container ref={containerRef} tabIndex={0} onBlur={() => setTimeout(() => showNotifications(false), 200)}>
       <div className="notification-header">
         <p>Notificações</p>
       </div>
-
       <NotificationList>
         {notifications.map(notification => (
           <Link to={notification.href}

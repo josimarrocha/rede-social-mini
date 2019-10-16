@@ -8,12 +8,13 @@ export const Container = styled.div`
   box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
   background: ${styles.colorWhite};
   top: 45px;
-  left: 50px;
+  left: 45px;
   z-index: 5;
   color: #333;
   display: flex;
   flex-direction: column;
   background-color: #ffffee;
+  outline: none;
 
   @media (max-width: ${styles.containerMiddle}) {
     left:0;

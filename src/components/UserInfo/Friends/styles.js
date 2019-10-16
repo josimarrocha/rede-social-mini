@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import styles from '../../../styles'
 
 export const FreindsContainer = styled.section`
-  box-shadow: 1px 1px 15px #ddd;
+  box-shadow: 1px 1px 15px #ccc;
   width: 100%;
   background: ${styles.colorWhite};
 
@@ -22,8 +22,10 @@ export const FreindsContainer = styled.section`
   }
   .friends-content > div{
     padding: 5px;
+    padding-left: 9px;
     display: flex;
     flex-wrap: wrap;
+    flex: 1;
     
    p{
     width: 100%;
@@ -35,43 +37,37 @@ export const FreindsContainer = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80px;
     box-shadow: 1px 1px 5px #aaa;
     margin-right: 5px;
     margin-bottom: 5px;
-    flex: 1 1 25%;
-    height: 100px;
-
-    &:last-child{
-    flex: 0 1 31.5%;
-    }
-
-    &:first-child{
-      flex: 0 1 31.5%;
-    }
+    max-width: 31.444%;
+    /* height: 100px; */
    }
   }
 `
 
 export const Friend = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  
   .friend-img{
-    /* width: 50px; */
+    height: 100%;
     img{
-      width: 55px;
-      height: 50px;
+      max-width: 100%;
     }
   }
 
-  .friend-name p{
+  .friend-name{
+    p{
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
     width: 100%;
-    text-align: center;
+    text-align: left;
     font-weight: 500;
-    color: ${styles.colorPrimary};
-    font-size: ${styles.fontSmallSmall}
+    color: ${styles.colorWhite};
+    font-size: ${styles.fontSmallSmall};
+    bottom: 0;
+    left:0;
+    z-index: 1;
+    height: 40px;
+    padding-top: 3px;
   }
-  
+}
 `

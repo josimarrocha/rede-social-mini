@@ -13,7 +13,7 @@ const Friends = ({ friends, friendsPending }) => {
   const renderFriends = () => {
     return (
       friends.map(friend => (
-        <Link to={`/${friend.username}/${friend.id}`} key={`friend:${friend.id}`}>
+        <Link to={`/${friend.username}/${friend.id}`} key={`friend:${friend.id}`} style={{ position: 'relative', padding: 0 }}>
           <Friend>
             <div className="friend-img">
               <img src={friend.image_profile_mini

@@ -4,9 +4,9 @@ import styles from '../../../styles'
 export const ContainerPost = styled.article`
   width: 100%;
   background: ${styles.colorWhite};
-  box-shadow: 1px 1px 15px #ddd;
+  box-shadow: 1px 1px 15px #ccc;
   margin-bottom: 10px;
-
+  border-radius: 10px;
   div.send{
     padding: 0 8px 5px 8px;
   }
@@ -125,6 +125,7 @@ export const ContainerPost = styled.article`
       }
     }
     .post-user-image{
+      cursor: pointer;
       width: 100%;
       img{
         width: 100%;

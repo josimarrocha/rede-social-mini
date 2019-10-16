@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+
 import Comments from '../../Comments'
 import SendComment from '../../Comments/SendComment'
 import ListUser from '../../InputSearch/ListUser'
+import PreviewImagePost from '../../PreviewImg'
+
 import { addLikePost, removeLikePost, deletePost, postsByUser } from '../../../reducers/posts/actionsCreators'
 import { hide } from '../../../reducers/ui'
 import { showCommentPost } from '../../../reducers/comments/actionsCreators'
-import { ContainerPost } from './styles'
+
+import getHours from '../../../config/getHours'
 import pathImageDefault, { friendsIO } from '../../../config/util'
 import api from '../../../config/api'
+import { ContainerPost } from './styles'
 
 const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, deletePost, comments }) => {
   const [showComment, setShowComment] = useState(false)
   const [showOptionsPost, setShowOptionsPost] = useState(false)
+  const [urlPreviewImagePost, setUrlPreviewImagePost] = useState('')
   const [mouseEnterNameUser, setMouseEnterNameUser] = useState('')
   const usersMarkup = []
   let userSearched = {}
@@ -63,8 +69,17 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
     setMouseEnterNameUser(user)
   }
 
+  const abortImagePreview = () => {
+    setUrlPreviewImagePost('')
+  }
+
   return (
     <>
+      <PreviewImagePost
+        inPosts={true}
+        imagePreview={urlPreviewImagePost}
+        abortImagePreview={abortImagePreview}
+      />
       <ContainerPost className='post-teste' datatype={`${post.id}:${post.user_id}`}>
         <div className="content">
           <div className="header-post">
@@ -78,7 +93,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
                 <i className="fas fa-ellipsis-v"
                   onClick={() => setShowOptionsPost(!showOptionsPost)}
                   tabIndex={0} onBlur={() => {
-                    setShowOptionsPost(false)
+                    setTimeout(() => setShowOptionsPost(false), 200)
                   }} />
                 {showOptionsPost &&
                   <ul className='options' onClick={() => deletePost(post.id)}>
@@ -87,17 +102,23 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
                 }
               </div>}
             <div className="post-user">
-              <img src={post.image_profile_mini ? post.image_profile_mini : `${pathImageDefault.pathImageDev}/user@50.png`} alt="" />
+              <div className="post-image-user">
+                <img src={post.image_profile_mini
+                  ? post.image_profile_mini
+                  : `${pathImageDefault.pathImageDev}/user@50.png`} alt="" />
+              </div>
               <div className="post-user-info">
-                <Link to={`/${post.username}/${post.user_id}`}><label>{post.name}</label></Link>
+                <Link to={`/${post.username}/${post.user_id}`}>
+                  <label>{post.name}</label>
+                </Link>
                 <label className='post-user-hour'>
-                  {new Date(post.data_post).toLocaleTimeString().split(/:\b\d+\b$/g)[0]}</label>
+                  {getHours(post.data_post)}
+                </label>
               </div>
             </div>
           </div>
           <div className="post-user-content"
-            onMouseLeave={() => setMouseEnterNameUser('')}
-          >
+            onMouseLeave={() => setMouseEnterNameUser('')}>
             {mouseEnterNameUser &&
               <ListUser
                 userSearch={mouseEnterNameUser}
@@ -117,7 +138,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
             }}
               dangerouslySetInnerHTML={userMarkup(post.legend)}
             />
-            <div className="post-user-image">
+            <div className="post-user-image" onClick={() => setUrlPreviewImagePost(post.pathImage)}>
               <img src={post.pathImage} alt="" />
             </div>
           </div>
@@ -127,7 +148,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
         </div>
         <div className="btn-actions">
           <a href='/' className={`btn ${post.usersLikesPost
-            .some(usersLike => usersLike.user_id === userInfo.id) ? 'like' : ''}`
+            .some(usersLike => usersLike.user_id === userInfo.id) && 'like'}`
           } onClick={(e) => {
             e.preventDefault()
             const userPost = {
@@ -139,8 +160,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
               ? removeLikePost(userPost)
               : createLikePost()
           }
-          }>
-            Gostei</a>
+          }>Gostei</a>
           <a href='/' className='btn' onClick={(e) => {
             e.preventDefault()
             showComments(post.id)

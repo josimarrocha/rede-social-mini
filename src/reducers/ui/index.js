@@ -24,26 +24,20 @@ export default (state = initialState, action) => {
     case SHOW_USER_CONFIG:
       return {
         ...state,
-        showUserConfig: !state.showUserConfig,
-        showSearch: false,
-        showNotifications: false,
-        showFriendsPending: false
+        showUserConfig: action.payload,
+
       }
     case SHOW_NOTIFICATIONS:
       return {
         ...state,
-        showNotifications: !state.showNotifications,
-        showFriendsPending: false,
-        showSearch: false,
-        showUserConfig: false,
+        showNotifications: action.payload,
+
       }
     case SHOW_FRIENDS_PENDING:
       return {
         ...state,
-        showFriendsPending: !state.showFriendsPending,
-        showSearch: false,
-        showUserConfig: false,
-        showNotifications: false,
+        showFriendsPending: action.payload,
+
       }
     case SHOW_LOADER:
       return {
@@ -67,19 +61,22 @@ export const hide = () => dispatch => {
     type: HIDE_ALL
   })
 }
-export const showUserConfig = () => dispatch => {
+export const showUserConfig = (boolean) => dispatch => {
   dispatch({
-    type: SHOW_USER_CONFIG
+    type: SHOW_USER_CONFIG,
+    payload: boolean
   })
 }
-export const showNotifications = () => dispatch => {
+export const showNotifications = (boolean) => dispatch => {
   dispatch({
-    type: SHOW_NOTIFICATIONS
+    type: SHOW_NOTIFICATIONS,
+    payload: boolean
   })
 }
-export const showFriendsPending = () => dispatch => {
+export const showFriendsPending = (boolean) => dispatch => {
   dispatch({
-    type: SHOW_FRIENDS_PENDING
+    type: SHOW_FRIENDS_PENDING,
+    payload: boolean
   })
 }
 export const showLoader = (boolean) => dispatch => {

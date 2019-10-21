@@ -1,17 +1,19 @@
 {
   "files": {
-    "main.css": "/rede-social-mini/static/css/main.c4696dae.chunk.css",
-    "main.js": "/rede-social-mini/static/js/main.abdd8ebc.chunk.js",
-    "main.js.map": "/rede-social-mini/static/js/main.abdd8ebc.chunk.js.map",
+    "main.css": "/rede-social-mini/static/css/main.815400fa.chunk.css",
+    "main.js": "/rede-social-mini/static/js/main.12d43be7.chunk.js",
+    "main.js.map": "/rede-social-mini/static/js/main.12d43be7.chunk.js.map",
     "runtime~main.js": "/rede-social-mini/static/js/runtime~main.409cf430.js",
     "runtime~main.js.map": "/rede-social-mini/static/js/runtime~main.409cf430.js.map",
-    "static/css/2.764ccc25.chunk.css": "/rede-social-mini/static/css/2.764ccc25.chunk.css",
-    "static/js/2.4a968911.chunk.js": "/rede-social-mini/static/js/2.4a968911.chunk.js",
-    "static/js/2.4a968911.chunk.js.map": "/rede-social-mini/static/js/2.4a968911.chunk.js.map",
+    "static/css/2.80539b1f.chunk.css": "/rede-social-mini/static/css/2.80539b1f.chunk.css",
+    "static/js/2.e93a18b8.chunk.js": "/rede-social-mini/static/js/2.e93a18b8.chunk.js",
+    "static/js/2.e93a18b8.chunk.js.map": "/rede-social-mini/static/js/2.e93a18b8.chunk.js.map",
     "index.html": "/rede-social-mini/index.html",
-    "precache-manifest.d43fe5dca90936b6cb31dfdb997f5696.js": "/rede-social-mini/precache-manifest.d43fe5dca90936b6cb31dfdb997f5696.js",
+    "precache-manifest.acb4afe38a98c536eaa8908de8524a63.js": "/rede-social-mini/precache-manifest.acb4afe38a98c536eaa8908de8524a63.js",
     "service-worker.js": "/rede-social-mini/service-worker.js",
-    "static/css/2.764ccc25.chunk.css.map": "/rede-social-mini/static/css/2.764ccc25.chunk.css.map",
-    "static/css/main.c4696dae.chunk.css.map": "/rede-social-mini/static/css/main.c4696dae.chunk.css.map"
+    "static/css/2.80539b1f.chunk.css.map": "/rede-social-mini/static/css/2.80539b1f.chunk.css.map",
+    "static/css/main.815400fa.chunk.css.map": "/rede-social-mini/static/css/main.815400fa.chunk.css.map",
+    "static/media/capa-inicio.jpg": "/rede-social-mini/static/media/capa-inicio.a98a65de.jpg",
+    "static/media/default-background.svg": "/rede-social-mini/static/media/default-background.27dfc395.svg"
   }
 }

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/rede-social-mini/precache-manifest.df86ba525bb24ef1f4aed73d2ccfdedc.js"
+  "/rede-social-mini/precache-manifest.1a9c2afd10bcc89af2a5257c64e3103b.js"
 );
 
 self.addEventListener('message', (event) => {

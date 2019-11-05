@@ -29,7 +29,7 @@ export const Container = styled.div`
     top: -20px;
     left: 90px;
     @media (max-width: ${styles.containerMiddle}) {
-      left:140px;
+      left:135px;
     }
   }
 
@@ -41,6 +41,9 @@ export const Container = styled.div`
     text-align: center;
     border-bottom: 1px solid #bbb;
     background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     p{
       width: 100%;
       text-align:center;

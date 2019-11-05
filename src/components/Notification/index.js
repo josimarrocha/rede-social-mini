@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import api from '../../config/api'
 import { loadingNotifications } from '../../reducers/notifications/actionsCreators'
 import { showLoader } from '../../reducers/ui'
+import imageUserDefault from '../../assets/images/user@50.png'
 import { Container, NotificationList } from './styles'
 
 const Notification = ({ notifications, loadingNotifications, showLoader, showNotifications }) => {
@@ -28,7 +29,7 @@ const Notification = ({ notifications, loadingNotifications, showLoader, showNot
     return legend !== '' ? `"${legend.substring(0, 30).replace(/(@\w+\d+)\${\d+}/g, '$1')}"` : ''
   }
   return (
-    <Container ref={containerRef} tabIndex={0} onBlur={() => setTimeout(() => showNotifications(false), 200)}>
+    <Container ref={containerRef} tabIndex={0} /*onBlur={() => setTimeout(() => showNotifications(false), 200)}*/>
       <div className="notification-header">
         <p>Notificações</p>
       </div>
@@ -39,7 +40,9 @@ const Notification = ({ notifications, loadingNotifications, showLoader, showNot
             onClick={() => showLoader(true)}>
             <li className='notification-item'>
               <div className="img-profile">
-                <img src={notification.image_user_action ? notification.image_user_action : "images/user@50.png"} alt="" />
+                <img src={notification.image_user_action
+                  ? notification.image_user_action
+                  : imageUserDefault} alt="" />
               </div>
               <div className="notification-info">
                 <p>

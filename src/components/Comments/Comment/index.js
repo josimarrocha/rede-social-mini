@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import api from '../../../config/api'
 import { connect } from 'react-redux'
 import { deleteComment, deleteReplyComment } from '../../../reducers/comments/actionsCreators'
-import pathImageDefault, { friendsIO } from '../../../config/util'
-
+import { friendsIO } from '../../../config/util'
+import imageUserDefault from '../../../assets/images/user@50.png'
 import { UserComment } from './styles'
 
 const Comment = ({ comment, userId, postId, removeLike, addLike, children, answer, idCommentPrincipal, deleteComment, deleteReplyComment }) => {
@@ -33,7 +33,7 @@ const Comment = ({ comment, userId, postId, removeLike, addLike, children, answe
       <div className="img-user">
         <img className='img' src={comment.image_profile_mini
           ? comment.image_profile_mini
-          : `${pathImageDefault.pathImageDev}/user@50.png`} alt=""
+          : imageUserDefault} alt=""
         />
 
       </div>

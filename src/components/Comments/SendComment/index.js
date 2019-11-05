@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import api from '../../../config/api'
 import { addNewComment } from '../../../reducers/comments/actionsCreators'
-import pathImageDefault, { commentIO, friendsIO } from '../../../config/util'
+import { commentIO, friendsIO } from '../../../config/util'
+import imageUserDefault from '../../../assets/images/user@50.png'
 import { SendCommentContainer } from './styles'
 
 const SendComment = ({ imageProfile, isAnswer, commentId, postId, userInfo, postByUserId, commentByUserId, addNewComment }) => {
@@ -55,7 +56,7 @@ const SendComment = ({ imageProfile, isAnswer, commentId, postId, userInfo, post
     <SendCommentContainer answer={isAnswer}>
       <div className="img-user-logged">
         <img className='img'
-          src={imageProfile ? imageProfile : `${pathImageDefault.pathImageDev}/user@50.png`}
+          src={imageProfile ? imageProfile : imageUserDefault}
           alt="" />
       </div>
       <form action="">

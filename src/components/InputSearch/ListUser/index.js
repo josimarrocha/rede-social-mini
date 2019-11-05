@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import pathImageDefault from '../../../config/util'
 import { searchProfile } from '../../../reducers/search/actionsCreators'
+import imageUserDefault from '../../../assets/images/user@50.png'
 import { ResultList } from './styles'
 
 const ListUser = ({ search, link, cleanInput, userSearch, searchProfile, markupUser, inHeader }) => {
@@ -26,8 +26,8 @@ const ListUser = ({ search, link, cleanInput, userSearch, searchProfile, markupU
             }}>
               <span>
                 <img src={item.image_profile_mini
-                  ? item.image_profile_mini :
-                  `${pathImageDefault.pathImageDev}/user@50.png`} alt="" />
+                  ? item.image_profile_mini
+                  : imageUserDefault} alt="" />
               </span>
               <b>{item.name}</b>
             </li>

@@ -1,21 +1,16 @@
 import styled from 'styled-components'
 import styles from '../../../styles'
-import path from '../../../config/util'
+import imageBackgroundDefault from '../../../assets/images/default-background.svg'
 
 export const ContainerImage = styled.div`
   margin-left: 300px;
   width: calc(100% - 300px);
   margin-bottom: 20px;
   
-  .image-bg{
-    img{
-      width: 100%;
-      max-width: 100%;
-    }
-    @media (max-width: ${styles.containerMiddle}) {
-     display: none;
-    }
+  @media (max-width: ${styles.containerMiddle}) {
+   display: none;
   }
+ 
   .edit-image{
     color: #f8f8f8;
     float: right;
@@ -42,7 +37,6 @@ export const ContainerImage = styled.div`
 export const UserImgbackground = styled.div`
   background-repeat: no-repeat;
   background-size: contain, cover;
-  /* background-position: center; */
   height:${props => props.visitProfile ? '480px' : '170px'};
   position:${props => props.visitProfile ? 'static' : 'absolute'};
   top: 0;
@@ -54,18 +48,18 @@ export const UserImgbackground = styled.div`
   ${props => props.imageBackground
     ? `background-image: url(${props.imageBackground});`
     : `background-color: rgba(0, 0, 0, 0.3);
-      background-image: url('${path.pathImageDev}/default-background.svg');
+      background-image: url('${imageBackgroundDefault}');
       @media (max-width: ${styles.containerMiddle}) {
         background-image:none;
       }`
   }
-  ${props => props.visitProfile && !props.imageBackground &&
-    `background: url('${path.pathImageDev}/default-background.svg');
+  /* ${props => props.visitProfile && !props.imageBackground &&
+    `background: url('${imageBackgroundDefault}');
      background-color: rgba(0, 0, 0, 0.3);
       @media (max-width: ${styles.containerMiddle}) {
         display: none;
       }
-  `}
+  `} */
 
   @media (max-width: ${styles.containerMiddle}) {
       background-position-y: -60px;

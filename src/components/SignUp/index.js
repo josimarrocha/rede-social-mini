@@ -12,13 +12,16 @@ const SignUp = ({ setIsLogin, isLogin }) => {
     const { name, email, password, confirmpassword } = e.target
     if (name.value && email.value && password.value && confirmpassword.value) {
       if (password.value === confirmpassword.value) {
-        await api.post('auth/register', {
-          name: name.value,
-          email: email.value,
-          password: password.value
-        })
-        setSuccess('Cadastro realizado com sucesso!')
-
+        try {
+          const { data } = await api.post('auth/register', {
+            name: name.value,
+            email: email.value,
+            password: password.value
+          })
+          setSuccess('Cadastro realizado com sucesso!')
+        } catch (error) {
+          return setError('Usuário já cadastrado!')
+        }
         setTimeout(() => {
           setIsLogin(true)
         }, 1200)

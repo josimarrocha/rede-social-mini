@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { loginUser } from '../../reducers/userInfo/actionsCreators'
 import FormLogin from '../Form'
 import { Container } from './styles'
-import api from '../../config/api'
+import api, { getAPIChat } from '../../config/api'
 
 const SignIn = ({ setIsLogin, isLogin, loginUser, history }) => {
   const [error, setError] = useState('')
@@ -24,7 +24,6 @@ const SignIn = ({ setIsLogin, isLogin, loginUser, history }) => {
       }
     }
   }
-  console.log(history)
   return (
     <Container>
       <FormLogin

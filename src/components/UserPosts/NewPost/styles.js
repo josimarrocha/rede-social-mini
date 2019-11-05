@@ -6,6 +6,7 @@ export const NewPostContainer = styled.div`
   padding-bottom: 10px;
   box-shadow: 1px 1px 15px #ccc;
   margin-bottom: 20px;
+  border-radius: 10px;
   position: relative;
 
   .newpost-header{

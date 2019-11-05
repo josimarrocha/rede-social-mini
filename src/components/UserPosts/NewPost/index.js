@@ -14,13 +14,6 @@ const NewPost = ({ createNewPost, searchProfile }) => {
   const [searchUser, setSearchUser] = useState('')
 
   const textarea = React.createRef()
-  useEffect(() => {
-    if (!image) {
-      setIsModalPreviw(false)
-    } else {
-      setIsModalPreviw(true)
-    }
-  }, [image])
 
   const newPost = async (e) => {
     e.preventDefault()
@@ -30,10 +23,10 @@ const NewPost = ({ createNewPost, searchProfile }) => {
     if (legenda === '' && !image) {
       return false
     }
+
     const data = new FormData()
     data.append('legend', legenda ? legenda : '')
     data.append('image', image)
-
     createNewPost(data, users)
     setImage('')
     setLegend('')
@@ -103,6 +96,7 @@ const NewPost = ({ createNewPost, searchProfile }) => {
     }
     setSearchUser('')
   }
+
   return (
     <>
       {isModalPreview &&
@@ -121,8 +115,11 @@ const NewPost = ({ createNewPost, searchProfile }) => {
                 type="file"
                 name="inputImage"
                 id="input"
-                style={{ display: 'none' }}
-                onChange={({ target: { files } }) => setImage(files[0])} />
+                hidden
+                onChange={({ target: { files } }) => {
+                  setImage(files[0])
+                  setIsModalPreviw(true)
+                }} />
             </div>
             <div className="newpost-up-post">
               <button

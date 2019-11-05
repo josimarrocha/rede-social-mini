@@ -4,17 +4,22 @@ import userInfo from './userInfo'
 import friendsInfo from './friends'
 import search from './search'
 import comments from './comments'
-import socket from './socket-io'
 import notifications from './notifications'
 import ui from './ui'
+import conversations from './chat/conversations'
+import messages from './chat/posts'
 
+const chat = combineReducers({
+  conversations,
+  messages
+})
 export default combineReducers({
   posts,
   userInfo,
   friendsInfo,
   search,
   comments,
-  socket,
   notifications,
-  ui
+  ui,
+  chat
 })

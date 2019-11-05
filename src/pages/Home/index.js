@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import UserInfo from '../../components/UserInfo'
 import UserPosts from '../../components/UserPosts'
 import Loader from '../../components/Loader'
+import Chat from '../../Chat'
 import { userToken } from '../../config/util'
 import { Container } from './styles'
 
@@ -28,14 +29,19 @@ const Home = ({ showPostsTimeline, showFriends, loadingProfile, history }) => {
 
   return <> {isLoader
     ? <Loader isLoading={isLoader} />
-    : <Container>
-      <UserInfo />
-      <UserPosts
-        postsTimeline={showPostsTimeline}
-        isScroll={true}
-      />
-      {IsMorePosts && <Loader isLoading={IsMorePosts} />}
-    </Container>
+    : <>
+      <Container >
+        <UserInfo />
+        <UserPosts
+          postsTimeline={showPostsTimeline}
+          isScroll={true}
+        />
+        {IsMorePosts &&
+          <Loader isLoading={IsMorePosts} />
+        }
+      </Container>
+      <Chat />
+    </>
   }
   </>
 }

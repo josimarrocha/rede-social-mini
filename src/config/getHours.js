@@ -15,12 +15,9 @@ export default function (time, place) {
     return `Hoje ${hour}:${minutes}`
   }
   if ((new Date().getDate() - day) > 1 || new Date().getMonth() + 1 > month + 1) {
-    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `${month + 1}` : month}/${year}`
+    return `${day < 10 ? `0${day}` : day}/${month < 10 ? month + 1 : month}/${year}`
   }
   if ((new Date().getDate() - day) === 1) {
     return `Ontem ${hour}:${minutes}`
   }
-  // else {
-  //   return `Ontem ${hour}:${minutes}`
-  // }
 }

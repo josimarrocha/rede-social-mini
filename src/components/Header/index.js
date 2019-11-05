@@ -5,6 +5,7 @@ import PendingFriends from '../UserInfo/PendingFriends'
 import MenuMobile from '../MenuMobile'
 import Notification from '../Notification'
 import InputSearch from '../InputSearch'
+import Chat from '../../Chat'
 import { showFriendsPending, showNotifications } from '../../reducers/ui'
 import { loadingNotifications } from '../../reducers/notifications/actionsCreators'
 import { friendsPending } from '../../reducers/friends/actionsCreators'
@@ -21,6 +22,7 @@ const Header = ({ pendingFriends, notifications, isNotification, isFriendsPendin
 
   const logout = () => {
     localStorage.removeItem('@midiasocial@')
+    localStorage.removeItem('@chat-midiasocial@')
     window.location.href = window.location.origin + '/rede-social-mini'
   }
 
@@ -36,14 +38,13 @@ const Header = ({ pendingFriends, notifications, isNotification, isFriendsPendin
   return (
     <HeaderContainer>
       <div className="header-content">
-        <div>
+        <div className='div'>
           <div className="header-logo">
             <Link to='/'><h2>Rede</h2></Link>
           </div>
           {!hideIcons &&
             <>
-              <span
-                className='friends-pending'
+              <span className='friends-pending'
                 onClick={() => showFriendsPending(!isFriendsPending)}>
                 {isFriendsPending &&
                   <PendingFriends showFriendsPending={showFriendsPending} />
@@ -52,8 +53,7 @@ const Header = ({ pendingFriends, notifications, isNotification, isFriendsPendin
                   {!!pendingFriends.length && <b>{pendingFriends.length}</b>}
                 </i>
               </span>
-              <span
-                className='notifications'
+              <span className='notifications'
                 onClick={() => showNotifications(!isNotification)}>
                 {isNotification &&
                   <Notification showNotifications={showNotifications} />
@@ -77,6 +77,7 @@ const Header = ({ pendingFriends, notifications, isNotification, isFriendsPendin
         }}>
           <i className="fas fa-search"></i>
         </div>
+
         <MenuMobile />
         <div className="logout" onClick={logout}>
           <p>Sair</p>

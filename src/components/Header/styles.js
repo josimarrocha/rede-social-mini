@@ -19,10 +19,10 @@ export const HeaderContainer = styled.header`
     padding: 0 10px;
     position: relative;
 
-    div{
+    .div{
       display: flex;
       align-items: center;
-
+      
       .header-logo{
         margin-right: 20px;
         a{
@@ -51,14 +51,14 @@ export const HeaderContainer = styled.header`
       }
 
       .notifications{
-        margin-left:15px;     
+        margin-left:15px;
+        margin-right: 15px;
       }
-
+      
       .my-perfil{
         display: block;
         font-size: ${styles.fontSmall};
         font-weight: bold;
-        margin-left: 15px;
         color: ${styles.colorWhite};
       }
     }

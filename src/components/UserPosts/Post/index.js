@@ -12,8 +12,9 @@ import { hide } from '../../../reducers/ui'
 import { showCommentPost } from '../../../reducers/comments/actionsCreators'
 
 import getHours from '../../../config/getHours'
-import pathImageDefault, { friendsIO } from '../../../config/util'
+import { friendsIO } from '../../../config/util'
 import api from '../../../config/api'
+import imageUserDefault from '../../../assets/images/user@50.png'
 import { ContainerPost } from './styles'
 
 const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, deletePost, comments }) => {
@@ -105,7 +106,7 @@ const Post = ({ post, addLikePost, removeLikePost, userInfo, showCommentPost, de
               <div className="post-image-user">
                 <img src={post.image_profile_mini
                   ? post.image_profile_mini
-                  : `${pathImageDefault.pathImageDev}/user@50.png`} alt="" />
+                  : imageUserDefault} alt="" />
               </div>
               <div className="post-user-info">
                 <Link to={`/${post.username}/${post.user_id}`}>

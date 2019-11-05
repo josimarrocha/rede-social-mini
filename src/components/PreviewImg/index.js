@@ -10,7 +10,7 @@ const PreviewImg = ({ abortImagePreview, imagePreview, confirmImagePreview, inPo
       classNames='preview'
       unmountOnExit
     >
-      <PreviewContainer inPosts={inPosts} onClick={abortImagePreview}>
+      <PreviewContainer inPosts={inPosts}>
         <div className="preview-close" onClick={abortImagePreview}>
           <i className="far fa-times-circle"></i>
         </div>

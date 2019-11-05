@@ -5,6 +5,7 @@ export const FreindsContainer = styled.section`
   box-shadow: 1px 1px 15px #ccc;
   width: 100%;
   background: ${styles.colorWhite};
+  border-radius: 10px;
 
   @media (max-width: ${styles.containerMiddle}) {
    display: none;
@@ -47,6 +48,9 @@ export const FreindsContainer = styled.section`
 `
 
 export const Friend = styled.div`
+  min-width: 83px;
+  min-height:86px;
+  text-align:center;
   .friend-img{
     height: 100%;
     img{

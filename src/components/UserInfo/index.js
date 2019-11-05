@@ -5,7 +5,8 @@ import UserAccountConfig from './UserAccountConfig'
 import { updateNameUser, updateDescription } from '../../reducers/userInfo/actionsCreators'
 import { loadingProfile, showFriends } from '../../reducers/friends/actionsCreators'
 import { showUserConfig } from '../../reducers/ui/'
-import pathImageDefault, { friendsIO } from '../../config/util'
+import { friendsIO } from '../../config/util'
+import imageUserDefault from '../../assets/images/user@150.png'
 import api from '../../config/api'
 import { UserAccountContainer, UserInfoContainer, UserImg, UserData } from './styles'
 
@@ -82,7 +83,7 @@ const UserInfo = ({ userInfo, profile, updateNameUser, visitProfile, loadingProf
           <UserImg>
             <img src={userInfo.image_profile
               ? !visitProfile ? userInfo.image_profile : profileInfo.image_profile
-              : `${pathImageDefault.pathImageDev}/user@150.png`} alt=""
+              : imageUserDefault} alt=""
             />
           </UserImg>
           <UserData>

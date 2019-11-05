@@ -6,6 +6,7 @@ export const UserAccountContainer = styled.section`
   width:100%;
   position: fixed;
   z-index: 2;
+  border-radius: 10px;
 
   @media (max-width: ${styles.containerMiddle}) {
     position: relative;
@@ -151,22 +152,31 @@ export const UserData = styled.div`
     }
   }
 
-
-  .profile-status-friend{
+  .profile-status{
     display: flex;
     justify-content: center;
     align-items:center;
-    border: 1px solid #999;
-    padding: 5px 0;
-    margin-top: 8px;
-    color: #333;
-    font-weight:600;
-    cursor: default;
-
-    i{
-      margin-right:8px;
-      font-size:20px;
-      color: green;
+    flex-direction: column;
+    width: 100%;
+    
+    .profile-status-friend{
+      display: flex;
+      justify-content: center;
+      align-items:center;
+      border: 1px solid #999;
+      max-width: 350px;
+      width: 100%;
+      padding: 5px 0;
+      margin-top: 8px;
+      color: #333;
+      font-weight:600;
+      cursor: default;
+  
+      i{
+        margin-right:8px;
+        font-size:20px;
+        color: green;
+      }
     }
   }
 
@@ -179,6 +189,7 @@ export const UserData = styled.div`
   }
 
   .profile-add{
+    width: 100%;
     a{
       margin-top: 5px;
       display: block;
@@ -192,6 +203,7 @@ export const UserData = styled.div`
     }
   }
   .profile-add-cancel{
+    width: 100%;
     span{
       margin-top: 5px;
       display: block;

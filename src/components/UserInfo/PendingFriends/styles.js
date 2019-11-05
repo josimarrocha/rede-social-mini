@@ -30,6 +30,9 @@ export const PendingFriendsConatiner = styled.div`
     border-bottom: 1px solid #bbb;
     background-color: #eee;
     height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     p{
       text-align: center;
       width: 100%;
